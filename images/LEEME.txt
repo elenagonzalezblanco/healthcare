@@ -1,0 +1,11 @@
+Coloca aquí las 4 fotografías siguiendo la dirección fotográfica de la guía de estilo
+(luz natural, tonos cálidos, premium sin ostentación). Nombres EXACTOS que espera la web:
+
+  pilar-01-tablet.jpg   → Manos sosteniendo una tablet con el mapa de salud / biomarcadores.
+  pilar-02-medico.jpg   → Médico/a especialista conversando de cerca con un paciente.
+  pilar-03-app.jpg      → Smartphone en la mano con la app de seguimiento médico.
+  hero-familia.jpg      → (opcional) Familia elegante y natural, luz cálida.
+
+Formato recomendado: JPG o WEBP, orientación horizontal, ~1200px de ancho, buena calidad.
+En cuanto dejes los archivos con estos nombres, se integran solos al recargar nakaia-tres-pilares.html.
+Si aún no están, la web muestra un mock-up de respaldo para que el diseño no se rompa.

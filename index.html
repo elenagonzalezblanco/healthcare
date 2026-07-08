@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>NAKAIA HEALTH — Tres Pilares</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    /* ===== Tokens guía de estilo Nakaia ===== */
+    --color-primary: #1F3D34;        /* verde grafito médico */
+    --color-primary-soft: #A7BCA4;   /* verde salvia */
+    --color-premium: #C9A97A;        /* oro suave / champagne */
+    --color-tech: #3D5E8A;           /* azul niebla tecnológico */
+
+    --color-background: #F3F5F2;      /* marfil clínico */
+    --color-surface: #FFFFFF;
+    --color-surface-warm: #E8E2D8;   /* piedra cálida */
+
+    --color-text: #1D2528;           /* grafito texto */
+    --color-text-muted: #5F6865;
+    --color-border: #DED8CE;
+
+    --num: #D9D4CB;
+
+    --font-heading: "Poppins", "Sora", "Inter", sans-serif;
+    --font-body: "Inter", "Satoshi", "Helvetica Neue", sans-serif;
+
+    --radius-md: 16px;
+    --radius-lg: 24px;
+    --radius-xl: 32px;
+    --radius-pill: 999px;
+
+    --shadow-soft: 0 12px 40px rgba(31, 61, 52, 0.08);
+    --shadow-card: 0 8px 24px rgba(31, 61, 52, 0.06);
+    --shadow-hover: 0 16px 48px rgba(31, 61, 52, 0.12);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: var(--font-body);
+    color: var(--color-text);
+    background: var(--color-background);
+    -webkit-font-smoothing: antialiased;
+    font-weight: 400;
+    line-height: 1.55;
+  }
+  h1, h2, h3 { font-family: var(--font-heading); color: var(--color-primary); }
+
+  .container { width: min(1280px, calc(100% - 96px)); margin: 0 auto; }
+
+  /* ===== Header ===== */
+  header.site {
+    position: sticky; top: 0; z-index: 40;
+    background: rgba(243,245,242,0.86);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--color-border);
+  }
+  header.site .container { display: flex; align-items: center; justify-content: space-between; height: 74px; }
+  .brand { display: flex; flex-direction: column; line-height: 1; }
+  .brand .name { font-family: var(--font-heading); font-weight: 500; font-size: 22px; letter-spacing: 0.34em; color: var(--color-primary); }
+  .brand .sub { font-size: 8.5px; letter-spacing: 0.56em; color: #9AA39C; margin-top: 5px; padding-left: 3px; }
+  .site-nav { display: flex; align-items: center; gap: 32px; }
+  .site-nav a { font-size: 14px; color: var(--color-text-muted); text-decoration: none; transition: color .2s; }
+  .site-nav a:hover { color: var(--color-primary); }
+  .button-primary {
+    background: var(--color-primary); color: #fff; border: 0;
+    border-radius: var(--radius-pill); padding: 12px 24px;
+    font-family: var(--font-body); font-size: 14px; font-weight: 500; cursor: pointer;
+    text-decoration: none; transition: background .2s, box-shadow .2s;
+  }
+  .button-primary:hover { background: #163028; box-shadow: 0 12px 32px rgba(31,61,52,0.18); }
+  @media (max-width: 860px){ .site-nav a { display: none; } }
+
+  /* ===== Sección ===== */
+  .section { padding: 84px 0 96px; }
+  .kicker {
+    display: inline-block; font-size: 12px; font-weight: 500;
+    letter-spacing: 0.2em; text-transform: uppercase; color: var(--color-premium);
+  }
+
+  /* ===== Banda Tres Pilares ===== */
+  .band {
+    display: grid;
+    grid-template-columns: 0.92fr 1fr 1fr 1fr;
+    gap: 28px;
+    align-items: stretch;
+  }
+  @media (max-width: 1040px){ .band { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 640px){ .band { grid-template-columns: 1fr; } }
+
+  /* ---- Columna intro ---- */
+  .intro { padding: 4px 10px 0 2px; align-self: center; }
+  .intro .kicker { margin-bottom: 14px; }
+  .intro h1 {
+    font-weight: 600;
+    font-size: clamp(30px, 3vw, 40px);
+    line-height: 1.12;
+    letter-spacing: -0.03em;
+    color: var(--color-primary);
+  }
+  .intro h1 .gold { color: var(--color-premium); }
+  .intro p {
+    margin-top: 22px;
+    font-size: 15px;
+    color: var(--color-text-muted);
+    max-width: 260px;
+    line-height: 1.6;
+  }
+  .intro .cta { margin-top: 28px; }
+
+  /* ---- Tarjetas pilar ---- */
+  .pillar {
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+    background: var(--color-surface);
+    border: 1px solid rgba(31,61,52,0.10);
+    box-shadow: var(--shadow-card);
+    display: flex; flex-direction: column;
+    transition: transform .3s ease, box-shadow .3s ease;
+  }
+  .pillar:hover { transform: translateY(-5px); box-shadow: var(--shadow-hover); }
+  .pillar .body { padding: 30px 28px 26px; flex: 1; }
+
+  .pillar--health { background: linear-gradient(180deg, rgba(167,188,164,0.22), #FFFFFF 62%); }
+  .pillar--medical { background: linear-gradient(180deg, rgba(201,169,122,0.22), #FFFFFF 62%); }
+  .pillar--tech { background: linear-gradient(180deg, rgba(61,94,138,0.18), #FFFFFF 62%); }
+
+  .pillar .num {
+    font-family: var(--font-heading);
+    font-weight: 400; font-size: 42px; line-height: 1;
+    color: var(--num);
+  }
+  .pillar--medical .num { color: #E2CFAF; }
+  .pillar--tech .num { color: #C4D0DE; }
+
+  .pillar .ic {
+    width: 46px; height: 46px; border-radius: var(--radius-pill);
+    display: flex; align-items: center; justify-content: center;
+    margin: 20px 0 18px; background: rgba(255,255,255,0.6);
+  }
+  .pillar--health .ic { border: 1px solid rgba(167,188,164,0.9); }
+  .pillar--medical .ic { border: 1px solid rgba(201,169,122,0.9); }
+  .pillar--tech .ic { border: 1px solid rgba(61,94,138,0.5); }
+
+  .pillar h3 {
+    font-family: var(--font-body);
+    font-weight: 600; font-size: 14px;
+    letter-spacing: 0.07em; text-transform: uppercase;
+    line-height: 1.5; color: var(--color-primary);
+  }
+  .pillar--tech h3 { color: #2C4160; }
+  .pillar .desc {
+    font-size: 13px; color: var(--color-text-muted);
+    margin-top: 14px; line-height: 1.6; min-height: 60px;
+  }
+
+  /* ---- Zona foto con fallback ---- */
+  .photo {
+    height: 170px; position: relative; overflow: hidden;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .photo img {
+    position: absolute; inset: 0; width: 100%; height: 100%;
+    object-fit: cover; z-index: 2;
+  }
+  .photo .fallback { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; z-index: 1; }
+  .fb-health { background: linear-gradient(150deg, #DCE4DC 0%, #B9C7B6 100%); }
+  .fb-medical { background: linear-gradient(135deg, #E8DED0 0%, #CBB89B 55%, #A98F6E 100%); }
+  .fb-tech { background: linear-gradient(150deg, #E4E9EE 0%, #C3CEDA 100%); }
+  .fb-note {
+    position: absolute; left: 16px; bottom: 12px; z-index: 3;
+    font-size: 10px; letter-spacing: .12em; text-transform: uppercase;
+    color: rgba(255,255,255,0.92);
+  }
+
+  /* mini mockup tablet */
+  .mini-tablet {
+    width: 80%; height: 120px; background: #fff; border-radius: 12px;
+    box-shadow: 0 12px 26px -14px rgba(31,61,52,0.5);
+    display: flex; align-items: center; gap: 14px; padding: 16px;
+  }
+  .mini-ring { width: 82px; height: 82px; position: relative; flex-shrink: 0; }
+  .mini-ring svg { transform: rotate(-90deg); }
+  .mini-ring .v { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+  .mini-ring .v b { font-family: var(--font-heading); font-weight: 400; font-size: 24px; color: var(--color-primary); }
+  .mini-ring .v span { font-size: 7px; letter-spacing: .1em; text-transform: uppercase; color: var(--color-primary-soft); }
+  .mini-lines { flex: 1; display: flex; flex-direction: column; gap: 8px; }
+  .mini-lines i { height: 5px; border-radius: 4px; background: #EDEFEC; display: block; }
+  .mini-lines i:nth-child(2){ width: 72%; background:#E4EAE3; }
+  .mini-lines i:nth-child(3){ width: 86%; }
+  .mini-lines i:nth-child(4){ width: 56%; background:#E4EAE3; }
+
+  /* mini mockup phone */
+  .mini-phone {
+    width: 104px; height: 142px; background: #fff; border-radius: 16px 16px 0 0;
+    box-shadow: 0 12px 26px -14px rgba(31,61,52,0.5); padding: 15px 13px;
+    display: flex; flex-direction: column; gap: 9px;
+  }
+  .mini-phone .ph-hd { font-size: 8.5px; color: var(--color-text-muted); }
+  .mini-phone .ph-row { display:flex; align-items:center; gap:8px; }
+  .mini-phone .ph-dot { width: 18px; height:18px; border-radius:50%; background:#EAF0E8; flex-shrink:0; }
+  .mini-phone .ph-bar { height:5px; border-radius:4px; background:#EDEFEC; flex:1; }
+  .mini-phone .ph-chart { margin-top:4px; height:38px; border-radius:8px; background: linear-gradient(180deg, #EEF3FB, #fff); position: relative; overflow:hidden; }
+  .mini-phone .ph-chart svg { position:absolute; inset:0; }
+
+  /* ===== Banda de beneficios ===== */
+  .benefits { border-top: 1px solid var(--color-border); }
+  .benefits .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+  @media (max-width: 900px){ .benefits .grid { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 520px){ .benefits .grid { grid-template-columns: 1fr; } }
+  .benefit .bic { width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: var(--radius-pill); border: 1px solid var(--color-border); margin-bottom: 16px; }
+  .benefit h4 { font-family: var(--font-body); font-weight: 600; font-size: 15px; color: var(--color-primary); }
+  .benefit p { font-size: 13.5px; color: var(--color-text-muted); margin-top: 8px; line-height: 1.55; }
+
+  /* ===== Footer ===== */
+  footer.site { background: var(--color-primary); color: #A9BCAE; padding: 56px 0; text-align: center; }
+  footer.site .name { font-family: var(--font-heading); font-weight: 500; font-size: 22px; letter-spacing: 0.34em; color: #fff; }
+  footer.site p { font-size: 13px; max-width: 480px; margin: 14px auto 0; }
+  .claim { text-align: center; margin-top: 8px; font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: #B4B0A6; }
+</style>
+</head>
+<body>
+
+  <header class="site">
+    <div class="container">
+      <div class="brand">
+        <span class="name">NAKAIA</span>
+        <span class="sub">HEALTH</span>
+      </div>
+      <nav class="site-nav">
+        <a href="#">Cómo funciona</a>
+        <a href="#">Para familias</a>
+        <a href="#">Para empresas</a>
+        <a href="#">Sobre nosotros</a>
+        <a class="button-primary" href="#">Quiero saber más</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="section">
+    <div class="container">
+      <div class="band">
+
+        <!-- Intro -->
+        <div class="intro">
+          <span class="kicker">Tres pilares</span>
+          <h1>Un solo objetivo:<br /><span class="gold">tu salud y la<br />de tu familia.</span></h1>
+          <p>Medicina privada, preventiva y de precisión. Con la mejor tecnología e IA al servicio de tu salud y la de tu familia.</p>
+          <div class="cta"><a class="button-primary" href="#">Quiero saber más</a></div>
+        </div>
+
+        <!-- Pilar 01 -->
+        <article class="pillar pillar--health">
+          <div class="body">
+            <div class="num">01</div>
+            <div class="ic">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1F3D34" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="10" cy="8" r="3.4"/>
+                <path d="M4 19c0-3.4 2.7-5 6-5 .8 0 1.5.1 2.2.3"/>
+                <path d="M16.5 14.2c1.6 0 2.8 1.2 2.8 2.7 0 1.7-2.8 3.6-2.8 3.6s-2.8-1.9-2.8-3.6c0-1.5 1.2-2.7 2.8-2.7Z"/>
+              </svg>
+            </div>
+            <h3>Evaluación, diagnóstico<br />y mapa de salud</h3>
+            <div class="desc">Conoce tu punto de partida para prevenir, anticipar y optimizar tu salud.</div>
+          </div>
+          <div class="photo">
+            <div class="fallback fb-health">
+              <div class="mini-tablet">
+                <div class="mini-ring">
+                  <svg width="82" height="82" viewBox="0 0 82 82">
+                    <circle cx="41" cy="41" r="34" fill="none" stroke="#EAEFEA" stroke-width="6"/>
+                    <circle cx="41" cy="41" r="34" fill="none" stroke="url(#mg)" stroke-width="6" stroke-linecap="round" stroke-dasharray="214" stroke-dashoffset="33"/>
+                    <defs><linearGradient id="mg" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#A7BCA4"/><stop offset="100%" stop-color="#1F3D34"/></linearGradient></defs>
+                  </svg>
+                  <div class="v"><b>87</b><span>Muy bueno</span></div>
+                </div>
+                <div class="mini-lines"><i></i><i></i><i></i><i></i></div>
+              </div>
+            </div>
+            <img src="images/pilar-01-tablet.jpg" alt="Tablet con el mapa de salud" onerror="this.remove()" />
+          </div>
+        </article>
+
+        <!-- Pilar 02 -->
+        <article class="pillar pillar--medical">
+          <div class="body">
+            <div class="num">02</div>
+            <div class="ic">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#B58C4F" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="8" cy="8.5" r="2.6"/><circle cx="16" cy="8.5" r="2.6"/>
+                <path d="M3 18c0-2.6 2.2-3.8 5-3.8M21 18c0-2.6-2.2-3.8-5-3.8"/>
+                <path d="M12 3.5v3M10.5 5h3"/>
+              </svg>
+            </div>
+            <h3>Excelencia médica<br />al alcance y<br />con inmediatez</h3>
+            <div class="desc">Accede a los mejores expertos cuando lo necesitas.</div>
+          </div>
+          <div class="photo">
+            <div class="fallback fb-medical">
+              <span class="fb-note">Especialistas de referencia</span>
+            </div>
+            <img src="images/pilar-02-medico.jpg" alt="Médico especialista con paciente" onerror="this.remove()" />
+          </div>
+        </article>
+
+        <!-- Pilar 03 -->
+        <article class="pillar pillar--tech">
+          <div class="body">
+            <div class="num">03</div>
+            <div class="ic">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#3D5E8A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 4a4.5 4.5 0 0 0-4.5 4.5c0 1.8.9 2.7.9 4.5v1.4a3.6 3.6 0 0 0 7.2 0V13c0-1.8.9-2.7.9-4.5A4.5 4.5 0 0 0 12 4Z"/>
+                <path d="M9.5 20h5M10 8.5h4M12 8.5v5"/>
+              </svg>
+            </div>
+            <h3>Seguimiento personalizado<br />y eficiencia operativa<br />con tecnología e IA</h3>
+            <div class="desc">Consultas, servicios, análisis y seguimiento continuo para una experiencia más fluida e inteligente.</div>
+          </div>
+          <div class="photo">
+            <div class="fallback fb-tech">
+              <div class="mini-phone">
+                <div class="ph-hd">Buenas tardes, Carlos</div>
+                <div class="ph-row"><div class="ph-dot"></div><div class="ph-bar"></div></div>
+                <div class="ph-row"><div class="ph-dot"></div><div class="ph-bar" style="width:70%"></div></div>
+                <div class="ph-chart">
+                  <svg viewBox="0 0 104 38" preserveAspectRatio="none">
+                    <polyline points="2,30 18,22 34,26 50,13 66,18 82,7 102,11" fill="none" stroke="#3D5E8A" stroke-width="1.8"/>
+                  </svg>
+                </div>
+              </div>
+            </div>
+            <img src="images/pilar-03-app.jpg" alt="Smartphone con la app de seguimiento" onerror="this.remove()" />
+          </div>
+        </article>
+
+      </div>
+      <div class="claim">Prevención · Excelencia · Seguimiento</div>
+    </div>
+  </section>
+
+  <!-- Beneficios -->
+  <section class="section benefits">
+    <div class="container">
+      <span class="kicker" style="color:var(--color-premium)">Por qué Nakaia</span>
+      <div style="height:36px"></div>
+      <div class="grid">
+        <div class="benefit">
+          <div class="bic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#A7BCA4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v5c0 5-3 8-7 10-4-2-7-5-7-10V6l7-3Z"/><path d="M9 12l2 2 4-4"/></svg></div>
+          <h4>Prevención activa</h4>
+          <p>Anticipamos para prevenir y mejorar tu calidad de vida.</p>
+        </div>
+        <div class="benefit">
+          <div class="bic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#C9A97A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="9" r="3"/><circle cx="16" cy="10" r="2.5"/><path d="M3 19c0-3 3-4 6-4s6 1 6 4"/></svg></div>
+          <h4>Coordinación familiar</h4>
+          <p>Cuidado integral para ti y los tuyos, en un solo lugar.</p>
+        </div>
+        <div class="benefit">
+          <div class="bic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#3D5E8A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4a4 4 0 0 0-4 4c0 1.6.8 2.4.8 4v1.2a3.2 3.2 0 0 0 6.4 0V12c0-1.6.8-2.4.8-4a4 4 0 0 0-4-4Z"/></svg></div>
+          <h4>Tecnología e IA</h4>
+          <p>Inteligencia y datos al servicio de decisiones más precisas.</p>
+        </div>
+        <div class="benefit">
+          <div class="bic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1F3D34" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12a7 7 0 0 1 14 0"/><rect x="3" y="12" width="4" height="6" rx="2"/><rect x="17" y="12" width="4" height="6" rx="2"/></svg></div>
+          <h4>Acceso continuo</h4>
+          <p>Acompañamiento constante, donde y cuando lo necesites.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="site">
+    <div class="container">
+      <div class="name">NAKAIA</div>
+      <p>Medicina privada, preventiva y de precisión. Con la mejor tecnología e IA al servicio de tu salud y la de tu familia.</p>
+    </div>
+  </footer>
+
+</body>
+</html>
