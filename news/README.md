@@ -1,29 +1,30 @@
 # Noticias del blog Nakaia
 
-Deja aquí cada noticia como un fichero `.md`. Al recargar la web NO se actualiza sola:
-hay que regenerar el blog ejecutando en la carpeta del proyecto:
+El blog se genera EXCLUSIVAMENTE a partir de los briefs que dejes en esta carpeta.
+No se inventa contenido.
 
-    python3 build_blog.py
+## Cómo añadir noticias
 
-Eso reescribe la zona de noticias de `blog.html` (entre `<!-- NEWS:START -->` y `<!-- NEWS:END -->`)
-con el mismo formato de tarjetas. Después: `git add -A && git commit -m "..." && git push`.
+1. Deja aquí el fichero del brief tal cual te llega, en `.html`
+   (por ejemplo `privia-brief-2026-07-08.html`).
+2. En la carpeta del proyecto ejecuta:
 
-## Formato de cada noticia (.md)
+       python3 build_blog.py
 
-```
----
-title: Título de la noticia
-category: Prevención
-date: 2026-07-08
-image: images/pilar-01-tablet.jpg
-read: 5 min
-featured: true        # opcional: marca el artículo destacado grande de arriba
-summary: Texto breve que aparece en la tarjeta.
----
-Cuerpo opcional (para una futura página de artículo).
-```
+   El script recorre todos los `news/*.html`, extrae CADA noticia enlazada
+   (su **título**, **fuente**, **fecha** y **enlace** originales) y reescribe la
+   zona de noticias de `blog.html` con tarjetas en el formato Nakaia, ordenadas
+   de más reciente a más antigua.
+3. Publica:
 
-- `date` en formato `AAAA-MM-DD`. Las noticias se ordenan de más reciente a más antigua.
-- `image`: ruta relativa a una imagen dentro de `images/`.
-- Solo una noticia debería llevar `featured: true` (si hay varias, se usa la más reciente).
-- El nombre del fichero recomendado: `AAAA-MM-DD-titulo-corto.md`.
+       git add -A && git commit -m "Actualiza noticias del blog" && git push
+
+## Qué se publica y qué no
+
+- Se publican solo las **noticias con fuente y enlace** del brief.
+- Se omiten los bloques de análisis interno ("Tendencias del sector",
+  "Implicaciones para PRIVIA/Nakaia"), porque no son noticias con fuente y el
+  propio brief los marca como material interno no destinado a difusión externa.
+
+Cada tarjeta enlaza al artículo original (se abre en una pestaña nueva) y muestra
+la fuente y la fecha reales.

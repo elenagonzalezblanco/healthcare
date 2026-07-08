@@ -1,120 +1,128 @@
 #!/usr/bin/env python3
-"""Genera la sección de noticias de blog.html a partir de los ficheros de news/.
+"""Genera la sección de noticias de blog.html a partir de los BRIEFS que dejes en news/.
 
-Cada noticia es un fichero .md dentro de la carpeta news/ con esta cabecera:
+Flujo previsto:
+  1. Dejas en la carpeta news/ uno o varios ficheros .html de brief (como
+     news/privia-brief-2026-07-08.html), tal cual te llegan.
+  2. Ejecutas:  python3 build_blog.py
+  3. El script extrae CADA noticia real del brief — su TÍTULO, FUENTE, FECHA y
+     ENLACE original — y reescribe la zona de noticias de blog.html (entre
+     <!-- NEWS:START --> y <!-- NEWS:END -->) con tarjetas en el formato Nakaia.
 
-    ---
-    title: Título de la noticia
-    category: Prevención
-    date: 2026-07-08
-    image: images/pilar-01-tablet.jpg
-    read: 5 min
-    featured: true        # opcional; el destacado grande de arriba
-    summary: Texto breve que aparece en la tarjeta.
-    ---
-    (Cuerpo opcional, para una futura página de artículo.)
-
-Uso:
-    python3 build_blog.py
-
-Reescribe SOLO la zona entre <!-- NEWS:START --> y <!-- NEWS:END --> de blog.html.
+NO se inventa contenido: solo se usan las noticias enlazadas del brief.
+Se omiten los bloques de análisis interno (Tendencias / Implicaciones), que no
+son noticias con fuente y que el propio brief marca como internos.
 Las noticias se ordenan por fecha (más recientes primero).
 """
-import os, re, glob
+import os, re, glob, html
 from datetime import datetime
 
-NEWS_DIR = "news"
+BRIEF_GLOB = "news/*.html"
 BLOG = "blog.html"
-MESES = ["enero", "febrero", "marzo", "abril", "mayo", "junio",
-         "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"]
+
+MESES = {"ene": 1, "feb": 2, "mar": 3, "abr": 4, "may": 5, "jun": 6,
+         "jul": 7, "ago": 8, "sep": 9, "set": 9, "oct": 10, "nov": 11, "dic": 12}
+MESES_NOMBRE = ["enero", "febrero", "marzo", "abril", "mayo", "junio",
+                "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"]
 
 
-def parse(path):
-    with open(path, encoding="utf-8") as f:
-        raw = f.read()
-    fm, body = {}, raw
-    m = re.match(r"^---\s*\n(.*?)\n---\s*\n?(.*)$", raw, re.S)
-    if m:
-        block, body = m.group(1), m.group(2)
-        for line in block.splitlines():
-            if ":" in line:
-                k, v = line.split(":", 1)
-                fm[k.strip().lower()] = v.strip()
-    fm["_body"] = body.strip()
-    if not fm.get("summary"):
-        fm["summary"] = body.strip().split("\n\n")[0].strip() if body.strip() else ""
-    return fm
+def strip_tags(s):
+    return re.sub(r"<[^>]+>", "", s)
 
 
-def date_es(s):
+def clean(s):
+    return html.unescape(strip_tags(s)).strip().strip('"').strip("«»").strip()
+
+
+def parse_date(s):
+    m = re.search(r"(\d{1,2})\s+([A-Za-zñáéíóú]+)\.?\s+(\d{4})", s)
+    if not m:
+        return (datetime.min, s)
+    day, mon, year = int(m.group(1)), m.group(2)[:3].lower(), int(m.group(3))
+    month = MESES.get(mon, 1)
     try:
-        d = datetime.strptime(s, "%Y-%m-%d")
-        return f"{d.day} de {MESES[d.month - 1]} de {d.year}"
-    except Exception:
-        return s
+        d = datetime(year, month, day)
+    except ValueError:
+        d = datetime.min
+    return (d, s)
 
 
-def esc(s):
-    return (s or "").replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
+def display_date(dt, original):
+    if dt == datetime.min:
+        return original
+    return f"{dt.day} de {MESES_NOMBRE[dt.month - 1]} de {dt.year}"
 
 
-def featured_html(n):
-    return f'''  <!-- Artículo destacado -->
-  <section class="featured">
-    <div class="container">
-      <a href="#">
-        <img src="{esc(n['image'])}" alt="{esc(n['title'])}" />
-        <div class="ft-body">
-          <span class="tag">{esc(n.get('category', ''))}</span>
-          <h2>{esc(n['title'])}</h2>
-          <p>{esc(n['summary'])}</p>
-          <div class="meta">{date_es(n.get('date', ''))} · {esc(n.get('read', ''))} de lectura</div>
-        </div>
-      </a>
-    </div>
-  </section>'''
+def parse_briefs():
+    items = []
+    for path in sorted(glob.glob(BRIEF_GLOB)):
+        raw = open(path, encoding="utf-8").read()
+        parts = re.split(r"<h2[^>]*>(.*?)</h2>", raw, flags=re.S)
+        for i in range(1, len(parts), 2):
+            raw_cat = clean(parts[i])
+            category = re.sub(r"\s*\(.*?\)\s*", "", raw_cat).split("·")[0].strip()
+            content = parts[i + 1] if i + 1 < len(parts) else ""
+            pat = re.compile(
+                r'<a href="([^"]+)"[^>]*>(.*?)</a>\s*<div[^>]*color:#888[^>]*>(.*?)</div>',
+                re.S,
+            )
+            for m in pat.finditer(content):
+                link = html.unescape(m.group(1)).strip()
+                title = clean(m.group(2))
+                srcdate = clean(m.group(3))
+                source, date_txt = srcdate, ""
+                if "·" in srcdate:
+                    source, date_txt = [x.strip() for x in srcdate.split("·", 1)]
+                dt, _ = parse_date(date_txt)
+                items.append({
+                    "link": link, "title": title, "source": source,
+                    "date_txt": date_txt, "date_disp": display_date(dt, date_txt),
+                    "category": category, "_dt": dt,
+                })
+    return items
 
 
 def card_html(n):
-    return f'''        <a class="post" href="#">
-          <img src="{esc(n['image'])}" alt="{esc(n['title'])}" />
-          <div class="p-body">
-            <span class="tag">{esc(n.get('category', ''))}</span>
-            <h3>{esc(n['title'])}</h3>
-            <p>{esc(n['summary'])}</p>
-            <div class="meta">{esc(n.get('category', ''))} <span class="dot"></span> {esc(n.get('read', ''))}</div>
-          </div>
+    return f'''        <a class="news-card" href="{html.escape(n['link'])}" target="_blank" rel="noopener">
+          <span class="tag">{html.escape(n['category'])}</span>
+          <h3>{html.escape(n['title'])}</h3>
+          <div class="src">{html.escape(n['source'])} · {html.escape(n['date_disp'])}</div>
+          <span class="readsrc">Leer la fuente &#8599;</span>
         </a>'''
 
 
 def main():
-    files = sorted(glob.glob(os.path.join(NEWS_DIR, "*.md")))
-    items = [parse(f) for f in files]
-    items = [i for i in items if i.get("title")]
-    if not items:
-        print("No hay noticias en news/. blog.html sin cambios.")
+    items = parse_briefs()
+    # dedup por enlace
+    seen, uniq = set(), []
+    for n in items:
+        if n["link"] in seen:
+            continue
+        seen.add(n["link"])
+        uniq.append(n)
+    if not uniq:
+        print("No se han encontrado noticias en los briefs de news/. blog.html sin cambios.")
         return
-    items.sort(key=lambda i: i.get("date", ""), reverse=True)
-    feat = next((i for i in items if str(i.get("featured", "")).lower() == "true"), items[0])
-    rest = [i for i in items if i is not feat]
-    grid = "\n".join(card_html(n) for n in rest)
+    uniq.sort(key=lambda n: n["_dt"], reverse=True)
+    cards = "\n".join(card_html(n) for n in uniq)
     region = (
-        featured_html(feat)
-        + "\n\n  <!-- Rejilla de artículos -->\n  <section class=\"posts\">\n"
-          "    <div class=\"container\">\n      <div class=\"grid\">\n\n"
-        + grid
+        "  <!-- Noticias del sector -->\n"
+        "  <section class=\"posts\">\n"
+        "    <div class=\"container\">\n"
+        "      <div class=\"grid\">\n\n"
+        + cards
         + "\n\n      </div>\n    </div>\n  </section>"
     )
     with open(BLOG, encoding="utf-8") as f:
-        html = f.read()
+        page = f.read()
     new = re.sub(
         r"<!-- NEWS:START -->.*?<!-- NEWS:END -->",
         "<!-- NEWS:START -->\n" + region + "\n  <!-- NEWS:END -->",
-        html, flags=re.S,
+        page, flags=re.S,
     )
     with open(BLOG, "w", encoding="utf-8") as f:
         f.write(new)
-    print(f"blog.html actualizado: 1 destacado + {len(rest)} tarjetas.")
+    print(f"blog.html actualizado con {len(uniq)} noticias reales del brief.")
 
 
 if __name__ == "__main__":

@@ -81,6 +81,14 @@
   .post .meta { margin-top: 20px; font-size: 12.5px; color: var(--color-text-muted); display: flex; align-items: center; gap: 8px; }
   .post .meta .dot { width: 3px; height: 3px; border-radius: 50%; background: var(--color-premium); }
 
+  /* Tarjeta de noticia (brief) */
+  .news-card { background: var(--color-surface); border: 1px solid var(--color-border); border-top: 3px solid var(--color-premium); border-radius: var(--radius-lg); padding: 28px 26px 24px; display: flex; flex-direction: column; text-decoration: none; box-shadow: var(--shadow-card); transition: transform .3s ease, box-shadow .3s ease; }
+  .news-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-hover); }
+  .news-card .tag { font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--color-premium); font-weight: 500; }
+  .news-card h3 { font-family: var(--font-heading); font-weight: 500; font-size: 18px; line-height: 1.34; letter-spacing: -0.01em; margin-top: 12px; color: var(--color-primary); flex: 1; }
+  .news-card .src { font-size: 12.5px; color: var(--color-text-muted); margin-top: 20px; }
+  .news-card .readsrc { font-size: 12.5px; color: var(--color-tech); margin-top: 12px; font-weight: 500; }
+
   /* Newsletter */
   .news { background: var(--color-primary); color: #C6D6C9; text-align: center; padding: 72px 0; }
   .news .kicker { color: #B8C9BC; }
@@ -117,86 +125,125 @@
 
   <section class="blog-head">
     <div class="container">
-      <span class="kicker">Diario Nakaia</span>
-      <h1>Salud, prevención y longevidad<br />con criterio.</h1>
-      <p>Ideas, evidencia y perspectivas sobre medicina preventiva, tecnología clínica y bienestar familiar — sin ruido ni modas.</p>
+      <span class="kicker">Actualidad del sector</span>
+      <h1>Medicina privada, prevención<br />y longevidad en el mundo.</h1>
+      <p>Una selección de la actualidad internacional del sector, con enlace a la fuente original y su fecha.</p>
     </div>
   </section>
 
   <!-- NEWS:START -->
-  <!-- Artículo destacado -->
-  <section class="featured">
-    <div class="container">
-      <a href="#">
-        <img src="images/benefit-familia.jpg" alt=""Longevidad saludable: lo que la medicina asiática y mediterránea nos enseñan"" />
-        <div class="ft-body">
-          <span class="tag">Longevidad</span>
-          <h2>"Longevidad saludable: lo que la medicina asiática y mediterránea nos enseñan"</h2>
-          <p>Más allá de las modas del biohacking, la evidencia apunta a hábitos sostenibles, prevención calendarizada y continuidad clínica. Repasamos qué prácticas tienen respaldo real y cómo integrarlas en la vida de una familia exigente.</p>
-          <div class="meta">8 de julio de 2026 · 6 min de lectura</div>
-        </div>
-      </a>
-    </div>
-  </section>
-
-  <!-- Rejilla de artículos -->
+  <!-- Noticias del sector -->
   <section class="posts">
     <div class="container">
       <div class="grid">
 
-        <a class="post" href="#">
-          <img src="images/pilar-01-tablet.jpg" alt="Por qué anticipar cambia el pronóstico" />
-          <div class="p-body">
-            <span class="tag">Prevención</span>
-            <h3>Por qué anticipar cambia el pronóstico</h3>
-            <p>La medicina preventiva no es hacer más pruebas, sino las adecuadas en el momento adecuado. Así construimos tu mapa de salud.</p>
-            <div class="meta">Prevención <span class="dot"></span> 5 min</div>
-          </div>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMie0FVX3lxTE1heEZWOXZHZllqZmtHNGx6SEdSUDIwR3JxTmZtd1NEelFXQmk0U09vQWh6alRGTENkaDdjc1ZfNlprbEN1b0o0bm5EUS1WMU1MbXE2MFltb2NEQzAtV3FJMzBvVjVHbmhzTV81bWFMWUl4QWstZGszWENXUQ?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Asia</span>
+          <h3>Las sociedades súper-envejecidas de Asia disparan un boom de clínicas de longevidad de alta gama</h3>
+          <div class="src">Fortune · 8 de julio de 2026</div>
+          <span class="readsrc">Leer la fuente &#8599;</span>
         </a>
-        <a class="post" href="#">
-          <img src="images/pilar-03-app.jpg" alt="Tu médico de familia en la era de la IA" />
-          <div class="p-body">
-            <span class="tag">Tecnología</span>
-            <h3>Tu médico de familia en la era de la IA</h3>
-            <p>"La tecnología bien usada no sustituye al médico: le da tiempo, contexto e información para decidir mejor y más rápido."</p>
-            <div class="meta">Tecnología <span class="dot"></span> 4 min</div>
-          </div>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMiugFBVV95cUxQdE1ZbWRVSkxqUnRQOFhpSzI3M09YelZzU1d4WDM5Ykt3LUhMUDZqR195NV9GcWd0S0NMdFozLTJhQlRhQ3poRVFUNjlTS1REQVFybTFOVzc3enV0NzFWQ3lzNGlYWjhScWVxOHNEb0RVUFRKeF9BX2l0YUJ0Ni1zbWhYLWtPRC1rNFFsNmlWYnNpTnBlaHFaMmI0eUVBMWVmX0hLdmlUY1ctQjVqOFhoYmNPRDZjbm1oeFE?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Dubái y Oriente Medio</span>
+          <h3>Nova Capital y Metamorph activan una plataforma de inversión de wellness y longevidad de 100 M$ liderada por EAU</h3>
+          <div class="src">International Business Magazine · 7 de julio de 2026</div>
+          <span class="readsrc">Leer la fuente &#8599;</span>
         </a>
-        <a class="post" href="#">
-          <img src="images/pilar-02-medico.jpg" alt=""Biomarcadores con criterio: qué medir y qué ignorar"" />
-          <div class="p-body">
-            <span class="tag">Excelencia</span>
-            <h3>"Biomarcadores con criterio: qué medir y qué ignorar"</h3>
-            <p>Pedir analíticas sin propósito genera ruido y ansiedad. Medimos solo lo que cambia una decisión clínica.</p>
-            <div class="meta">Excelencia <span class="dot"></span> 5 min</div>
-          </div>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMipgFBVV95cUxOR251UGkwU1d4QXBMOGlwTjBtU2RkSUtsYkxsYjNEMi0xS3BxbHdxVFBYR3NVak9WSWFNdW5lQURSNFFxVGQzY3QyemJ4aEtaVk5Ud29XQUdOYVV3NTJFbmhvaGJ1b0JWMjlnVXNfWkdjSWJ6cWxSRzY4Nzh5SnVzQnV0VG9sY3daZWRZUnJ2WVFCV3lKNnpJcHJldGV5ZERITzMzSDV3?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Asia</span>
+          <h3>Indonesia ancla «Longevity 5.0» en medio de brechas regionales en células madre</h3>
+          <div class="src">Healthcare Asia Magazine · 3 de julio de 2026</div>
+          <span class="readsrc">Leer la fuente &#8599;</span>
         </a>
-        <a class="post" href="#">
-          <img src="images/benefit-familia.jpg" alt="Salud familiar coordinada, en un solo lugar" />
-          <div class="p-body">
-            <span class="tag">Familia</span>
-            <h3>Salud familiar coordinada, en un solo lugar</h3>
-            <p>Un médico de referencia que conoce la historia de todos y orquesta especialistas, pruebas y seguimiento sin fricción.</p>
-            <div class="meta">Familia <span class="dot"></span> 4 min</div>
-          </div>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMimwFBVV95cUxQV3lmaGhUakQ2RWp6dXVrbE53akhkX1VCM2cyVjVwdU0zdmt3TzhOZ0RXOXFBV2V1cnFRczlLVE9HVjZnSzJUN01vS1Q1U2RPSGstT0xqTFk1S3I2TGk5MF9Xai1FdDJnYzRPM1dlb1N5eFU4bU4tWklvaC1wZHlFNXRXWkU5czYyb2NvaUpXUG9mMTVDQzdMLV8xWQ?oc=5" target="_blank" rel="noopener">
+          <span class="tag">EE. UU.</span>
+          <h3>Fountain Life hace la longevidad accesible con una membresía de 595 $</h3>
+          <div class="src">Longevity.Technology · 3 de julio de 2026</div>
+          <span class="readsrc">Leer la fuente &#8599;</span>
         </a>
-        <a class="post" href="#">
-          <img src="images/pilar-01-tablet.jpg" alt="Del chequeo anual al seguimiento continuo" />
-          <div class="p-body">
-            <span class="tag">Prevención</span>
-            <h3>Del chequeo anual al seguimiento continuo</h3>
-            <p>Un chequeo aislado es una foto; la salud es una película. Te contamos por qué la continuidad marca la diferencia.</p>
-            <div class="meta">Prevención <span class="dot"></span> 6 min</div>
-          </div>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMi1wFBVV95cUxNTUM2ektJRnBqSVYyaTFHU2xyVnEzNEo1VkhCZS1RTENmTUxiNnF4cnVlQ2E4SE9jYzlmNkN0VTlLMXBUN0VhYzNYT0xHQnBPaUlfV0c5MkE0eFlLQi12N1BjZmw4dUJ4UEVWaDZsNzRocHpicXBjWkhZM25ZVmFOWFdwZW84RFpNcWJZa0ZZMXFkS09EQUhfN19EbXdKQmhlZ011TTNUVzg3LUdzYk9BTGVzOXNienJEOHhLVlljTy12LVM0SmotWDQyaWtaUTVkYkQzV1Nwcw?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Europa</span>
+          <h3>El International Longevity Summit Madrid vuelve en 2026</h3>
+          <div class="src">Cryptopolitan · 2 de julio de 2026</div>
+          <span class="readsrc">Leer la fuente &#8599;</span>
         </a>
-        <a class="post" href="#">
-          <img src="images/pilar-03-app.jpg" alt=""Poco tiempo, mucha exigencia: eficiencia sin renunciar a la calidad"" />
-          <div class="p-body">
-            <span class="tag">Para quién</span>
-            <h3>"Poco tiempo, mucha exigencia: eficiencia sin renunciar a la calidad"</h3>
-            <p>Cómo diseñamos una operativa médica premium para agendas imposibles, con respuestas ágiles y coordinación total.</p>
-            <div class="meta">Para quién <span class="dot"></span> 5 min</div>
-          </div>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMiekFVX3lxTFA4eGNFanhLYjZDWnIzYzdiYWlFU1g0eUZxWF8ySm5JcDZtZ0ZFTDdTRFBra21ULVo3UjFvQm1NamFNMjAwY2luMXo5bnVPcHNJVEh6NzZTSmwwTFVza3RWRUs0NU12VGNSOFhyU2hZV3pVNnUtWUVBcndR?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Europa</span>
+          <h3>Un tercio de los adultos británicos duda de que el NHS pueda cubrir plenamente sus necesidades</h3>
+          <div class="src">Cover Magazine · 2 de julio de 2026</div>
+          <span class="readsrc">Leer la fuente &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMi6wFBVV95cUxPSU9CVk9uRDZrRS16d1VKcGY0emZjQVh3YkVsTkI1QW13eHBLamhTQlljeElKcVZKc215dkJsdk81TnI5aW5LOEdzVkRXQVRFMVRBRi03UjhiYXRPT2VybnJleldQWS1tY1QyNjRhM1ZUdTJSWHNmV2VjX2l4a0RXTXl2UDdOOTlwOVBpZHRzUjcteGJNTDdfSS00Nlo4QjcwOS1iRlVfSnllbEF0U2I3dy0tRzR4Tl9pY2d3NjY5T1pLclNuYjlMVEwwVElfOTJGSDJtd1duUHFpVVNseElPTFpyYjRkZjJ3aHVF?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Mercado y financiación</span>
+          <h3>El mercado de concierge medicine alcanzará 37.980 M$ en 2031</h3>
+          <div class="src">Barchart · 2 de julio de 2026</div>
+          <span class="readsrc">Leer la fuente &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMi5wFBVV95cUxQZzQ3ZnFzb2RJVkRPZkZoOVZKWGEwdF9EQ0l3Xzl0ekdEZzIzZ3RRZUl5Z2YxUU5XLXY4YWJjaTlCYlhUTGt0cUpheGpsWUVVQlBCRlJaWk1CeUx1djB4WVhobmRRLWo4OTRnNklPMWZzeEMyQXB5VFhsZnlaaEc3eDBaOGhRMXJMN0xmZDBuTWVDcE1qY0xuS2NzUlNvSkFDNG1LODF6dVMzRGZPZWZRWjdaNFhpLTN2a3I1SEI0ZDRHMlZyNk8yVVA4X0FrU0JBYzNPZDJHd0xVbHlvWXQ0UjRXckFKUWc?oc=5" target="_blank" rel="noopener">
+          <span class="tag">España</span>
+          <h3>Elsa Pataky se suma a la medicina preventiva de Sanitas: del genoma personal a la respuesta individual a los fármacos</h3>
+          <div class="src">Sanitas · 1 de julio de 2026</div>
+          <span class="readsrc">Leer la fuente &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMixAFBVV95cUxOcHo5dFlBdjZ0bUF0V0l4di1ZYVRnUnZSTGVTOEtwdDRVTDhkTmNPTXdqd3g4MEdacl81WTFjaEVZTDZfNTM1QzdpUkVaNXlsb1J0bk9RV0gwQW9fN0N4MlNWWUtRM0FnQTc0ME5PdHFCV3ZOQjdJRHJmYl9ueXZhZ3NxLTc5eEpISUd1MmR1QkZvcGpFSllsdXJ0eWItc25PZENjdW9wNkp0Z1I0dVNhR08wV1d0MjY5SER5YThaUHpKYnM20gHYAUFVX3lxTE80UjFReTAtNzdxOUZPNXlhNHMtVGhyV0dnSDFoaTY5Y0RfRjVXd01VTW9XVzd4WXY0QlItUmloWGhMZ0ZWMWV1ejRnREkzVUFmS1B1ZjZCUHJ4ZmQxLVJwM1F6WE5EWnhDSlpnTGdRcDFWQU9abGhZazBxOEI1Z2JKaUs0TmsydS1CcG45dlF1emVKb1ZYMXAtNGtPVlo3clpPdHp6c0ZsNWVWbG85NUUtOFNqaDZ6aHB3Q2ppaFdQdjVvV2ZBSjZBMkI0aU9IV0s5Q19qaW1HZA?oc=5" target="_blank" rel="noopener">
+          <span class="tag">España</span>
+          <h3>DKV cambia de marca: será ERGO para liderar el seguro de salud en España</h3>
+          <div class="src">Cinco Días · 29 de junio de 2026</div>
+          <span class="readsrc">Leer la fuente &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMijgFBVV95cUxOU2E2QnJfWHF1Z1hMV3Rpc2NXcENQUzBtc3VMNTZpRElnaTZlZU45M3d4MHZGY2ZLTnVSTnkzb3YyRHBGLUltU1pFVjB5T3dMcE00eHp0dnFxejVBY1V4UGh2R3czTWQxWGZuc3d5TWk5SEtmOVdVdTVtSnR2N2JVcUlkVmZOVUF0Y1RhLUNB?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Europa</span>
+          <h3>La próxima frontera del «branded living»: la longevidad</h3>
+          <div class="src">Hospitality Investor · 28 de junio de 2026</div>
+          <span class="readsrc">Leer la fuente &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMiwgFBVV95cUxOUkxrVmtraS0ybjNHUy1hTUluVzZXRE1hc2l2MzJMZGtwdnN1SVFuZzhCeWF6eHZVUENnQmktbGlKNTBPaVllWHpRMTFPRnhGZnE2ajIxcl81b3FIeWVBSGlqb2xHRUNZcGhVVlk2UHNRNzRibTdDb3BZX0hZQnQ1MDBCd2xYNG1sbzlwOXBSVWUzSHppSXlFaU14UEVibzR1cmJYcE1ldFpHalR1QTA0d3o3SWNRNkEzcnpfbnlFMG9qdw?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Europa</span>
+          <h3>Clinique La Prairie: «Estamos construyendo un ecosistema global de longevidad</h3>
+          <div class="src">Luxury Tribune · 25 de junio de 2026</div>
+          <span class="readsrc">Leer la fuente &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMihAFBVV95cUxPZXBUdWh0dlEyLTRqLWdPUkJtcnIyOWhxXzZaQzRURl80RGZSUGE5NkhpQjk5eXZVOWVQbmJpX05xWnRyemprcmJMX05HQzFVUFc1ZkhBWnNoMWcxd3Ewc3U3aEw3M0pCZFU1ODNCdmphb3R2RzNVLU9Rb0IwZDNjbFVITVg?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Mercado y financiación</span>
+          <h3>Prosus lidera una inversión de 480 M€ en la healthtech francesa Alan</h3>
+          <div class="src">Financial Times · 24 de junio de 2026</div>
+          <span class="readsrc">Leer la fuente &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMi_AFBVV95cUxQMFFtSV8ya1VNc21rdERVcVhxOWhLaUlWN1IzVFdMaG1nRGlsaTNtcWROb2JSQmRKV0I3dlh0TjgzaUEzS2ZwaUYzTE1keGtOM3F6VDBMRWhUOVlGMzRDZE16Q3E2Tk1yZ0RncGtfVDZjVGpvYWlBVnhyMFFpNjd3UU9yeS1WemhseVJVamt2cVJEbFozTEkyU1h3TV9rWS0tOUlIWWE4SlJuR3Z3Z2l3TUdOb1V6RjFFSVFwRUZDdXpuTXdHZnYtdXhROGVIMEJnZ0lnRFJCRDByczNneG5qMFBoLVlKVW5nNERDTWRqY0x0OUhHRFFYZ1p4NGQ?oc=5" target="_blank" rel="noopener">
+          <span class="tag">EE. UU.</span>
+          <h3>Next Health abre su flagship de la Costa Este en Chestnut Hill (Boston)</h3>
+          <div class="src">Business Wire · 22 de junio de 2026</div>
+          <span class="readsrc">Leer la fuente &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMiY0FVX3lxTE9nM1MtNFMxRlVoZmNkVDQ5cV9ybWhsRm5vV05UaXdQQlJDVkxXam9GNW9EWUVGUnFYVlFZSjgtTS0tMFdqdlhQYXlDZ0xqOS1SbVNqQVpiT3lSWjB6WmF5VlFuMA?oc=5" target="_blank" rel="noopener">
+          <span class="tag">EE. UU.</span>
+          <h3>ShinyHunters amenaza con filtrar 8,8 TB de datos robados de One Medical</h3>
+          <div class="src">The HIPAA Journal · 22 de junio de 2026</div>
+          <span class="readsrc">Leer la fuente &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMikwFBVV95cUxQTUlMRFltTm9zN2ZBLVFtZkNHWXM3VVRRMXZDd0F1MzNLMTQ4bnhsYVJRWF9rSW1yVTNnbnVrZkRMYlB6V0NTVnNTbTZWQTBtWUZIWEFyR2FMdVdwTnRlS0p6X2NtMzRiVVZ6UDJVU3J0YWdYRUZQcE9XZGR5RkhQOGhWdDhhRE9RVF9YX0xhNnJnR0k?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Dubái y Oriente Medio</span>
+          <h3>El boom del wellness en EAU se construye sobre la recuperación</h3>
+          <div class="src">Fast Company Middle East · 19 de junio de 2026</div>
+          <span class="readsrc">Leer la fuente &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMi5AFBVV95cUxOR200ZkgyY1d6Zi1UeG1DMHdFeTV1TW5CLWFkSlk1UlZ6M2NjRnV2VnA1WkdVQUZ6cjhNQ0I1MVZqdjg4eFpteDcwLUwwMFB1UHI1WGgzRTNJYmtzWWxjUE1LTGo2QzNiYXBmaU91Z3E0Mm1QWkRXV21PRUFDU0g0Z0NrNHpaRTU3S203SXAtX3NOTUJFM0ZhSlVzMTctZGdqMHpBSmFfUmFmTzkwSXUtN0lLOFNEZjk4VThkNk1Lb1pRUnMzVkFaZ3p5LWpTR2J3TGpITTBBWmxuTjVNYnE3cXJET0Y?oc=5" target="_blank" rel="noopener">
+          <span class="tag">España</span>
+          <h3>Beyond Longevity: medicina de la longevidad basada en tecnología y experiencia</h3>
+          <div class="src">El Economista · 19 de junio de 2026</div>
+          <span class="readsrc">Leer la fuente &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMijgFBVV95cUxOWWJJRlpzTUdpVnJMcnVEaEhPNHAxS3lPWGNRWDBlbVlZX0lCZEZscXFub2VnSnpiNTcwMDNHaTQ0TXVhMkd6bEFIZUpic3FCcHJQUlRRSWZ2QzJhd1NsTVc3ZTFKTHJsb0E3TGdENVlpLWc4Q2NlUFFHU0Z4NVg4T0hfTGo0SlZJRURYbFlB?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Dubái y Oriente Medio</span>
+          <h3>Dubái lanza una autoridad de longevidad para liderar el wellness</h3>
+          <div class="src">Travel Daily Media · 18 de junio de 2026</div>
+          <span class="readsrc">Leer la fuente &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMisgFBVV95cUxORzhsSGljc0RXYTJYS1g5VEtHbVpTWG42UUNmRGx1X2JjYW11dnFXdHZxNTVqbHhIY3YzRDlwbmVNX1RsRW1DT1ZtcTlTYXlETmhzVUxtV1Bad09EdnBSZFVqVlhOX1BCeGUzZzFYZkJJTWREY3RXdUs3SVpIRk45Z1pmZnh2aXBqM2tiRlhUWV9yamRHb1R5Y3otaUtGcWlwV0JHX1RPVVdwYkNnc19BM0dn?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Asia</span>
+          <h3>La economía del wellness de Tailandia impulsa la demanda de clínicas de longevidad y salud preventiva</h3>
+          <div class="src">The National Law Review · 16 de junio de 2026</div>
+          <span class="readsrc">Leer la fuente &#8599;</span>
         </a>
 
       </div>
