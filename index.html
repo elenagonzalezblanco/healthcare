@@ -232,6 +232,44 @@
   .modelo li:first-child { padding-top: 0; }
   .modelo li .dash { width: 26px; height: 3px; border-radius: 2px; background: var(--color-premium); margin-top: 11px; }
 
+  /* ===== Para quién ===== */
+  .audience { border-top: 1px solid var(--color-border); text-align: center; scroll-margin-top: 90px; }
+  .audience h2 { font-weight: 400; font-size: clamp(30px, 3.8vw, 46px); line-height: 1.14; letter-spacing: -0.02em; color: var(--color-primary); max-width: 900px; margin: 16px auto 0; }
+  .audience .cards { display: grid; grid-template-columns: repeat(3,1fr); gap: 28px; margin-top: 56px; text-align: left; }
+  @media (max-width: 860px){ .audience .cards { grid-template-columns: 1fr; } }
+  .aud-card { background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-xl); box-shadow: var(--shadow-card); padding: 44px 36px; transition: transform .3s ease, box-shadow .3s ease; }
+  .aud-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-hover); }
+  .aud-card .num { font-family: var(--font-heading); font-weight: 400; font-size: 34px; color: var(--color-premium); }
+  .aud-card h3 { font-family: var(--font-heading); font-weight: 500; font-size: 20px; color: var(--color-primary); margin-top: 26px; line-height: 1.25; letter-spacing: -0.01em; }
+  .aud-card .rule { width: 40px; height: 1px; background: var(--color-premium); opacity: .8; margin: 18px 0; }
+  .aud-card p { font-size: 14.5px; color: var(--color-text-muted); line-height: 1.6; }
+
+  /* ===== Quiénes somos ===== */
+  .about { border-top: 1px solid var(--color-border); scroll-margin-top: 90px; }
+  .about .lead { font-family: var(--font-heading); font-weight: 400; font-size: clamp(21px, 2.3vw, 29px); line-height: 1.4; color: var(--color-primary); max-width: 920px; letter-spacing: -0.01em; margin-top: 16px; }
+  .about .mv { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; margin-top: 52px; }
+  @media (max-width: 860px){ .about .mv { grid-template-columns: 1fr; } }
+  .mv-card { background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-lg); box-shadow: var(--shadow-card); padding: 40px; }
+  .mv-card .tag { font-size: 12px; font-weight: 500; letter-spacing: .2em; text-transform: uppercase; color: var(--color-premium); }
+  .mv-card p { font-size: 15.5px; color: var(--color-text-muted); line-height: 1.7; margin-top: 16px; }
+
+  /* ===== Qué no somos ===== */
+  .notus { margin-top: 92px; }
+  .notus h2 { font-weight: 400; font-size: clamp(28px, 3.4vw, 44px); line-height: 1.14; letter-spacing: -0.02em; color: var(--color-primary); margin-top: 14px; }
+  .notus .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 44px; }
+  @media (max-width: 860px){ .notus .grid2 { grid-template-columns: 1fr; } }
+  .not-card { background: #F4EEE3; border-left: 3px solid var(--color-premium); border-radius: 0 var(--radius-md) var(--radius-md) 0; padding: 26px 28px; display: grid; grid-template-columns: 20px 1fr; gap: 14px; align-items: start; }
+  .not-card .x { color: #C0655A; font-size: 15px; margin-top: 2px; }
+  .not-card p { font-size: 16px; color: var(--color-text); line-height: 1.5; }
+
+  /* ===== Admisión privada ===== */
+  .admission { background: var(--color-primary); color: #C6D6C9; text-align: center; scroll-margin-top: 90px; }
+  .admission .ey { display: inline-block; color: #B8C9BC; font-size: 12px; font-weight: 500; letter-spacing: .28em; text-transform: uppercase; }
+  .admission h2 { color: #fff; font-weight: 400; font-size: clamp(30px, 4vw, 52px); line-height: 1.12; letter-spacing: -0.02em; margin-top: 18px; }
+  .admission p { color: #B7C8BB; font-size: 17px; max-width: 620px; margin: 22px auto 0; line-height: 1.6; }
+  .admission .btn-outline { display: inline-flex; align-items: center; gap: 10px; margin-top: 34px; border: 1px solid rgba(255,255,255,0.5); color: #fff; border-radius: var(--radius-pill); padding: 14px 30px; text-decoration: none; font-size: 15px; font-weight: 500; transition: background .2s; }
+  .admission .btn-outline:hover { background: rgba(255,255,255,0.08); }
+
   /* ===== Footer ===== */
   footer.site { background: var(--color-primary); color: #A9BCAE; padding: 56px 0; text-align: center; }
   footer.site .name { font-family: var(--font-heading); font-weight: 500; font-size: 22px; letter-spacing: 0.34em; color: #fff; }
@@ -250,9 +288,9 @@
       <nav class="site-nav">
         <a href="#">Cómo funciona</a>
         <a href="#modelo">Modelo</a>
+        <a href="#para-quien">Para quién</a>
         <a href="#">Para familias</a>
-        <a href="#">Para empresas</a>
-        <a href="#">Sobre nosotros</a>
+        <a href="#quienes">Quiénes somos</a>
         <a class="button-primary" href="#">Apúntate a la lista de espera</a>
       </nav>
     </div>
@@ -379,6 +417,44 @@
     </div>
   </section>
 
+  <!-- Para quién -->
+  <section class="section audience" id="para-quien">
+    <div class="container">
+      <span class="kicker">Para quién</span>
+      <h2>Diseñado para personas exigentes con poco tiempo y familias globales</h2>
+      <div class="cards">
+        <article class="aud-card">
+          <div class="num">01</div>
+          <h3>Banca privada</h3>
+          <div class="rule"></div>
+          <p>Un estándar de servicio a la altura de la relación con vuestro banquero: discreción, disponibilidad y decisiones informadas.</p>
+        </article>
+        <article class="aud-card">
+          <div class="num">02</div>
+          <h3>Expats y familias globales</h3>
+          <div class="rule"></div>
+          <p>Continuidad médica entre países, coordinación con clínicas internacionales y comunicación multilingüe.</p>
+        </article>
+        <article class="aud-card">
+          <div class="num">03</div>
+          <h3>Ejecutivos y sus familias</h3>
+          <div class="rule"></div>
+          <p>Prevención, acompañamiento familiar y una operativa eficiente para quien tiene poco tiempo y mucha exigencia.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Admisión privada -->
+  <section class="section admission" id="admision">
+    <div class="container">
+      <span class="ey">Admisión privada</span>
+      <h2>Un estándar médico a la altura de tu vida</h2>
+      <p>La admisión en Nakaia es privada y por invitación. Solicita una conversación con nuestro equipo y diseñaremos un plan para ti y tu familia.</p>
+      <a class="btn-outline" href="#"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6.5 3.5 4 6c0 8 6 14 14 14l2.5-2.5-3.5-2.5-2 1.5c-2.5-1-4.5-3-5.5-5.5l1.5-2L6.5 3.5Z"/></svg> Hablar con un asesor</a>
+    </div>
+  </section>
+
   <!-- Beneficios -->
   <section class="section benefits">
     <div class="container">
@@ -404,6 +480,35 @@
           <div class="bic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1F3D34" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12a7 7 0 0 1 14 0"/><rect x="3" y="12" width="4" height="6" rx="2"/><rect x="17" y="12" width="4" height="6" rx="2"/></svg></div>
           <h4>Acceso continuo</h4>
           <p>Acompañamiento constante, donde y cuando lo necesites.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Quiénes somos -->
+  <section class="section about" id="quienes">
+    <div class="container">
+      <span class="kicker">Quiénes somos</span>
+      <p class="lead">Nakaia es una capa médica premium para familias exigentes: combina médico de confianza, especialistas de excelencia, prevención calendarizada y un producto digital avanzado para resolver, anticipar y coordinar la salud con mucha más calidad, rapidez y eficiencia.</p>
+      <div class="mv">
+        <div class="mv-card">
+          <span class="tag">Misión</span>
+          <p>Simplificar, anticipar y elevar la experiencia médica de familias y personas exigentes, combinando un médico de confianza que conoce su historia completa, acceso ágil a especialistas de excelencia, prevención personalizada y tecnología inteligente conectada al historial clínico para tomar mejores decisiones, ahorrar tiempo y aportar tranquilidad.</p>
+        </div>
+        <div class="mv-card">
+          <span class="tag">Visión</span>
+          <p>Ser la capa médica premium de referencia para familias y profesionales con poco tiempo: un modelo high-touch, local y humano, apoyado en tecnología e IA de primer nivel, capaz de transformar un sistema sanitario fragmentado en una experiencia continua, preventiva, personalizada y exportable a otros mercados.</p>
+        </div>
+      </div>
+
+      <div class="notus">
+        <span class="kicker">Qué no somos</span>
+        <h2>Nuestros límites son parte de la propuesta</h2>
+        <div class="grid2">
+          <div class="not-card"><span class="x">✕</span><p>Fábrica de complementos que no sirven para nada</p></div>
+          <div class="not-card"><span class="x">✕</span><p>Longevidad sin calidad ni evidencia clínica</p></div>
+          <div class="not-card"><span class="x">✕</span><p>Medical devices que solo recopilan datos</p></div>
+          <div class="not-card"><span class="x">✕</span><p>Tecnología que sustituye al médico en lugar de asistirlo</p></div>
         </div>
       </div>
     </div>
