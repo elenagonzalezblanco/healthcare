@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>NAKAIA HEALTH — Blog</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --color-primary: #1F3D34;
+    --color-primary-soft: #A7BCA4;
+    --color-premium: #C9A97A;
+    --color-tech: #3D5E8A;
+    --color-background: #F3F5F2;
+    --color-surface: #FFFFFF;
+    --color-surface-warm: #E8E2D8;
+    --color-text: #1D2528;
+    --color-text-muted: #5F6865;
+    --color-border: #DED8CE;
+    --font-heading: "Poppins", "Sora", "Inter", sans-serif;
+    --font-body: "Inter", "Satoshi", "Helvetica Neue", sans-serif;
+    --radius-md: 16px;
+    --radius-lg: 24px;
+    --radius-xl: 32px;
+    --radius-pill: 999px;
+    --shadow-card: 0 8px 24px rgba(31, 61, 52, 0.06);
+    --shadow-hover: 0 16px 48px rgba(31, 61, 52, 0.12);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: var(--font-body); color: var(--color-text); background: var(--color-background); -webkit-font-smoothing: antialiased; font-weight: 400; line-height: 1.55; }
+  h1, h2, h3 { font-family: var(--font-heading); color: var(--color-primary); }
+  a { color: inherit; }
+  .container { width: min(1280px, calc(100% - 96px)); margin: 0 auto; }
+
+  /* Header */
+  header.site { position: sticky; top: 0; z-index: 40; background: rgba(243,245,242,0.86); backdrop-filter: blur(16px); border-bottom: 1px solid var(--color-border); }
+  header.site .container { display: flex; align-items: center; justify-content: space-between; height: 74px; }
+  .brand { display: flex; flex-direction: column; line-height: 1; text-decoration: none; }
+  .brand .name { font-family: var(--font-heading); font-weight: 500; font-size: 22px; letter-spacing: 0.34em; color: var(--color-primary); }
+  .brand .sub { font-size: 8.5px; letter-spacing: 0.56em; color: #9AA39C; margin-top: 5px; padding-left: 3px; }
+  .site-nav { display: flex; align-items: center; gap: 32px; }
+  .site-nav a { font-size: 14px; color: var(--color-text-muted); text-decoration: none; transition: color .2s; }
+  .site-nav a:hover, .site-nav a.active { color: var(--color-primary); }
+  .button-primary { background: var(--color-primary); color: #fff; border: 0; border-radius: var(--radius-pill); padding: 12px 24px; font-family: var(--font-body); font-size: 14px; font-weight: 500; cursor: pointer; text-decoration: none; transition: background .2s, box-shadow .2s; }
+  .button-primary:hover { background: #163028; box-shadow: 0 12px 32px rgba(31,61,52,0.18); }
+  @media (max-width: 920px){ .site-nav a:not(.button-primary){ display: none; } }
+
+  /* Blog head */
+  .blog-head { padding: 84px 0 40px; }
+  .kicker { display: inline-block; font-size: 12px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: var(--color-premium); }
+  .blog-head h1 { font-weight: 400; font-size: clamp(34px, 5vw, 56px); line-height: 1.08; letter-spacing: -0.03em; margin-top: 14px; }
+  .blog-head p { margin-top: 18px; font-size: 17px; color: var(--color-text-muted); max-width: 560px; }
+
+  /* Featured */
+  .featured { padding: 24px 0 20px; }
+  .featured a { display: grid; grid-template-columns: 1.15fr 1fr; gap: 40px; align-items: center; background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-xl); overflow: hidden; box-shadow: var(--shadow-card); text-decoration: none; transition: transform .3s ease, box-shadow .3s ease; }
+  .featured a:hover { transform: translateY(-4px); box-shadow: var(--shadow-hover); }
+  .featured img { width: 100%; height: 100%; min-height: 320px; object-fit: cover; }
+  .featured .ft-body { padding: 44px 48px 44px 8px; }
+  .featured .tag { font-size: 11px; letter-spacing: .16em; text-transform: uppercase; color: var(--color-premium); font-weight: 500; }
+  .featured h2 { font-weight: 400; font-size: clamp(26px, 3vw, 36px); line-height: 1.15; letter-spacing: -0.02em; margin-top: 14px; }
+  .featured .ft-body p { margin-top: 16px; font-size: 15.5px; color: var(--color-text-muted); line-height: 1.65; }
+  .featured .meta { margin-top: 22px; font-size: 13px; color: var(--color-text-muted); }
+  @media (max-width: 820px){ .featured a { grid-template-columns: 1fr; } .featured .ft-body { padding: 8px 32px 40px; } .featured img { min-height: 240px; } }
+
+  /* Grid */
+  .posts { padding: 40px 0 100px; }
+  .posts .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
+  @media (max-width: 900px){ .posts .grid { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 600px){ .posts .grid { grid-template-columns: 1fr; } }
+  .post { background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-card); display: flex; flex-direction: column; text-decoration: none; transition: transform .3s ease, box-shadow .3s ease; }
+  .post:hover { transform: translateY(-5px); box-shadow: var(--shadow-hover); }
+  .post img { width: 100%; height: 190px; object-fit: cover; }
+  .post .p-body { padding: 26px 26px 30px; display: flex; flex-direction: column; flex: 1; }
+  .post .tag { font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--color-premium); font-weight: 500; }
+  .post h3 { font-weight: 500; font-size: 19px; line-height: 1.3; letter-spacing: -0.01em; margin-top: 12px; color: var(--color-primary); }
+  .post p { font-size: 14px; color: var(--color-text-muted); margin-top: 12px; line-height: 1.6; flex: 1; }
+  .post .meta { margin-top: 20px; font-size: 12.5px; color: var(--color-text-muted); display: flex; align-items: center; gap: 8px; }
+  .post .meta .dot { width: 3px; height: 3px; border-radius: 50%; background: var(--color-premium); }
+
+  /* Newsletter */
+  .news { background: var(--color-primary); color: #C6D6C9; text-align: center; padding: 72px 0; }
+  .news .kicker { color: #B8C9BC; }
+  .news h2 { color: #fff; font-weight: 400; font-size: clamp(26px, 3.4vw, 40px); line-height: 1.14; letter-spacing: -0.02em; margin-top: 14px; }
+  .news p { color: #B7C8BB; font-size: 16px; max-width: 520px; margin: 18px auto 0; }
+  .news form { margin-top: 30px; display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+  .news input { border: 1px solid rgba(255,255,255,0.4); background: rgba(255,255,255,0.06); color: #fff; border-radius: var(--radius-pill); padding: 14px 24px; font-family: var(--font-body); font-size: 15px; width: 320px; max-width: 100%; }
+  .news input::placeholder { color: #9DB2A2; }
+  .news button { background: var(--color-premium); color: var(--color-primary); border: 0; border-radius: var(--radius-pill); padding: 14px 30px; font-family: var(--font-body); font-weight: 600; font-size: 15px; cursor: pointer; transition: filter .2s; }
+  .news button:hover { filter: brightness(1.05); }
+
+  footer.site { background: #163028; color: #A9BCAE; padding: 56px 0; text-align: center; }
+  footer.site .name { font-family: var(--font-heading); font-weight: 500; font-size: 22px; letter-spacing: 0.34em; color: #fff; }
+  footer.site p { font-size: 13px; max-width: 480px; margin: 14px auto 0; }
+</style>
+</head>
+<body>
+
+  <header class="site">
+    <div class="container">
+      <a class="brand" href="index.html">
+        <span class="name">NAKAIA</span>
+        <span class="sub">HEALTH</span>
+      </a>
+      <nav class="site-nav">
+        <a href="index.html#modelo">Modelo</a>
+        <a href="index.html#para-quien">Para quién</a>
+        <a href="index.html#quienes">Quiénes somos</a>
+        <a href="blog.html" class="active">Blog</a>
+        <a class="button-primary" href="index.html#">Apúntate a la lista de espera</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="blog-head">
+    <div class="container">
+      <span class="kicker">Diario Nakaia</span>
+      <h1>Salud, prevención y longevidad<br />con criterio.</h1>
+      <p>Ideas, evidencia y perspectivas sobre medicina preventiva, tecnología clínica y bienestar familiar — sin ruido ni modas.</p>
+    </div>
+  </section>
+
+  <!-- Artículo destacado -->
+  <section class="featured">
+    <div class="container">
+      <a href="#">
+        <img src="images/benefit-familia.jpg" alt="Longevidad saludable en familia" />
+        <div class="ft-body">
+          <span class="tag">Longevidad</span>
+          <h2>Longevidad saludable: lo que la medicina asiática y mediterránea nos enseñan</h2>
+          <p>Más allá de las modas del biohacking, la evidencia apunta a hábitos sostenibles, prevención calendarizada y continuidad clínica. Repasamos qué prácticas tienen respaldo real y cómo integrarlas en la vida de una familia exigente.</p>
+          <div class="meta">8 de julio de 2026 · 6 min de lectura</div>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <!-- Rejilla de artículos -->
+  <section class="posts">
+    <div class="container">
+      <div class="grid">
+
+        <a class="post" href="#">
+          <img src="images/pilar-01-tablet.jpg" alt="Mapa de salud" />
+          <div class="p-body">
+            <span class="tag">Prevención</span>
+            <h3>Por qué anticipar cambia el pronóstico</h3>
+            <p>La medicina preventiva no es hacer más pruebas, sino las adecuadas en el momento adecuado. Así construimos tu mapa de salud.</p>
+            <div class="meta">Prevención <span class="dot"></span> 5 min</div>
+          </div>
+        </a>
+
+        <a class="post" href="#">
+          <img src="images/pilar-03-app.jpg" alt="Tecnología e IA en salud" />
+          <div class="p-body">
+            <span class="tag">Tecnología</span>
+            <h3>Tu médico de familia en la era de la IA</h3>
+            <p>La tecnología bien usada no sustituye al médico: le da tiempo, contexto e información para decidir mejor y más rápido.</p>
+            <div class="meta">Tecnología <span class="dot"></span> 4 min</div>
+          </div>
+        </a>
+
+        <a class="post" href="#">
+          <img src="images/pilar-02-medico.jpg" alt="Especialistas de referencia" />
+          <div class="p-body">
+            <span class="tag">Excelencia</span>
+            <h3>Biomarcadores con criterio: qué medir y qué ignorar</h3>
+            <p>Pedir analíticas sin propósito genera ruido y ansiedad. Medimos solo lo que cambia una decisión clínica.</p>
+            <div class="meta">Excelencia <span class="dot"></span> 5 min</div>
+          </div>
+        </a>
+
+        <a class="post" href="#">
+          <img src="images/benefit-familia.jpg" alt="Salud familiar coordinada" />
+          <div class="p-body">
+            <span class="tag">Familia</span>
+            <h3>Salud familiar coordinada, en un solo lugar</h3>
+            <p>Un médico de referencia que conoce la historia de todos y orquesta especialistas, pruebas y seguimiento sin fricción.</p>
+            <div class="meta">Familia <span class="dot"></span> 4 min</div>
+          </div>
+        </a>
+
+        <a class="post" href="#">
+          <img src="images/pilar-01-tablet.jpg" alt="Chequeo con propósito" />
+          <div class="p-body">
+            <span class="tag">Prevención</span>
+            <h3>Del chequeo anual al seguimiento continuo</h3>
+            <p>Un chequeo aislado es una foto; la salud es una película. Te contamos por qué la continuidad marca la diferencia.</p>
+            <div class="meta">Prevención <span class="dot"></span> 6 min</div>
+          </div>
+        </a>
+
+        <a class="post" href="#">
+          <img src="images/pilar-03-app.jpg" alt="Eficiencia para ejecutivos" />
+          <div class="p-body">
+            <span class="tag">Para quién</span>
+            <h3>Poco tiempo, mucha exigencia: eficiencia sin renunciar a la calidad</h3>
+            <p>Cómo diseñamos una operativa médica premium para agendas imposibles, con respuestas ágiles y coordinación total.</p>
+            <div class="meta">Para quién <span class="dot"></span> 5 min</div>
+          </div>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Newsletter -->
+  <section class="news">
+    <div class="container">
+      <span class="kicker">Newsletter</span>
+      <h2>Recibe nuestras ideas sobre salud y longevidad</h2>
+      <p>Sin spam. Solo contenido con criterio clínico, una o dos veces al mes.</p>
+      <form onsubmit="return false;">
+        <input type="email" placeholder="Tu correo electrónico" aria-label="Correo electrónico" />
+        <button type="submit">Suscribirme</button>
+      </form>
+    </div>
+  </section>
+
+  <footer class="site">
+    <div class="container">
+      <div class="name">NAKAIA</div>
+      <p>Medicina privada, preventiva y de precisión. Con la mejor tecnología e IA al servicio de tu salud y la de tu familia.</p>
+    </div>
+  </footer>
+
+</body>
+</html>
