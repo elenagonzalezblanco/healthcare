@@ -39,6 +39,7 @@
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
   body {
     font-family: var(--font-body);
     color: var(--color-text);
@@ -211,9 +212,25 @@
   .benefits .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
   @media (max-width: 900px){ .benefits .grid { grid-template-columns: 1fr 1fr; } }
   @media (max-width: 520px){ .benefits .grid { grid-template-columns: 1fr; } }
-  .benefit .bic { width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: var(--radius-pill); border: 1px solid var(--color-border); margin-bottom: 16px; }
+  .benefit { background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-card); display: flex; flex-direction: column; transition: transform .3s ease, box-shadow .3s ease; }
+  .benefit:hover { transform: translateY(-4px); box-shadow: var(--shadow-hover); }
+  .benefit .bphoto { width: 100%; height: 158px; object-fit: cover; display: block; }
+  .benefit .bbody { padding: 0 22px 26px; }
+  .benefit .bic { width: 46px; height: 46px; display: flex; align-items: center; justify-content: center; border-radius: var(--radius-pill); background: var(--color-surface); box-shadow: var(--shadow-card); margin: -23px 0 16px; position: relative; z-index: 2; }
   .benefit h4 { font-family: var(--font-body); font-weight: 600; font-size: 15px; color: var(--color-primary); }
   .benefit p { font-size: 13.5px; color: var(--color-text-muted); margin-top: 8px; line-height: 1.55; }
+
+  /* ===== Modelo / Qué somos ===== */
+  .modelo { border-top: 1px solid var(--color-border); scroll-margin-top: 90px; }
+  .modelo .grid { display: grid; grid-template-columns: 1.05fr 1fr; gap: 64px; align-items: start; }
+  @media (max-width: 860px){ .modelo .grid { grid-template-columns: 1fr; gap: 40px; } }
+  .modelo h2 { font-weight: 400; font-size: clamp(30px, 3.6vw, 46px); line-height: 1.14; letter-spacing: -0.02em; color: var(--color-primary); margin-top: 16px; }
+  .modelo .rule { width: 96px; height: 1px; background: var(--color-premium); opacity: .75; margin: 30px 0; }
+  .modelo .lead { font-size: 16px; color: var(--color-text-muted); max-width: 460px; line-height: 1.7; }
+  .modelo ul { list-style: none; }
+  .modelo li { display: grid; grid-template-columns: 34px 1fr; gap: 12px; padding: 22px 0; border-bottom: 1px solid var(--color-border); font-size: 16px; color: var(--color-text); align-items: start; line-height: 1.5; }
+  .modelo li:first-child { padding-top: 0; }
+  .modelo li .dash { width: 26px; height: 3px; border-radius: 2px; background: var(--color-premium); margin-top: 11px; }
 
   /* ===== Footer ===== */
   footer.site { background: var(--color-primary); color: #A9BCAE; padding: 56px 0; text-align: center; }
@@ -232,10 +249,11 @@
       </div>
       <nav class="site-nav">
         <a href="#">Cómo funciona</a>
+        <a href="#modelo">Modelo</a>
         <a href="#">Para familias</a>
         <a href="#">Para empresas</a>
         <a href="#">Sobre nosotros</a>
-        <a class="button-primary" href="#">Apúntate al Early Access</a>
+        <a class="button-primary" href="#">Apúntate a la lista de espera</a>
       </nav>
     </div>
   </header>
@@ -249,7 +267,7 @@
           <span class="kicker">Tres pilares</span>
           <h1>Un solo objetivo:<br /><span class="gold">tu salud y la<br />de tu familia.</span></h1>
           <p>Medicina privada, preventiva y de precisión. Con la mejor tecnología e IA al servicio de tu salud y la de tu familia.</p>
-          <div class="cta"><a class="button-primary" href="#">Apúntate al Early Access</a></div>
+          <div class="cta"><a class="button-primary" href="#">Apúntate a la lista de espera</a></div>
         </div>
 
         <!-- Pilar 01 -->
@@ -338,6 +356,26 @@
 
       </div>
       <div class="claim">Prevención · Excelencia · Seguimiento</div>
+    </div>
+  </section>
+
+  <!-- Modelo / Qué somos -->
+  <section class="section modelo" id="modelo">
+    <div class="container">
+      <div class="grid">
+        <div>
+          <span class="kicker">Qué somos</span>
+          <h2>Ni un seguro. Ni un hospital.<br />Una capa de servicios que eleva tu salud.</h2>
+          <div class="rule"></div>
+          <p class="lead">Nakaia aporta calidad y eficiencia operativa en un mercado sanitario fragmentado. Trabajamos junto a tu seguro, tu hospital y tus especialistas — orquestando cada decisión bajo el criterio de tu médico de familia Nakaia.</p>
+        </div>
+        <ul>
+          <li><span class="dash"></span><span>Consultas largas, escucha activa y visión integral del paciente</span></li>
+          <li><span class="dash"></span><span>Biomarcadores y pruebas solo cuando cambian una decisión clínica</span></li>
+          <li><span class="dash"></span><span>Coordinación multidisciplinar con especialistas de referencia</span></li>
+          <li><span class="dash"></span><span>Continuidad longitudinal: acompañamiento, no chequeos aislados</span></li>
+        </ul>
+      </div>
     </div>
   </section>
 
