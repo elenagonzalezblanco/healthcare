@@ -1,10 +1,10 @@
 #!/bin/bash
 # Regenera el blog desde news/*.html y publica los cambios en GitHub.
 # Se ejecuta a diario a las 8:00 mediante el LaunchAgent com.nakaia.blog.daily.
-REPO="/Users/elenagbg/Library/CloudStorage/OneDrive-Personal/personal 26-27/proyectos git26-27/oscar"
+REPO="$HOME/Nakaia/healthcare"
 cd "$REPO" || exit 1
 export PATH="/opt/homebrew/bin:/usr/bin:/bin:/usr/sbin:/sbin"
-LOG="$REPO/.blog-cron.log"
+LOG="$HOME/Library/Logs/nakaia-blog.log"
 {
   echo "==== $(date '+%Y-%m-%d %H:%M:%S') ===="
   # Traer posibles cambios remotos para evitar rechazos en el push
