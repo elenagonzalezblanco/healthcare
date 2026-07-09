@@ -25,5 +25,16 @@ LOG="$HOME/Library/Logs/nakaia-blog.log"
   else
     echo "sin cambios"
   fi
+  # Aviso si falta el brief de hoy (a partir de las 8:00, como mucho una vez al día)
+  TODAY=$(date +%F); HOUR=$(date +%H); FLAG="$HOME/Library/Logs/.nakaia-notified-$TODAY"
+  if ls news/*"$TODAY"*.html >/dev/null 2>&1; then
+    echo "brief de hoy ($TODAY): presente"
+  elif [ "$HOUR" -ge 8 ] && [ ! -f "$FLAG" ]; then
+    /usr/bin/osascript -e 'display notification "No encuentro el brief de hoy en la carpeta local (Escritorio → Nakaia-briefs). El blog no se ha actualizado con noticias nuevas." with title "Nakaia · Blog" sound name "Ping"' || true
+    touch "$FLAG"
+    echo "brief de hoy ($TODAY): FALTA -> aviso enviado"
+  else
+    echo "brief de hoy ($TODAY): falta (sin aviso: antes de las 8h o ya avisado)"
+  fi
   echo ""
 } >> "$LOG" 2>&1
