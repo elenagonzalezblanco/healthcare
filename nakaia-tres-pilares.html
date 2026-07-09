@@ -287,6 +287,19 @@
   footer.site .name { font-family: var(--font-heading); font-weight: 500; font-size: 22px; letter-spacing: 0.34em; color: #fff; }
   footer.site p { font-size: 13px; max-width: 480px; margin: 14px auto 0; }
   .claim { text-align: center; margin-top: 8px; font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: #B4B0A6; }
+  /* ===== Hero landing (foto de familia de fondo) ===== */
+  .hero-lp { position: relative; min-height: 88vh; display: flex; align-items: center; background-image: url('images/hero-familia.jpg'); background-size: cover; background-position: 70% center; }
+  .hero-lp::before { content: ''; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(243,245,242,0.94) 0%, rgba(243,245,242,0.76) 30%, rgba(243,245,242,0.18) 56%, rgba(243,245,242,0) 72%); }
+  .hero-lp .container { position: relative; z-index: 1; }
+  .hero-lp .hero-text { max-width: 660px; }
+  .hero-lp .kicker { color: var(--color-premium); }
+  .hero-lp h1 { font-family: var(--font-heading); font-weight: 300; font-size: clamp(28px, 3.9vw, 52px); line-height: 1.24; letter-spacing: -0.02em; color: var(--color-primary); margin-top: 20px; }
+  .hero-lp h1 em { font-style: normal; color: var(--color-premium); }
+  @media (max-width: 720px){
+    .hero-lp { min-height: 80vh; background-position: 64% center; align-items: flex-end; padding-bottom: 54px; }
+    .hero-lp::before { background: linear-gradient(180deg, rgba(243,245,242,0.45) 0%, rgba(243,245,242,0.08) 28%, rgba(243,245,242,0.7) 74%, rgba(243,245,242,0.97) 100%); }
+    .hero-lp h1 { font-size: clamp(25px, 6.6vw, 38px); }
+  }
 </style>
 </head>
 <body>
@@ -307,6 +320,16 @@
       </nav>
     </div>
   </header>
+
+  <!-- Hero landing -->
+  <section class="hero-lp">
+    <div class="container">
+      <div class="hero-text">
+        <span class="kicker">Nakaia Health</span>
+        <h1>Un servicio médico premium que combina <em>prevención</em>, <em>acompañamiento</em> y <em>excelencia</em> en el servicio a lo largo de toda tu vida y la de tu familia.</h1>
+      </div>
+    </div>
+  </section>
 
   <section class="section">
     <div class="container">
