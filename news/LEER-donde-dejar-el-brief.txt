@@ -1,0 +1,26 @@
+IMPORTANTE — dónde dejar el brief diario del blog
+==================================================
+
+La automatización del blog NO puede leer esta carpeta de OneDrive
+(macOS bloquea a los procesos automáticos el acceso a OneDrive/CloudStorage).
+
+Por eso el trabajo diario funciona desde una COPIA LOCAL del proyecto:
+
+    ~/Nakaia/healthcare/
+
+>>> A partir de ahora deja el brief .html de cada día en:
+
+    ~/Nakaia/healthcare/news/
+
+Para que sea fácil, tienes un acceso directo en el Escritorio:
+
+    Escritorio → "Nakaia-briefs"   (suelta ahí el .html)
+
+Qué pasa entonces:
+- El agente com.nakaia.blog.daily se ejecuta a las 08:00 (y también en cuanto
+  enciendes/inicias sesión si a las 8:00 estaba apagado).
+- Lee los briefs de ~/Nakaia/healthcare/news/, regenera el blog y hace push.
+- Log de cada ejecución: ~/Library/Logs/nakaia-blog.log
+
+Esta carpeta de OneDrive sigue sirviendo para editar la web en las sesiones de
+trabajo (se sincroniza con GitHub), pero el brief diario va en la carpeta local.
