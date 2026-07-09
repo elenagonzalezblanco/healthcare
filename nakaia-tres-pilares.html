@@ -4,7 +4,6 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>NAKAIA HEALTH — Tres Pilares</title>
-<link rel="icon" type="image/svg+xml" href="images/logo.svg" />
 <link rel="icon" type="image/png" sizes="512x512" href="images/favicon.png" />
 <link rel="apple-touch-icon" href="images/favicon.png" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -78,6 +77,8 @@
     text-decoration: none; transition: background .2s, box-shadow .2s;
   }
   .button-primary:hover { background: #163028; box-shadow: 0 12px 32px rgba(31,61,52,0.18); }
+  .site-nav a.button-primary { color: #fff; }
+  .site-nav a.button-primary:hover { color: #fff; }
   .nav-toggle { display: none; background: none; border: 0; cursor: pointer; padding: 8px; }
   .nav-toggle span { display: block; width: 24px; height: 2px; background: var(--color-primary); border-radius: 2px; transition: transform .25s, opacity .2s; }
   .nav-toggle span + span { margin-top: 5px; }
@@ -226,16 +227,16 @@
 
   /* ===== Banda de beneficios ===== */
   .benefits { border-top: 1px solid var(--color-border); }
-  .benefits .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+  .benefits .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 28px; }
   @media (max-width: 900px){ .benefits .grid { grid-template-columns: 1fr 1fr; } }
   @media (max-width: 520px){ .benefits .grid { grid-template-columns: 1fr; } }
   .benefit { background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-card); display: flex; flex-direction: column; transition: transform .3s ease, box-shadow .3s ease; }
   .benefit:hover { transform: translateY(-4px); box-shadow: var(--shadow-hover); }
   .benefit .bphoto { width: 100%; height: 158px; object-fit: cover; display: block; }
-  .benefit .bbody { padding: 0 22px 26px; }
-  .benefit .bic { width: 46px; height: 46px; display: flex; align-items: center; justify-content: center; border-radius: var(--radius-pill); background: var(--color-surface); box-shadow: var(--shadow-card); margin: -23px 0 16px; position: relative; z-index: 2; }
-  .benefit h4 { font-family: var(--font-body); font-weight: 600; font-size: 15px; color: var(--color-primary); }
-  .benefit p { font-size: 13.5px; color: var(--color-text-muted); margin-top: 8px; line-height: 1.55; }
+  .benefit .bbody { padding: 6px 28px 34px; }
+  .benefit .bic { width: 46px; height: 46px; display: flex; align-items: center; justify-content: center; border-radius: var(--radius-pill); background: var(--color-surface); box-shadow: var(--shadow-card); margin: -24px 0 20px; position: relative; z-index: 2; }
+  .benefit h4 { font-family: var(--font-body); font-weight: 600; font-size: 16px; letter-spacing: -0.01em; color: var(--color-primary); }
+  .benefit p { font-size: 14px; color: var(--color-text-muted); margin-top: 12px; line-height: 1.65; }
 
   /* ===== Modelo / Qué somos ===== */
   .modelo { border-top: 1px solid var(--color-border); scroll-margin-top: 90px; }
