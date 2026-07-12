@@ -7,7 +7,7 @@ Flujo previsto:
   2. Ejecutas:  python3 build_blog.py
   3. El script extrae CADA noticia real del brief — su TÍTULO, FUENTE, FECHA y
      ENLACE original — y reescribe la zona de noticias de blog.html (entre
-     <!-- NEWS:START --> y <!-- NEWS:END -->) con tarjetas en el formato Nakaia.
+     <!-- NEWS:START --> y <!-- NEWS:END -->) con tarjetas en el formato Privia Health.
 
 NO se inventa contenido: solo se usan las noticias enlazadas del brief.
 Se omiten los bloques de análisis interno (Tendencias / Implicaciones), que no

@@ -1,4 +1,4 @@
-# Noticias del blog Nakaia
+# Noticias del blog Privia Health
 
 El blog se genera EXCLUSIVAMENTE a partir de los briefs que dejes en esta carpeta.
 No se inventa contenido.
@@ -13,7 +13,7 @@ No se inventa contenido.
 
    El script recorre todos los `news/*.html`, extrae CADA noticia enlazada
    (su **título**, **fuente**, **fecha** y **enlace** originales) y reescribe la
-   zona de noticias de `blog.html` con tarjetas en el formato Nakaia, ordenadas
+   zona de noticias de `blog.html` con tarjetas en el formato Privia Health, ordenadas
    de más reciente a más antigua.
 3. Publica:
 

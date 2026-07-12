@@ -30,7 +30,7 @@ LOG="$HOME/Library/Logs/nakaia-blog.log"
   if ls news/*"$TODAY"*.html >/dev/null 2>&1; then
     echo "brief de hoy ($TODAY): presente"
   elif [ "$HOUR" -ge 8 ] && [ ! -f "$FLAG" ]; then
-    /usr/bin/osascript -e 'display notification "No encuentro el brief de hoy en la carpeta local (Escritorio → Nakaia-briefs). El blog no se ha actualizado con noticias nuevas." with title "Nakaia · Blog" sound name "Ping"' || true
+    /usr/bin/osascript -e 'display notification "No encuentro el brief de hoy en la carpeta local (Escritorio → Nakaia-briefs). El blog no se ha actualizado con noticias nuevas." with title "Privia Health · Blog" sound name "Ping"' || true
     touch "$FLAG"
     echo "brief de hoy ($TODAY): FALTA -> aviso enviado"
   else
