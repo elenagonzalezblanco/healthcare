@@ -1,0 +1,10 @@
+body .privia-language{display:inline-flex;flex-direction:row;align-items:center;gap:6px;margin-left:auto;flex-shrink:0;vertical-align:middle;font-size:13px;line-height:1.2;color:inherit;letter-spacing:0}
+.privia-language svg{width:20px;height:20px;flex-shrink:0}
+.privia-language select{font:inherit;letter-spacing:0;color:inherit;background:transparent;border:1px solid currentColor;border-radius:4px;padding:6px 20px 6px 7px;width:100px;min-height:32px;cursor:pointer}
+.privia-language option{color:CanvasText;background:Canvas}
+.privia-language select:focus-visible{outline:2px solid currentColor;outline-offset:3px}
+body>.privia-language{position:relative;display:flex;justify-content:flex-end;padding:12px 20px}
+.demo-band{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+header.site .container{gap:12px}
+@media(max-width:760px){.privia-language select{width:92px}.demo-band .privia-language{margin-left:auto}header.site .privia-language{order:1}header.site .nav-toggle{order:2}header.site .brand{margin-right:auto}}
+@media(max-width:600px){header.site .container{padding-left:16px;padding-right:16px;gap:8px}header.site .brand{gap:8px;min-width:0}header.site .brand-mark{width:30px;height:30px}header.site .brand .name{font-size:18px;letter-spacing:2px}header.site .brand .sub{letter-spacing:3px}header.site .privia-language{gap:4px}header.site .privia-language select{width:83px;font-size:12px;padding-left:4px}header.site .privia-language svg{width:18px;height:18px}}

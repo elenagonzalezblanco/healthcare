@@ -1,0 +1,1831 @@
+<!DOCTYPE html>
+<html lang="en" data-static-language="true">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>PRIVIA HEALTH — Blog</title>
+<link rel="icon" type="image/png" sizes="512x512" href="images/favicon.png" />
+<link rel="apple-touch-icon" href="images/favicon.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --color-primary: #1F3D34;
+    --color-primary-soft: #A7BCA4;
+    --color-premium: #C9A97A;
+    --color-tech: #3D5E8A;
+    --color-background: #F3F5F2;
+    --color-surface: #FFFFFF;
+    --color-surface-warm: #E8E2D8;
+    --color-text: #1D2528;
+    --color-text-muted: #5F6865;
+    --color-border: #DED8CE;
+    --font-heading: "Poppins", "Sora", "Inter", sans-serif;
+    --font-body: "Inter", "Satoshi", "Helvetica Neue", sans-serif;
+    --radius-md: 16px;
+    --radius-lg: 24px;
+    --radius-xl: 32px;
+    --radius-pill: 999px;
+    --shadow-card: 0 8px 24px rgba(31, 61, 52, 0.06);
+    --shadow-hover: 0 16px 48px rgba(31, 61, 52, 0.12);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: var(--font-body); color: var(--color-text); background: var(--color-background); -webkit-font-smoothing: antialiased; font-weight: 400; line-height: 1.55; }
+  h1, h2, h3 { font-family: var(--font-heading); color: var(--color-primary); }
+  a { color: inherit; }
+  .container { width: min(1280px, calc(100% - 96px)); margin: 0 auto; }
+
+  /* Header */
+  header.site { position: sticky; top: 0; z-index: 40; background: rgba(243,245,242,0.86); backdrop-filter: blur(16px); border-bottom: 1px solid var(--color-border); }
+  header.site .container { display: flex; align-items: center; justify-content: space-between; height: 74px; }
+  .brand { display: flex; flex-direction: row; align-items: center; gap: 12px; line-height: 1; text-decoration: none; }
+  .brand-mark { width: 38px; height: 38px; display: block; }
+  .brand-txt { display: flex; flex-direction: column; }
+  .brand .name { font-family: var(--font-heading); font-weight: 500; font-size: 22px; letter-spacing: 0.34em; color: var(--color-primary); }
+  .brand .sub { font-size: 8.5px; letter-spacing: 0.56em; color: #9AA39C; margin-top: 5px; padding-left: 3px; }
+  .site-nav { display: flex; align-items: center; gap: 20px; }
+  .site-nav a { font-size: 14px; color: var(--color-text-muted); text-decoration: none; transition: color .2s; }
+  .site-nav a:hover, .site-nav a.active { color: var(--color-primary); }
+  .button-primary { background: var(--color-primary); color: #fff; border: 0; border-radius: var(--radius-pill); padding: 12px 24px; font-family: var(--font-body); font-size: 14px; font-weight: 500; cursor: pointer; text-decoration: none; transition: background .2s, box-shadow .2s; }
+  .button-primary:hover { background: #163028; box-shadow: 0 12px 32px rgba(31,61,52,0.18); }
+  .site-nav a.button-primary { color: #fff; }
+  .site-nav a.button-primary:hover { color: #fff; }
+  .nav-toggle { display: none; background: none; border: 0; cursor: pointer; padding: 8px; }
+  .nav-toggle span { display: block; width: 24px; height: 2px; background: var(--color-primary); border-radius: 2px; transition: transform .25s, opacity .2s; }
+  .nav-toggle span + span { margin-top: 5px; }
+  .nav-toggle.open span:nth-child(1){ transform: translateY(7px) rotate(45deg); }
+  .nav-toggle.open span:nth-child(2){ opacity: 0; }
+  .nav-toggle.open span:nth-child(3){ transform: translateY(-7px) rotate(-45deg); }
+  @media (max-width: 1200px){
+    .nav-toggle { display: block; }
+    .site-nav { position: absolute; top: 74px; left: 0; right: 0; display: none; flex-direction: column; align-items: stretch; gap: 0; padding: 8px 24px 22px; background: rgba(243,245,242,0.98); backdrop-filter: blur(16px); border-bottom: 1px solid var(--color-border); box-shadow: 0 20px 40px -24px rgba(31,61,52,0.3); }
+    .site-nav.open { display: flex; }
+    .site-nav a { display: block; padding: 15px 0; font-size: 16px; border-bottom: 1px solid var(--color-border); }
+    .site-nav a.button-primary { text-align: center; margin-top: 16px; border-bottom: 0; }
+  }
+
+  /* Blog head */
+  .blog-head { padding: 84px 0 40px; }
+  .kicker { display: inline-block; font-size: 12px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: var(--color-premium); }
+  .blog-head h1 { font-weight: 400; font-size: clamp(34px, 5vw, 56px); line-height: 1.08; letter-spacing: -0.03em; margin-top: 14px; }
+  .blog-head p { margin-top: 18px; font-size: 17px; color: var(--color-text-muted); max-width: 560px; }
+
+  /* Featured */
+  .featured { padding: 24px 0 20px; }
+  .featured a { display: grid; grid-template-columns: 1.15fr 1fr; gap: 40px; align-items: center; background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-xl); overflow: hidden; box-shadow: var(--shadow-card); text-decoration: none; transition: transform .3s ease, box-shadow .3s ease; }
+  .featured a:hover { transform: translateY(-4px); box-shadow: var(--shadow-hover); }
+  .featured img { width: 100%; height: 100%; min-height: 320px; object-fit: cover; }
+  .featured .ft-body { padding: 44px 48px 44px 8px; }
+  .featured .tag { font-size: 11px; letter-spacing: .16em; text-transform: uppercase; color: var(--color-premium); font-weight: 500; }
+  .featured h2 { font-weight: 400; font-size: clamp(26px, 3vw, 36px); line-height: 1.15; letter-spacing: -0.02em; margin-top: 14px; }
+  .featured .ft-body p { margin-top: 16px; font-size: 15.5px; color: var(--color-text-muted); line-height: 1.65; }
+  .featured .meta { margin-top: 22px; font-size: 13px; color: var(--color-text-muted); }
+  @media (max-width: 820px){ .featured a { grid-template-columns: 1fr; } .featured .ft-body { padding: 8px 32px 40px; } .featured img { min-height: 240px; } }
+
+  /* Grid */
+  .posts { padding: 40px 0 100px; }
+  .posts .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
+  @media (max-width: 900px){ .posts .grid { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 600px){ .posts .grid { grid-template-columns: 1fr; } }
+  .post { background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-card); display: flex; flex-direction: column; text-decoration: none; transition: transform .3s ease, box-shadow .3s ease; }
+  .post:hover { transform: translateY(-5px); box-shadow: var(--shadow-hover); }
+  .post img { width: 100%; height: 190px; object-fit: cover; }
+  .post .p-body { padding: 26px 26px 30px; display: flex; flex-direction: column; flex: 1; }
+  .post .tag { font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--color-premium); font-weight: 500; }
+  .post h3 { font-weight: 500; font-size: 19px; line-height: 1.3; letter-spacing: -0.01em; margin-top: 12px; color: var(--color-primary); }
+  .post p { font-size: 14px; color: var(--color-text-muted); margin-top: 12px; line-height: 1.6; flex: 1; }
+  .post .meta { margin-top: 20px; font-size: 12.5px; color: var(--color-text-muted); display: flex; align-items: center; gap: 8px; }
+  .post .meta .dot { width: 3px; height: 3px; border-radius: 50%; background: var(--color-premium); }
+
+  /* Tarjeta de noticia (brief) */
+  .news-card { background: var(--color-surface); border: 1px solid var(--color-border); border-top: 3px solid var(--color-premium); border-radius: var(--radius-lg); padding: 28px 26px 24px; display: flex; flex-direction: column; text-decoration: none; box-shadow: var(--shadow-card); transition: transform .3s ease, box-shadow .3s ease; }
+  .news-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-hover); }
+  .news-card .tag { font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--color-premium); font-weight: 500; }
+  .news-card h3 { font-family: var(--font-heading); font-weight: 500; font-size: 18px; line-height: 1.34; letter-spacing: -0.01em; margin-top: 12px; color: var(--color-primary); flex: 1; }
+  .news-card .src { font-size: 12.5px; color: var(--color-text-muted); margin-top: 20px; }
+  .news-card .readsrc { font-size: 12.5px; color: var(--color-tech); margin-top: 12px; font-weight: 500; }
+
+  /* Newsletter */
+  .news { background: var(--color-primary); color: #C6D6C9; text-align: center; padding: 72px 0; }
+  .news .kicker { color: #B8C9BC; }
+  .news h2 { color: #fff; font-weight: 400; font-size: clamp(26px, 3.4vw, 40px); line-height: 1.14; letter-spacing: -0.02em; margin-top: 14px; }
+  .news p { color: #B7C8BB; font-size: 16px; max-width: 520px; margin: 18px auto 0; }
+  .news form { margin-top: 30px; display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+  .news input { border: 1px solid rgba(255,255,255,0.4); background: rgba(255,255,255,0.06); color: #fff; border-radius: var(--radius-pill); padding: 14px 24px; font-family: var(--font-body); font-size: 15px; width: 320px; max-width: 100%; }
+  .news input::placeholder { color: #9DB2A2; }
+  .news button { background: var(--color-premium); color: var(--color-primary); border: 0; border-radius: var(--radius-pill); padding: 14px 30px; font-family: var(--font-body); font-weight: 600; font-size: 15px; cursor: pointer; transition: filter .2s; }
+  .news button:hover { filter: brightness(1.05); }
+
+  footer.site { background: #163028; color: #A9BCAE; padding: 56px 0; text-align: center; }
+  footer.site .name { font-family: var(--font-heading); font-weight: 500; font-size: 22px; letter-spacing: 0.34em; color: #fff; }
+  footer.site p { font-size: 13px; max-width: 480px; margin: 14px auto 0; }
+</style>
+<link rel="stylesheet" href="privia-language.css">
+<script defer src="privia-icons.js"></script>
+<script src="privia-language.js"></script>
+</head>
+<body>
+
+  <header class="site">
+    <div class="container">
+      <a class="brand" href="index.html">
+        <img class="brand-mark" src="images/logo.svg" alt="Privia Health" />
+        <span class="brand-txt">
+          <span class="name">PRIVIA</span>
+          <span class="sub">HEALTH</span>
+        </span>
+      </a>
+      <button class="nav-toggle" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
+      <nav class="site-nav">
+        <a href="index.html#modelo">Model</a>
+        <a href="index.html#quienes">About us</a>
+        <a href="blog.html" class="active">Blog</a>
+        <a href="https://medrag-prodgl3vc4-web.blackstone-b235e782.eastus2.azurecontainerapps.io" target="_blank" rel="noopener">Research area</a>
+        <a href="https://privia-demo-6camog4fqjoxo.swedencentral.cloudapp.azure.com/admin" target="_blank" rel="noopener">Admin</a>
+        <a href="https://privia-demo-6camog4fqjoxo.swedencentral.cloudapp.azure.com/professionals" target="_blank" rel="noopener">Professional access</a>
+        <a class="button-primary" href="https://privia-demo-6camog4fqjoxo.swedencentral.cloudapp.azure.com/" target="_blank" rel="noopener">User area</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="blog-head">
+    <div class="container">
+      <span class="kicker">Industry news</span>
+      <h1>Private healthcare, prevention<br />and longevity around the world.</h1>
+      <p>A selection of the latest international industry news, with a link to the original source and its publication date.</p>
+    </div>
+  </section>
+
+  <!-- NEWS:START -->
+  <!-- Noticias del sector -->
+  <section class="posts">
+    <div class="container">
+      <div class="grid">
+
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMi_AFBVV95cUxNaTZJVlFCYnlwYVp4bUh0X01kSkR3dW94SXViVFhaR2hZbnlscy1IT3MyeHo0Sk84RVA1aFFfNmZqbk5XLVpCVHNGVTB5T1NId09LcE1RRGVYc0piZmdPSV8tZW14cXVEbXVUX1VVNkhVOTB4TWlCNVRvZHRyTVEtb3BiVlBSdVpuR0RUenNRYUJDQjVWb2U4VVNHWVduWW5QSnlKc282dS1RWEtDdVpTaFd3T3FTMW44QmpiVF9QUFBTY1hLb2I4Tkl3YTVmb21mcEluZlNtLWdjUzByc0ZOR3lwRl9Gd2hvTmRjUDRQclVxbEZsRHYtQkpQREbSAYoCQVVfeXFMT1FFM1REWnZod2UzTEh1Q3dwY1E0QTB2YWhiSkVqc29DTzk0NGQxcFpvN2RyN1Z5ODBZT3JxdTFmOTBJQTh0M2ZDRkcxUHllak51NS1xWUFjWlhHcnRhVURkQ3JPVUNGVHlQaHJvdVcxRW9SRFpaQUUtLTkweUtxbG55RUNUYUt0MGVEc2FISGtReVNXMTlxMnJwRUVJZ2IyNUxoMlFCb3BQakZqZFlSWTh5Q0VUUE1YeVd0d0lraDByZy01QzFXMU12d1BTaXA0clVPTFFFR1djbWtoNGdEVy1hREM5VTAtY3F6c2ZaaHlsXzQ3Sk9QS2JaZ1FUSVBBQ2FoYy1HVjZNaFE?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Europe</span>
+          <h3>5 wellness retreats worth travelling for, from the Alps to the Maldives</h3>
+          <div class="src">Esquire · 8 September 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMitwFBVV95cUxQSFRVRWgxODJfZ05pR2NINnAxZkR4MkdYTVV1a0Y5Y3dnLXlvM3hZaFg5Z1JweHkybUpyVjJqN19QbTFjdmN6NEJsdDlFaHBxSHRyR3laSUxCaVg0ZndINkotU1BXZXRra080LU1EWEkwRTRrTFVoVF9EMEZRR08wei0taE1vbms0SkduVGJWTHcyb0JDMlVKZmVRWjVpczlERUtfLThpUkYwVm5LS0lvRWVGZ3Q5dGc?oc=5" target="_blank" rel="noopener">
+          <span class="tag">US</span>
+          <h3>More than 100,000 patients agreed to hear about clinical trials: WELL reaches the milestone through its clinics alone</h3>
+          <div class="src">Stock Titan · 8 September 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMizwFBVV95cUxOREFRWEFXREpMcnVzak1PM0c2VFdLVVdFMWk2NWVqN3ROR2tKaEhPM0IzMDJZbjUzWi1vTVNsVWoxQ09CYnZrSzc2aTd3LU9HVE8tYmJmRFhwMnJxbDdxaDJSSGxZZW5vaWZIMWpZbjdnSkE4SEFWUFBDblotSHQwU2RGamVQQmF2MFZQU2VYN19PWXZHb0dwT1k0VDVIRUR1bGJ0d0NCRE83YkpUeE05S0NWaHhUeEFMdnRlamxWVjcycl9xZ21EUUJmaEc1aWc?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Spain</span>
+          <h3>More civil servants choose public healthcare amid the MUFACE crisis and differences in quality</h3>
+          <div class="src">Diario de Burgos · 8 September 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMipwFBVV95cUxNRmRTZVFpc200ZWZfdnhweXA4dE5UbWQ3YUhVcUttTzFNd1c2RC1uQ09BSll1d3lnNERRc241Q1BBN2xWWUYwa3U2bklFaHdEdlIwV3B5bTllSGMzNi1vM0N3VWsweVQ0cnNjandTai15ZkhBbHJzMUp0T3BNbnpPOGp1TjJWTmUyWGxVeTlqUTJONUdWLUtYLU5uRl82aGdVX0RTX082WQ?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Market, funding and technology</span>
+          <h3>Sanofi signs letter of intent with Tricog Health for AI-assisted cardiac diagnostics</h3>
+          <div class="src">Digital Health News · 8 September 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMi2gFBVV95cUxQOGhIdzhrMUhVUzRQVGRBay1pT0p0OXVsOW9NeG1WQ2x2Uk9HUFRlM2hQZ21zLWM5U3J3WEVEOUtFcUR3Z2U1VDJGdVlrbTFXNUVzTHpaTGJLWm94aXNoLTZIRFNESWd1NjBHcGRNVHhNNEhtSnlQR1hIMmgtRndxcS0tNHVuSFdlMzVkR1A2T0RlNmN4UFJhQUxyZjN3elQyUWU1RHdFWm5CbUxTMEVuQ2x4MUpqVXRTUGhNVy1CZTBhSVBWSDJxZ0xPMDgycGFQYzVCam5IQTJJQQ?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Europe</span>
+          <h3>Investment banking in European healthcare technology: 10 structural factors accelerating the lower-mid market (2026–2030)</h3>
+          <div class="src">healthcare.digital · 7 September 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMingFBVV95cUxPSldDQlJ2TTZ0eGhiSm9vbEpaUjcyWVZnczNmTnRlR2hQLTIwVV9lNzFpZW1UWmtSMzVQb243N25YLTdCejJPQm9sWFdlNDdPdG5sU09nRmJxdXZyWDk0a0Z1bnA4ZTUxY24tcHJfcTRMYmVwZ1dqd0dWVzRHSWRUS2dZTmFtTmFfRTROUkMzSTRHQ2o0VHJlZERaVUdQdw?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Dubai and the Middle East</span>
+          <h3>Forbes Middle East and PureHealth host the 5th Healthcare Leaders Summit in Abu Dhabi</h3>
+          <div class="src">UrduPoint · 7 September 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMi-gFBVV95cUxNYjJJWXh6X2xrTG5IOXJWeWRNT1hNczlQU1hRMmQ1TWY1a255VEpNNmd1dW4wcE1iLU1CcjM2Y2xMb0x3TVZ0NmpzS1puVzc2R01vNmhLRG1UWFFReU9aV3NVQVlzSlpHczFWdUFDZzlrVmZESzRFaTlCNmI4VnhyaTVlTXdGbzBaSFZwM0tCYWxocEJ2QnpYRmJ1NmZJal9qRTIxaHI1ZWMySmoyTkoyTTAtclFlLVVtNEwxSy1DY2t4bXpqejQzOW93ZjM4S2xOamlxMDQ4ZVpjU1VodTZCZXdwSENrb3FBRU1UTVR0SWRxVkFmRzlhNGln0gH_AUFVX3lxTFBOaTNiOFl6dk91dDdNQ3ZsdkttaDh5M2QtUjBEUWcxS1lraTVjSERMcjhwVEtRbmN5UndHQmE3S0h6NU9NSVNWQnhxVWh6MFdZSnlYamFCbDEycWtwdXpxWDNpSjRsOHJYVkZPc0htUnRHVXRTUHVrOXlOUWRXdWw3MFdIc3J2bHR3RUxSNWtfZWx2cEVoc25MZk05MVBPVTRoY29EdGNla05mR2NQRHdydV9GbUpyWmdscGdsVkk5SklBcF9kVnBOa1dlbUc4T3hDdlFxS2U2NEhGbjFrREN0Um1wS19RNmZvMFMyakdacnBSaXB6VVZ5ZHpfbnd3WQ?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Asia</span>
+          <h3>AXA launches EverGuard (GBA), health insurance for the growing demand for cross-border care</h3>
+          <div class="src">The Manila Times · 7 September 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMimgFBVV95cUxNVVhnOG5BaVpsQzFhSVlVRlNuWURUbjEtaThSakhwc2xnYm1FOEdpRGR6LV9xU1FZdko3LUNTc0RsRXVReWZ4ejVOSndUYkF6ZnNZdGExdGR2eURuQlU3VmR6V3lyRjYyRFBuTmxlaHdaNjN2T05GeTdwQjN1SHVBT1Uyd283R084TkF5QXk1SHh5NlZZejlNWkZn?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Asia</span>
+          <h3>Apartments, hotels and senior care merge into a new property sector in Korea</h3>
+          <div class="src">Seoul Economic Daily · 7 September 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMi_AFBVV95cUxOTkgxbDNIckxCX3p6Ni0weEZnNDlVdGxyNnBjdS12NnU1d3RXQW44LW1yZkZWZmozRjhKQmc0VWJac3phdnBaUmhLM1JRTVVULWhMUlQyamx5WFJQVS1haVJnZ0tLTngwN2N3NzlIb2FLeEptV2ZlYkJTT3pIQkJlQU5HVzRmcVNwcUwzN3J0cDRwUWk1cTRYM0dCVUdXUllSejVaVllCMkw1RFlhZU05S3FOd1c5RlFCTEI3RXVHSUtnWjNvdW9lOWdGVDZQd3ZyLUVyOXJNVmh3SGNQaDgwYkdqWjgyZHNoaGxZcENJejg2RnJHcVZjTGRpcEjSAYIC?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Spain</span>
+          <h3>Vithas 9 d&#x27;Octubre hospital earned €4.5 million in 2025, driven by referrals from the public health service</h3>
+          <div class="src">elDiario.es · 7 September 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMiSkFVX3lxTE5WSm96TkJMLTJlUmpDaEpLUjlPamxRT0dBOHcyV29QZWROT3o3WHJrenNEcm9PcnBnMmtVemJmNHVReGNpWEdyVDZR?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Dubai and the Middle East</span>
+          <h3>Qiddiya and Cleveland Clinic establish a sports medicine advisory partnership in Saudi Arabia</h3>
+          <div class="src">Saudi Press Agency · 6 September 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMikAFBVV95cUxNanFyUWVRQmhHbWtGczQ1a0UwUXRTdU0tY2xjVlZMM0RXdV9NdHJHNFZJY0h4NjJxMHRaa2lwdnlnTmxIWGx5bVZ5V0U1T1JLV203TFcxNDdsVlU4MmRJVU1EcDU5ZnpqaWlwTHdKYnRreEtZa0dQOXcwZUJDRmpPS0E0M1d0SGtLSmhHNXk0bG4?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Asia</span>
+          <h3>Where the longevity money is really going</h3>
+          <div class="src">BioPharma APAC · 6 September 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMirgFBVV95cUxNQnVFUlJGUVdHUkZfMVFzYkc3cEF3WmJNbmo5NkxnWW96cG10eTNWdVJRcVZwcV9BVklzUWJ3Y0hrRVBhamJhRmxoMXRybGhYTjVsVXV3VUlJUjVxY0FiZFlJejB4a2ZnXzFXNUh0cFMzbXlxWU02MUxzYmhnUER4dkNpRnBHZXhzWmkwRVBqczNjbGNjSm9KUHdSS1FXaWRUNzZhal9JY1FsN244SVE?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Asia</span>
+          <h3>What New Zealanders are doing to try to live forever (or at least longer)</h3>
+          <div class="src">RNZ · 6 September 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMikwFBVV95cUxNVHl5aFdGQjZnRFVSSm9vYlctZVFkb0hQaTlzN294WXdGRkhHcU5HOEplWUVyZUlFM0FZcUp5dngtMzhpR0x0ZFhYSGI5dm5aTmtKcUI5Wl8wX2E3bG9jT2hGdmlROTN6Z2JzODh5VDRYaWU2RWhWNjVtOEo1TVJIRDI1cUMxMWxpQmZsTUhTTGJab2M?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Spain</span>
+          <h3>Is the longevity craze getting ahead of the science? What we really know about slowing ageing</h3>
+          <div class="src">El Confidencial · 6 September 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMi5gFBVV95cUxNaUhQdXFaWFRlX1k3VG5SX0IzR1Q5c05uOEdkUk41LXpqbkFJZzl0TW1WUF9NcFBCelZDX1FSMzVXdDlzTWlqVEdnZjRUMHRITVNvSTZsRjRPWEEwakM2VlBIb1J6dzVfeXBmUk52RnZROVVLX0luZFl1dVQzVEl4eTlrMDdncVBmblI3Y0FHNUhxUnljYjBFTk02VUI2OFRaODdBREZGQUY1d2ZMVHhmQXZJck81Yjg5cU45YndjdHBGOW1xSnZRLVV4QW5YV1FBYl9Qa19yYjhCRmt3YlU1NGpRczUzZ9IB6wFBVV95cUxOdmU5Z29TeUM3WnpVeDhrTmJTSW83dm1Gbkk4X2xKR19xMDBzR3RJN05VaGhSenN0Wk5RaDgyX1d0VGxLalRja2hRNEktSXR2UkJPUFVfSFZsWTFfUkNkSEE0MGI1OGpsbGhycDF2UHVYa0JZNHpWS2FxMFM5aDViZ0FCWG12LWNXQTZ0U2JoSlRrZDk1N2xaRFY0YV9JN0lsSjRtUGh2YnZRTkNyWFg0QVJNeV8xcXJvN3pCd2tYeEdSUnVqV19ndENLaExnSTRvNVFUQ19kNkZfQlpoc3ZYNVdtMVZIdTZWMjBv?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Spain</span>
+          <h3>Quirónsalud strengthens its leadership in quality of care, backed by international standards (ICGEA)</h3>
+          <div class="src">Vozpopuli · 6 September 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMioAFBVV95cUxOUmVKckt1djZNX2U1X2lmaE9xT2MyUjNwRU5mN2g4eHVuendFd3E4Rlg1bmREYjJlS3RHcUJ5VXJXTDUtVW9YYWw2dEw2WUwzVVNUUjY4SEIxUHNGQlU4d0RkNklJWHlpejd0UUM0LXR3T0h5MU9yS040bWFKXzBJUWF6eGNrY3pXS3hiRVhEcWs1WnQtaTlEZHpVRU5kNFIz?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Market, funding and technology</span>
+          <h3>Living longer starts earlier: why longevity is becoming a megatrend</h3>
+          <div class="src">Deutsche Bank · 6 September 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMiwgFBVV95cUxQaWxXZjRfMDg0a001a2JaOVNxZklTbXZQb01UeVRLREMta1ZhaUdxVS1HZWlPOW1Db2U3MlNwWHM3RGlVa3M3WFBkMm95TmZJM1Z0d3NsSmNoZnlwdmc0ekRxbUpxNl9JYkR6el9vSFlLNUd5YVNFb0U4RF81Z05IZVdBb09ud25kREpVSU5hTkQ1ZWJoWUZGZDNPOFIxNmJEMW53T1RWNlQ0aGg1TTFucHNuSkhDdVkyVGxJbEI4REduZw?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Europe</span>
+          <h3>Boutique investment banking in European health technology M&amp;A</h3>
+          <div class="src">healthcare.digital · 5 September 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMisgFBVV95cUxPSjhWckJQcHpwNHZ3U0dGenN5a0JHc3NMcllkcFcwTEtJYnZEaG5faVBBUmlET3B1QTdsR0doTEZzajBZOG5KLW5LZG93R1d4M2FNQVhaUFZrVm5QWS1QYXloY2ZUbFA5LUpOeC1MZ25RVllzQk9kWTUxeks0bHJnTFlnTHRNQ1dqZk53S1A0SjNGbDkwS2JGVVNNdzdKSGh2Mm1IMXk0bWtFMnk4VnVXZVp3?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Asia</span>
+          <h3>Beyond care: building India&#x27;s longevity economy</h3>
+          <div class="src">Loktej English · 5 September 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMi8AFBVV95cUxPdjlic3podnVLVjBOWHV3QzBfcUZBeTdERE5RRXFPT1BZM0FOcmtWQS16a2l4WUJRc0prQ2lLNFlWMm1KU0hjYklPTlMxaC1iWmJrYzFVa1hCazlQbGZOWEd4NVNnT3lwRjhrZnk0ZkNjNWtFMlYyY1hRRnVZR2I3SFE0NDhvcEVyZFc1bk9xeUM0ZEpfSFhGUmlZTVkwTDZBNWUtLVRSWHBOeW04Rm1kbWxaQzQ0WnFjY0p3UDNPQnBvUUM2WlhGWGV3X1dwUElsdHp0SkFPN3E5R0VObk9OSnNXazE0a0loWGxJMDR3RG8?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Spain</span>
+          <h3>Vithas launches its interoperable digital data space, ‘Vithas Data Space’</h3>
+          <div class="src">alsoldelacosta.com · 5 September 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMirAFBVV95cUxPakFjUExCeUtuVGg5UklRbjBQOVhUWXFsM0FHd2tlZjBxc0Y3MXZUeHgtOFBYWjU2TlF4Sk5xQ3VaeEZZMG9tUGFGbWU5Wk5VSHlFYUNjVnh2V20wMzdIdmVUcFp6NVA4RFNSa0Y5YWZENmlZOXI0a1hZVXdPbXpvZWxBTmNwN1hFcXo4aTROcnFEOXdvMXd5c1VyTEREZlJSM1VsUXBXaDFPT1Z5?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Dubai and the Middle East</span>
+          <h3>Abu Dhabi&#x27;s PureHealth agrees to buy 60% of Hellenic Healthcare</h3>
+          <div class="src">Arab News · 5 September 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMiV0FVX3lxTE1maUxBVkl4a2RVZDh2Y2dZUkJXdlc5RkFwejdMaDZ3WlE5SV9uVUtrWHpXV21MTHdWMGZrQnVRUWpqanU3OTZRUkszRVB1UFNxYUpUR3JNQQ?oc=5" target="_blank" rel="noopener">
+          <span class="tag">US</span>
+          <h3>‘Longevity clinics’ selling neonatal stem cells expand to 2,700 locations in the US</h3>
+          <div class="src">Herald (via aggregator) · 5 September 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMitwFBVV95cUxOQzVPQ0RsUVpreUZUdkFEZTJZUXk5NWx4Q096RTRtb3ZCN0ZodWt0UkdMWldzQktuOVN5dUh0QU5RYVFwejA3N3Qya1IyNUJxdHhYeGx0Zmtscmx1dUkyZVdxVGVBVDZDYS12RW12SjNsOUhxcHIxTXA5b1FIblFFZmw3V3EtTno1RFQ1N3VrZWxoQjE4Mkl4czM1WWFISEw3RFFnaV91NWlDcFB3MlE3OVhkOFVjeDQ?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Europe</span>
+          <h3>This week in HealthTech, MedTech and healthcare AI in Europe (5 Sep 2026)</h3>
+          <div class="src">healthcare.digital · 4 September 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMiuAFBVV95cUxOeGxVNGNYVTA0QkI2TFFrcEdBaS1qaGF2TGdTcTd6aTdoaDFhdmlRR1NOb3lMQWtJckNnUTV3X0lxRzJSdE1OZFoxV3ZLQ1hJc2NJeS1VdnNVZGZ5cnRiSWRzNDVTclpGdkNwRXlnVmFveTAwdnI2ZlZBYkZ0WllCS0xMdWE4bGI3bWVEOFJOZEtHSllZa1JXdDZtVzE1X2ZoY3IxaE1sTElwbVNUNnRoV2RGMmZLVXpz?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Market, funding and technology</span>
+          <h3>Healthtech funding rounds: Singular Photonics, Aisel Health and Trinity Biotech</h3>
+          <div class="src">Healthcare Today · 4 September 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMikgFBVV95cUxQNHNNMDFFZWtWZUZxNnM5V1ZTN3ByaXZiUk1KV05CSDFMR0hXMXM5Sm1HeUI4Z0x0RkJ3c2FVZjdmbnhKT2ZkS3hPaEt4cjFnX01JeC1kdEpKY25IUVlBQWVuOTYwWHdja1A0V2dZa010YnNYQUg4T01rOWtVUGg3N1g1Wi1xMjhyTmtOSkdNd3gyZw?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Asia</span>
+          <h3>Investing in the future of health: Singapore&#x27;s growing longevity sector</h3>
+          <div class="src">The Straits Times · 4 September 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMi1AFBVV95cUxNaTZRME1CYU1RYUh3MHpGa0taenFSTnJ2UlpnbFpWdXhmWjhKWXR6MUFDTnJQcWFmeEdxYTlUNmw2dUk5OVpkZXNldlh5aFFjWmpfb01XMHZlcmtHYU1taUZYWHlZQndhckl1NTZiQjR0NnFpVGZjalRMRVJqSzJ3TFpvZW4tVlF2LUpqUkZVdEtXMXdGM3poWHpyQTlxazhPSC1DMzdzeFladlNwbHN6VVpNRXBXOTg5SEdZWUd3YlJ5R2FubDV3dkx4dzZfREJaQXBxRA?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Asia</span>
+          <h3>From personalised health dashboards to ‘body servicing’: Singapore&#x27;s great healthy ageing experiment</h3>
+          <div class="src">The Straits Times · 4 September 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMiSkFVX3lxTE5mN1ZQRkRBdzREbGFkUXc2SzRwc0pXYjBoa3IxWEp4SUlzZTRBcFFXVy0yMktfZHotUHFrM2lKOG9OMzVRYWhtYWFB?oc=5" target="_blank" rel="noopener">
+          <span class="tag">US</span>
+          <h3>Private equity and corporate medicine: what doctors say, in their own words</h3>
+          <div class="src">KevinMD · 4 September 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMizAFBVV95cUxQd1c5b3FCaFVGbHotWllvUDh6ZFNNR1kxNGluT2I2blpjVjhqYnVnZllRZ3NBbVEtX2dibzYtV3dIUlZCdFEyWTNOYk96d1IyNm1rN2l0ZEJGRkd4RmRHUGR5UVdrZzVNb0ZkUTQ0MERUYXVNcWEtTmdxWGt0YkhTREZjeTJKdWFLNW5MNmRLd3N1bmF4NnR4UU94SXlIRmNGRTZxaVFiYldrUkxuaUtHUEZQSXM0X1hiNURTME9Gd056dHE5d1I4LUJYcHI?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Market, funding and technology</span>
+          <h3>Smart ring maker Oura goes public with AI-powered preventive health as its pitch</h3>
+          <div class="src">Fierce Healthcare · 4 September 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMihgFBVV95cUxQVTFtTGFfdHJaallNRkc1UWYtX1ZsTXMyeWxCMmpJQVRVLWc1akZHNjk0RTNJNHpxUFBKN1hobjNxN0dsejRjUHA4NVhRVEJUaDlhRTR2aWxGZzJ2MXpiTC1QeUttWkFSVEx1UV9hckZ5R2J3bDJLMTg1Y1p3SjIxdEdUNVVZQQ?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Europe</span>
+          <h3>A British elderly care model targets Asia&#x27;s ageing boom</h3>
+          <div class="src">Longevity.Technology · 4 September 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMi2gFBVV95cUxQdzhwWHNmYzU5dDZ0bGJlZ3hWYzdvUks1NlNuWnNBWndVRmc0V2FaTlpDXzRNZjBRbjRHZmdmTFZySkp3UTlFS2RKVnE1NUhDcWswMERPVUdfczBBT0VFWG5tcmVyaHU3RHIwc01YQ1ZTeGtadFctSjVpb0JWTHU0eEdydlBnU0JHc1o0MG5Tc3VKN3N5LWhHMkJaVGZmX204LUtvcDY4MGczVkJtWWdVUFRhVWpMTHk3QjVfM3VXWDBSTTdwdloxVG5vd3kxTWdadmoxVFpyLVBfQQ?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Asia</span>
+          <h3>The Straits Times launches ‘The New Age’, a year-long series on living longer and better</h3>
+          <div class="src">The Straits Times · 4 September 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMixgJBVV95cUxPazhxNFBhMklfeXFfcVg2Rm9xZXF4NmZPZmxvaEdMLWdXTHA2SUNGeTdWenFybHI2YWJ1VTlkcjUtRzQtWGlEaVhFLWxQVzl2RExWOFdrZGJRM1h5Skx0NTV0X3FuU3l5YTRQSlhWMG1nWkxrNDdJam14VmhpUmlMc2lkN205eVU1dndmWFhSNTZqQ1BrcW8yOXJXQkE0WU1FWW5lcl8tU1cyYTlhXzZZMGJaYUg1X20ybHZGNFhJZGZRbXI5dmxHTjRJNGhXbzdTR1NjczB2WHFKWFVlWW1aTVcwbXFkTGhQM1hDVk1fUlVhd2lZQzc4V2dVdUtwZDdfV1Z5alZmQ2kzLWYza1RkVk00ZFotUm9ndVVRejVEWE9JakxLRHZOVUNyMWtaTmlJZlNmenhKWTBtM1puUVBoemxFekZUZw?oc=5" target="_blank" rel="noopener">
+          <span class="tag">US</span>
+          <h3>Two Weill Cornell paediatricians become the first to offer concierge paediatrics with Concierge Choice Physicians</h3>
+          <div class="src">PR Newswire · 4 September 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMioAFBVV95cUxQOVdHelZDcW9pVVFsVFNmamdXRmZzVThYeXdWaERDZVpjalZVcnhJMS1QMmI2a3ZGeVNCcE1HTmpZOThzVDdDTDZjWTNTZ3NqR0JHQThGam13cTBnNHo5UDI2bGx2X0RZWEx3VV9nUjlYTmdXMlJQUGtJdkJtSGJNcE5nX000a3p1bjJRWWRFLXFSX1V6QTZtbzlFZkZFakRG?oc=5" target="_blank" rel="noopener">
+          <span class="tag">US</span>
+          <h3>AnswersMD opens new office in Boca Raton and adds family medicine and sports medicine doctors</h3>
+          <div class="src">citybiz · 4 September 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMifEFVX3lxTE9jTXpyaGNKeUlrdHVucDRaVDhVbGpaQ2EySENSVjAtdy1YUHlSNUVjcXRPQWY4TWVOdmdjNkl0bmtDaFh4OUhaNVFPQ2JDRS12RGJ6dGF1X05ta25NR2x6RzBzNkNjOUZURWNrSUU3ZnlTRVZTZ2U3aUNadFg?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Market, funding and technology</span>
+          <h3>Concierge medicine market report: size, share and growth through 2034</h3>
+          <div class="src">Fortune Business Insights · 4 September 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMie0FVX3lxTE5idzZrX0ZpNmYzTFhCTmlwQlhHVHUzTmQwUXFURXZNNkVTaDdjVlh2YktKc1E2TjBfUmN2WDNNb1FMVFlzeGZWYmtiaE1Wd1hoY0RWYXJPTUkxNXVYNFN3VjktRHhtTjFsTU5LV0VGejk5SW1uVzBuX1FXbw?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Market, funding and technology</span>
+          <h3>Longevity is the new brand opportunity</h3>
+          <div class="src">Brand Innovators · 4 September 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMiugFBVV95cUxOTVc0ek1uWGkyaWg0NWVQazc5bVdIQk0wNzAtRGpmNjUwNWk2c1VMckxDSnBxdnNzSEU3RGtMS0RVOUtaME1fRG9SZ0lNQUJSYWZNcWVYTWJzWDZmaVpyVkU1UG83YmU5TXg5alR5VGJZQVJyLTRZR2dHR3A2Xy03ZDVDZEo1eXF6NmdxT3dxM09oV0JsYmg1ZHE5THNDMjR3NDNoWVBSYW9mWFA3QVRucHl4YzBER20waVE?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Dubai and the Middle East</span>
+          <h3>Tourism, sport and the ‘agentic’ shift: Globant at LEAP 2026 (Saudi Arabia)</h3>
+          <div class="src">Gulf Business · 3 September 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMirAFBVV95cUxPbTk1bHJOQTl5S0dDa3FSb3FydEtrQ1g5RVBzczN1dGRleHBNMTctcHFuWWZ2MEFWV19sdlBFWVN3LWJEX1V0Y1ExVFZiR1N5OEMtVFVDX19pLWh4SmVwQ2hjUmZaTGFWM3Bwd2I0T0Rzd1BWMGJfS3daODRIX2NNM3VUX056cU5uZERJWldfeHFkbGZleEJIYlktMWNHN01yTmZJREplUWtrQU56?oc=5" target="_blank" rel="noopener">
+          <span class="tag">US</span>
+          <h3>Redefining proactive care: the rise of the hybrid concierge medicine model</h3>
+          <div class="src">PRLog · 3 September 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMi7AFBVV95cUxOR054WnNMM1h4Q2o2WTE1N2NUZlZrM1NVNEV6dnh6VTlSeDVUN3BJc0lvZW8xNmxScGpGdUJVNWY3eVBmd0paMGdHS2c5cGw0SGtxZlpHQU1aM2QzcTdBRFpUT1pSOFpaTUVrbE5wa2MtSlV6WDZETlZ1WWlGZWZhOEsxMTN0c2M1aWVHVFdQZWc0WkNQUzFjbnFMOE9HcVZfbDZWTjRiTGR3dWVfVWJFai14MWw1NmU4N05rQlo0S2pPYjRYZEdJSE9IanRJS1RmcWhuem5sb3ZLQ0ltYkR1M1RjUnBDSVM3MkpUVQ?oc=5" target="_blank" rel="noopener">
+          <span class="tag">US</span>
+          <h3>More and more doctors are offering healthcare memberships</h3>
+          <div class="src">Vermont Community Newspaper Group · 3 September 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMi2gFBVV95cUxNYnA3S21YbXNRaXZFMmJxRUwwZ0JWUFZaMEtGQ0s5NjlYRWlZR3ZXSE8wb3lvT05OZk91ZThKVE5qLTZCaUhqRUpRNGdQNjNOX3R3QjFpN2tBNU9sZkxnUWVzSTl2cXVCZ3RhekJqLWlzelhIQkZKTms1d1F2Y2tRMXVDc1lybWJPN3dHSGFWdWNtaFE5aU83eG1DMXZWQVRzRjVEQnBzLTFUYWxNTUFIbjYtRERpREpiTUNKTFB1Z0xsU1dPRVFUYzE3M0hMRWwtUVduVi1QczZxd9IB3wFBVV95cUxQR1VXbnNEV0VKNmU1R2libU5kbnJncEtyaC1UQk1UelNoSnVpbWp0Ym52SEo1MTUzNjJ3azhKcmtSbDhJYzBPaDdqR3FQcHNjNF9YQlZONWF1ZDVUTXJrQnlmZ2ZPdXNWbU02LTVwX2F1S3NyYThVakl2cnZHVllPd3VJT1pKSVg2WW5MTDJtYnZjQVJFbENtbmMtRDVCM3R3LV8xMVl0NDlzTzVISHMwTmtWRmNMR1k5bENleGk5QS0tVzYwT082d0lub0l4ZVU1Ql9WNTZpeGRFZk1UOXZJ?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Spain</span>
+          <h3>The 24 projects competing for the first ASPE Private Healthcare Awards</h3>
+          <div class="src">Redacción Médica · 3 September 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMiwAFBVV95cUxQSGpFOUcxVHJTTDlDckxham1TMkZVWWJmRjlta3B6SUxmYnF1TDdpNWpCSmhNQWttak0xZG5xWUw3cWQ0LUtFeEx3M2hKVnhiOXhDV2o0NHRRb0F1WlowbzZvS1UzdFJqd2NBTkJYZ0E3SWNlWE9NNXBlZ0s1X1lTUV9YdUZ0OU1PVHVIVXEyVmxFbW9UbTFzZmwyZ0laMVFVVHB1eWhvM1MtVWRZM0E2VE1aRXlXVTl0bnJ4NFFodmHSAcYBQVVfeXFMTzE4VlNkMW5fcDhraHVvU2dLYVEtZEhzQW5ZMi1qejVGRVNZWVJjeU8tWnBjUzhUUE1ZLTB4aWF6V3BhQ3gtYmVHUUc3QXRsNzBMYi1qWmtzaEppdVF2OG45Z0FoUl9RNUZCM1Z1NDdVWFd4X1lLVnZCcTBuRFNpUnpIMko3SXNiek1jMEJuWDg1OFg1UEUyZ0loazJvbUFCUG1wNTF0N0dsWlhJVWhvU1VTX1dMRExLeXIyeUFPYks1SC1ZandB?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Spain</span>
+          <h3>Hospital Pascual to change from private to public in November</h3>
+          <div class="src">ABC · 3 September 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMilwFBVV95cUxPVmNaY212Xy1vZGhoMkZSQWxla3V2YXBGVTBleUR3blFMMTd0VVJpUUc1cmF2ZUM4cHFsMFgxdVFPSFhZRUZTQ3BYLWoxb1d0QUctSWJ2eUh4djE1T2lBVDFiVC1XUWFWOXF1Q2xtU2d1OFFiWFdzRkJvUVZXSzhseE5OUm0zNVQ0R3RUNUZMM21yYjV1ak9v?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Market, funding and technology</span>
+          <h3>FDA launches pilot to bring generative AI devices to patients before authorisation</h3>
+          <div class="src">STAT · 3 September 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMiuAFBVV95cUxNWm5zX1lZMWF3OGxKY1RYRTBDNzF2U1JHV1gzTmdDdHVsS1VzaFFqeTk2eHZXNVlMZ1BuUTl0Sl9BM21MLUQyNGRZbGlrSkw0T094X3FBS1gzSnRUUEVjN2R4UTJqcVNaQ0dvNWZLblRQOERobVNGSnRRa2hLQVRYUVJrZkdlNXpBMlRUQ0dUM0IyNXB5U1ZzZ1ZKdDkxaHA4YTRNbGVfNGVjcW1oMUhpQVlxem1lUkN6?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Dubai and the Middle East</span>
+          <h3>Closing the distance: how Mayo Clinic brings world-class care closer to Saudi patients</h3>
+          <div class="src">Gulf Business · 2 September 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMihAFBVV95cUxPalRHWnlhNVBYUWlTSTBBNEhTWjhHMEt5WlRueE9SVlY2d0ROd1JjMXBIUlU4ZkhKTlZ3MTQzNUxDdFRjdDhaZ1JCSzEyUTRjXzhtUWNBNHNhell4ZXgzd1VvbVRjWFROaDZFYnBqbExWUk5pY3Nnb2QzeERlMWFXc2lxRmc?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Europe</span>
+          <h3>Can longevity retreats really fix executive burnout?</h3>
+          <div class="src">Business Traveller · 2 September 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMioAFBVV95cUxOZnRKNHBvNzdyRld5c0ZHQnJLUHZaSGw3MXhKaWlRMjBvZlZEM09WdzdicllxRFlwNlRuZjZ0aGJyVjdOVVd5eXc0VEhxUWlWX1RTXzhxeEY1a1pIbV9YTjhTdk9Pc0xwUU8zMGp5Tjh3UXF5dDhQQlZMcTFhVkN0RTNsNkVUeDBGdkJDM3FSTkVCV3haZFBHN1dLaWZUUk1s?oc=5" target="_blank" rel="noopener">
+          <span class="tag">US</span>
+          <h3>Private Medical opens its seventh location, bringing concierge primary care to Greenwich</h3>
+          <div class="src">Yahoo Finance · 2 September 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMi3wFBVV95cUxQOGRfVnhTcVFFWWx1MklISnhDZVQ0S3p5Yk54eGlKcVRpUG5sWTJzblNFbmxRRlVEQmZteGQ0SW9vQVRfdXRBaVlFekhnc05FZWRPVVJwMnJqRFJuNktWNUNrMjJKY040bGh1VVZFS3ZJLWhjZDNzRk9RZTJpV0R3V185QlBYNVpMUWJlZHM3VHlCVzhkNm9uTnh4RTlvNGVYVk9GOV9WZ1RaWF9DM096R2dSanJNc3hFRzM0V3RkQkM5ejVVZFJrb0tET3JJMzk4NTExRV9fc3gyZnhIVGVr?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Spain</span>
+          <h3>IMED Hospitales accelerates its growth in the Mediterranean with revenue of €232m</h3>
+          <div class="src">El Español · 2 September 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMiuAFBVV95cUxOMzRWOW9RTVRpM24tTUFiTFdfRXpGc0dYdmdwbEM2TktoSVBRaXVaVEdjMlVyYk5XeGtYTlh2U3I5WWxBXzJydnpZYVVvU05Pdmk5V2dWbVpuQmZkRXJHeENlTV9DTmVqbzZ3X0VmMkVKSDM3b1ZqdnhOcWJacmx6ZjVZd2gyeXA1eVVVM1NNZUlzQW52VDM3N01OS3JDTWxscm1MRWplRWdMZlBjbEo4Wml0aXA0b3lP?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Market, funding and technology</span>
+          <h3>Healthtech unicorn Alan (backed by Kylian Mbappé) makes its first acquisition in Africa</h3>
+          <div class="src">Launch Base Africa · 2 September 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMingFBVV95cUxPVXI4Zzl6WjJ0ekwxak9IdXdtSUpjVWU1b1JjWnlxUmgyb3ctMExlVE9mMmVnVnRGMDlpZFdCR1RPUW5pWXBZZUV4RnZHNzNvNnRsR25JNnN4aVBYWTNWQzBHMmJYLVhrV1p2TllyUWFjTzdfajVaT0hfeU01OHpLWlR1T1dnbHdTbXozUEtqQnpSYjk1X2FnOUoxc2VYQQ?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Market, funding and technology</span>
+          <h3>NewDays closes $16m seed round for AI-powered dementia care and launches in Nevada</h3>
+          <div class="src">Dealroom · 2 September 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMizAFBVV95cUxPOXhKS21hWU81NUEySG9xQm9tZFZLOUVIaXdOR09JYlBTOWt2cFNmcVhWZVJHcVlWLVR4R1pCc2d2S3A4eFZoWHVTZ2hVbXl6TGRMcUl2Qzdva0lNbjRXSWtmU1gtNVZKbDl4c0V4TnRhYkUzU1pEOXdma29iWEhvaHlXU2hjS21qOTV4RmlobFdldHZhbFhhR0tsZldTQjZKWjBTX1BRN3RPb3cyZjJ2dVNXYXZfeEZzUVpWUVJHZHQ4Ri1kRzlVSmdsVmXSAdIBQVVfeXFMTUdqUG9NRnBkdmhpc0ZOMTVkSTdMWnRwSzN6Q244UmlhblBCY2FpZEFMOThfUFdMdEh5aU1rNzNDRDlfb21SNHk5NFB2ODk2ZVNJSl9EWTJUdUJGTmh2cUNXNjFGenhnWnY0N01fWlRpVWw4YmhCblB4RF9vWjRMSTVnemJ0dzBlWWg4dGF4TGhvaUhycVFNRkJ4T2F1WmpFM1RsMGZabXBpbmZTaTA5Ymo5eUFOZ3AtU0U3aFFaOUZQMWlqNUx4NXdJZXB4WmJ3a293?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Spain</span>
+          <h3>Quirónsalud Zaragoza introduces cutting-edge nuclear medicine technology</h3>
+          <div class="src">Heraldo · 2 September 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMirwFBVV95cUxNSVEweW5EcXhNT21pM0VuSTFWY0w5ZTJrQnBBQ3lCeTlJcFZLZWFEMUgtek9qY0R4WjBYajU2c2tJNC0tXzB5TTlWbzU0N1hBTXdIanZ5SjBJcm9yd0tCdkw0UkRfMGdVYm0wYlZ2TkhvWVdxa1dtVVo4WWxEQl80UjNYYnpPZzNrMDhtYlJHR0hBbHR3djNZdU9ERk1PRDAwcHJLbUM0ZVRZVDdFZmpF?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Dubai and the Middle East</span>
+          <h3>Interview with Dr Beri Ridgeway: keeping patient care connected across borders</h3>
+          <div class="src">ITIJ · 1 September 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMi0AFBVV95cUxOeldsT01GZjdOSFBGNXVxWXJzUzQ3Q1RtNUJZVG9xTGlHckZyN2QzYko1c2tfRG9HbGZUR0Fyc0JDdHB6a0NaY25MZWNzeVdXd0tWb1NTMS12MFNrSm53WTFGOVV6Wkk3OE9GWW40SExEOFppWmhoSURrWjFfYUhFRlI4bDI4X0pPdDRGS2FaRGlfT05ZNEFTZ1NvSU02bGU2UzNnYjNKcUVSY0pMel8wR3pLMkJGSmZyQkRqaEdHZFZhcl82Q3pmV0xBXzFVaEZr?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Europe</span>
+          <h3>Rayscape secures €1.5m in European funding to develop an AI platform for oncology CT</h3>
+          <div class="src">Business Review · 1 September 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMizwFBVV95cUxPeTJQZXV3N190TWQ0dUk5U2dSd3NBOGR5QjdXR0ItbXdJT2w5ZWVSSzZUOXo5ZHhKSmZBc2lmMXRTUm1Cekk0QlJGMWxYOU1aOUpBVExzTVhGbXZCSnhzQWlYR3BmTjRFT0VmbmxWU0ZINkpQNzdneERfOVMxWk8xRk9RS0NTTm5JQ21xQzlUR2FiZ2lSeW5sZHhVUWN5MnRWWk1zTklQeFl0WXNxc2NhQkpRRVFCX3pMSTA1bVRGcDBGQjVPM3o5dVRtTzlTdnM?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Asia</span>
+          <h3>Strategic acquisitions drive the next chapter for India&#x27;s life sciences start-ups</h3>
+          <div class="src">BioSpectrum India · 1 September 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMikwFBVV95cUxOUUl4U3ZqRnowVTNhb1NzdmpEeDFwSUdNdWhHcjVreTR4QlQ4OWVDbUFYek1EODVkMzFvUFQ4b0ZOQTBmYUtLTVN0LXlfRUgwZ1JEaWZEQVMzelZyT1g1N3NsSkU4SE85bTJPUnNaZ0dES2dINFBCSE1SZGpzOG1lSnFBV25xMmVQUnl6dXF1UFhHMFU?oc=5" target="_blank" rel="noopener">
+          <span class="tag">US</span>
+          <h3>South Florida&#x27;s Medical Experts 2026: Concierge Medicine of Boca Raton</h3>
+          <div class="src">Boca Raton Magazine · 1 September 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMi0wFBVV95cUxOMnFmSXZYMjY3S21pZ180NGNBeUpENV9aZTRNLVNhVUZWZEowVUo3QklZUU54ajZRcEoyOE9CUWVNMUIyRE1GWlBvYWlUMFdYSkhrR1hoNm9CYUFGOGYweDFMTFVyOEJ4QmNXdk1sQ3dfU1lTd3NUVkFRNV9lLS1mb0xnSUVrUW9NN3FxaVJJTHIyajdzbFZteHRPWjJwbWVuZUdmRXNSVm1uQnBvWExaSTJFSGZXLVFXYl9IYVAyRUxzYkFDVFVldUZvMTd4SnB1NnFZ?oc=5" target="_blank" rel="noopener">
+          <span class="tag">US</span>
+          <h3>Longevity ‘guru’ Bryan Johnson and the debate over the pursuit of immortality (NYT)</h3>
+          <div class="src">The New York Times (via social media) · 1 September 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMi2gFBVV95cUxQNlJDS0Z6WV95bU1EeElxbHlrMWZyc2pkZmxFRlhBb09Dbjc5OU9TbVB5alBvWkdwbkg0dDJVLWFfbzExQ1FJUExVclMxUm1ibVJUaDBtR08xeUtuQkk1cHJ2YnNBd3hFd2UybXpkakZYT2ROVnFLcDBmQ3Zudy1wTUxVdnRodEZ6T3hINEhBN0hfMEpXN3ZOeXNjd2lNNzh6LU5JLW0wV3ZjdE45QVZhaDZ6bnFIZjUwZDVMSFdOU19LY0pTRDhPWjFsU1hQZ3Z4MmFBN1pPS3hUUQ?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Market, funding and technology</span>
+          <h3>Institutional reallocation in healthcare M&amp;A: the rise of family-office ‘buy and build’ platforms in the lower-middle market</h3>
+          <div class="src">healthcare.digital · 1 September 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMi3AFBVV95cUxOT2JxUE9qSGZuVFpjWHFfVkI4SmRjbHFjdWRVVWxsbV9ZNG9qQ2FTaGVNeTZ3cm1zSzRaNWdnSWo0cmVwVllnZFBndF9BTTBRSjA1S3BuUzZLRzdYdDBPZE1WSGRzWGxmaExxc1JVZjAyaEhySjJ0Tm9Ja2F5X3hDX0xsT1lSdjhrcHB0MXZVbDUwLXZhSmFOOVQweHFCYWZYc1RCS3ZoOWZlT25QZ21tTTNkV2dKUGdnNHZrMWxVQmhMYmFqQ29hNDZGOVNaM2NINlp2WDNWSWFvVWhO?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Dubai and the Middle East</span>
+          <h3>Dubai issues social media rules for doctors, clinics and influencers, banning misleading claims</h3>
+          <div class="src">Gulf News · 1 September 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMi3wFBVV95cUxOTVpmNDBoLTRRMGhGa3hsdEJYSGU0aFVnelNNeTVtXzdUS2x6eWdiek1sS19zbXFBM2U2am5ISUNUamdLYzFvYl9BZmZNb013Yk9rNHVydmdvWlN5N1F5NTZBWGZLblNGTXNHR2JlWUJMQWlURUJ6bmh1NTJ6VDhaNXVfa2pjaGdxVkdTSzZZMGhtVm45cFAyZElzYXgyRjFDOFNIc3F3SV9oalRCZW5RS0VEZ2NSU0JySExxMW5Sa2pyU1dITmVuaHVXa3BQWHdBTEpJWG9WaktDTmYtLW9B?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Europe</span>
+          <h3>Ireland: Mater Private Network (backed by InfraVia) secures a seven-year €520m debt facility</h3>
+          <div class="src">Investors in Healthcare · 1 September 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMiwAFBVV95cUxQLW1ZcnhJWkpCbGxqeWNIcWNrdDNxVTVwYzFjLXRLXzhzT09iMks5a0tFTUFRTTRyS2NwaFNiR1NrUVd3dGxnNEs2ajRGUENCUk8zSFlta0xKcGpFQWItNG43aVV5bUJxRFFKRElwQ2p0aDQ1ZUtsZG91WmtxNk9wdFJmeGFmZ0JUbXNKelNLa3dfRGk1OHFacVAxZDkxQkFyUHVHcnNBbVhGdTEwRzFiQ1h6LUE0UjMwWnFoUG9YODY?oc=5" target="_blank" rel="noopener">
+          <span class="tag">US</span>
+          <h3>Lifestyle medicine could be the next differentiator in direct primary care (DPC)</h3>
+          <div class="src">Medical Economics · 1 September 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMi6AFBVV95cUxPY0k0bEE5VnZNUkxKVW5selB1dERwc1c2LWNvRjE3V2dCUFU5SjJyM2RxdWlvbFR6WDM0dWFNSkttelMyVm9UaTBSMDdvYUEyRGUwMHN6cTd3LW9TZTlucEpMMzRmclhoNTJNcnQwTC1ybUs5cy15QUhtVkZqTGViLXFhYlpydHNWa09ROEZORXQtOXdIaWNmelU4RDdSa1FYbzhXTDFNWUhpdm41dVNxRWdzZTNWZGRqZDhkYlNHM3FkcURuX0NpeUpRdWM2NmI3VWtlVXQ1bjhlUVhlLTdDVFdMeUl4dHZD?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Spain</span>
+          <h3>Vithas enters the race for health data: a €1bn business set to grow by 15%</h3>
+          <div class="src">El Economista · 1 September 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMivwFBVV95cUxPdlN4aEJkSS1EUVFBeHowa2VNQkpCckRQX1VNcmR1djdDZkxNSUNuc3hpaTV6ZzMzaG5jek5lenp4b0t0UXNzejh4V1hqRm5mbjhnWDVqNmlHN3hTNEtXbV9nVG55UGg4ZTVqTEtKWnpKSktkT2tSQ3Q3dUJBQ3ZXWkFQbTRMWWFDVmtsVkR6Y1FmVk9BUzBsVFA1bDlHMUxYNUNZT3F0NlczLUxsb3RER1BJM3RLcGJGUXNBNHZGaw?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Spain</span>
+          <h3>The boom in longevity clinics: wellness, science and luxury in the Alps</h3>
+          <div class="src">A24 · 1 September 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMickFVX3lxTE5weVFNZElFNWdiQ2xpcEc5OE1CT3FTUVBuVkJ3c3l4dlRzVEVONGQxbGh0anFLTFRaZEhaMWdSN1VEa1oxT182dFo1NThUVndwS054dEZaSTBVV2tJckZMWlZYajZwUlVYNTN3SE9sNGFuUQ?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Market, funding and technology</span>
+          <h3>Medical AI could shift from treatment to prevention</h3>
+          <div class="src">Medical Xpress · 1 September 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMivgFBVV95cUxOTVQxVXkwa1EwaFd6OUR3SjNqQXBnRjdhNFRRV2RJZ3JlTDFiWUN1WEJTcU5TNGFYZUV4OE1ZWlI3RzNIZ2U2bUt5eHROTm5NSVg3dEdaazR1MExxRWt5WXhfeTQxR0dpT2F1d3FEUXk1Q1cxYlpQZnZneWRhOVFqaEFKcXNnbUl5YlB1eF90QXBKQmpLMjJkcjJtWExhZDVVTDFQdjF3QUJnUkNtMmMyYVN4TWgtanRiRzB3dTF3?oc=5" target="_blank" rel="noopener">
+          <span class="tag">US</span>
+          <h3>Not accepting health insurance is a selling point for some Kansas City doctors</h3>
+          <div class="src">The Beacon · 1 September 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMi5AFBVV95cUxQazROdXc5ZTJxQ3NjSDBiMHk5UWNXenJ2YVhYSUVaQ09ib2YxR1JjZzZfb3NtX0RzSDZSNjBSRE9kUzhFV0ptSXJ5dkFaQ3ZoU2dyaUFsNmNuVlZrNWxLekxob2JHM3kzNVdDbXNqWk1talR1LUo0aGQ0RzlodlU0Z29zbFJiZFNFM0ZuZEtfN2hya0ptaGRONDllYTNjcUw3d2NvTjJpWXNWWUVGNkVOVDBxM3AwUkNqeUpBdkxPQ09pUFVJQTFlVGdhM1RxQzJmYzF1WVNGTFo3MEc0b3E3dENuX3U?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Spain</span>
+          <h3>The exclusive 27,000 m² wellness spa in Alicante frequented by Javier Bardem</h3>
+          <div class="src">El Español · 1 September 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMi1wFBVV95cUxNMW96NFZEUkJvZWJUanVLUXM1Vk5vd2pxVWxWS0dLRk1FVXpCZ3FFdVZycWJMTEJ2WnJFWk5FZ3hiRWl0TlhjZlRXbjFqQV9MaDMxX3Y0cHlEcEdNQ2NteHdycjg5YUFRWnNTRlVlcWFGeXlLcjNHMXY2SjMzN1AtTlhTYkxUS3BiLTdRMFVTbTJjQVZIT3FQR3BfaWxMdU5FaFY1SXVrcUZfeTZ3NnBBdnpScURHa2dBaDRYb3BXSVZPQm50TG4wOHBxUHpGeGJ1VnFNcjBRSQ?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Europe</span>
+          <h3>The paradigm shift in MedTech and life sciences M&amp;A: licensing, collaborative governance and risk-mitigated capital</h3>
+          <div class="src">healthcare.digital · 31 August 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMiiwFBVV95cUxPWTBlVTFBSlhSdmJPN1M5ZVNSSlU2dk9ERzdqV29jU29GeDVSOW8wckRjMVlGX2s1VkVlb0tRNVY2MXdpRnpDejN6RTcwWDRXNl9OSU9RX28xOVdoV2I4VHgwaXUwMVQ3R3ZXSzdrblRtRkFOZkY3VTNBRThxVmZESUNObGhtOHo4VWE4?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Asia</span>
+          <h3>Korea: a testing ground for longevity-focused property</h3>
+          <div class="src">Luxus Plus · 31 August 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMiwAFBVV95cUxQRFc2dmJ3VXlkbFVpSk9kUko5VW13S25pa0wtSmhDMnUzRHpFQS0ta0J5M0hNWE1mdzJCWm1mbTJySmlTelFhVEJGOXZEU1Fuc2twNzlwdHFLUGFZdkM1RU45aUhyMW9DRnFoUDhERnBCUFJNZWtWN0Yxd3JjWDZJSExkRzhTSjBIbk92RGpXcW1CLWlBMzBIRS1HbF9wRVhUSFNCVHloZmxrNGcxeU9vUjBKbmpzTUF2UE8tSjlQa0o?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Asia</span>
+          <h3>Luxury developers pivot to wellness as India&#x27;s wealthy buyers seek healthier homes</h3>
+          <div class="src">India&#x27;s News.Net · 31 August 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMiuwFBVV95cUxPcTZlRGkwMjRBU1FNLXdVMEFvTTRLeVdmaklRc1NadDZvMXVMZVN2MllNZTE5eEVaVG4tN3hPYnYzQnkxSVhvem9OdVJYZVVkMXl6QURCcWlaVDh0d01RVGwyN1Q5MzRaTjV4eVdYVmYtRGJBUVN6TnJ1ejMydTg4ay1fTUdIN0M5VnVVbnFDZnA0SGd1Vnl2VnBhRzc1VTRuU2RFc2xJRk9wTDBsM0M2QWVfeVFrTkVBNHM0?oc=5" target="_blank" rel="noopener">
+          <span class="tag">US</span>
+          <h3>Wearables leader WHOOP expands into health screening and cancer detection</h3>
+          <div class="src">New York Post · 31 August 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMi1AFBVV95cUxOZDg4ckJTUjVsdFN0Z1Bnbi1DaGgxQkFoSFJleUZSWnlVQVVRbDRVMVJWX2xvb0hHN3VuYVhmYkozenVMam1NU2w4UWxiSkFwV1pyN3Z4T2xkeUVVOURPeXprUmZhOUtJVFg4cWhib3hwRlBYVkFJSkd5a2NDdnAyZjdqaG1VYkctLUpEalJxa3h4TmlNNUtDLXBpVkpNV1g4VHR3Z0I5NmtDVm43ekpZeEtSTjhYOU9Beld4RlBENEpuZTZhWDlzVHVJMDlGZjZUd2ItZg?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Spain</span>
+          <h3>Gonzalo Piédrola Angulo, a leading figure in preventive medicine and public health in Spain, dies</h3>
+          <div class="src">ConSalud · 31 August 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMi2gFBVV95cUxQTnhMcVhuRW9zbnltRjltYmNPS20yWEE4WnF3eUJQMTNsVFk1clBFMGRSQ1VyMnJFZlNHSGw4ZGIwbUw1Sm9fV3NnZkRSMlNBcktGUWZ5T2ZXMHpDNmtaN3hvWEVwdGpfNElLRGIyR3lIcUNwT0ZidlBjc1lSbTZPSUxZVXdKWFFuaUxZdVBvb0x1QjZHUlh6OFdSQmlqeTB3cldCRUtvNFZVMm94ejZQb2hQMndvZVhpWnJnRFlNcnZJRjVmcWVraVlCajVVV0lCQjdpdlBQbWtCQQ?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Market, funding and technology</span>
+          <h3>Scan.com raises $220m to build the largest medical imaging network in the US</h3>
+          <div class="src">Business Wire · 31 August 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMi0wFBVV95cUxPWmktQk00NmZieTVEZ1RzdDdQVm9HM3JVUzBaVUhaZHI4SGtJZ1lMdnlhQjhKUGZPWEYxY09QbzdjT2VXc2hPejBxVjF3S3pFMTBrWDdRcGxCc0NwT194MU1NbXVwVE8tb2FEcm12anBnZTRsSkZETGV5Y051aXczZm1nSWhQcG85TnFfcUhPVGJVb1RnSXdpRzB2UmZ0clVFbUhKMFBuczhsR1JiakZldm5uTHhFa2xGNUNmXzFZZU52OV9rUVd2WWgtUUpzLUpSNDdZ?oc=5" target="_blank" rel="noopener">
+          <span class="tag">US</span>
+          <h3>What a $4,000 membership says about urgent care in the US</h3>
+          <div class="src">Forbes · 31 August 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMiugFBVV95cUxNVW9Rd0hldkhlWkFVTVpEajExYmJpWmRmYXY5VTJNTzZPX2FTSUd2TFFaRmVQcFhKVGVrdzdZY2Y1OFRSVmpkci0wRlFyZThSdjhaQ2FlMi1SSkhQcDc4OWYtRWl0Qjk1dUp0bXhjWkZfeWxyWU5HWERQVHNheUd3RHJvWDM5QVp6XzU4eXBtYk40V0RUQjVkbm5PaTIyNG0ybUNGUjBTUFJZTC1kY1lzQURBVEtnaHI1VmfSAboBQVVfeXFMTVVvUXdIZXZIZVpBVU1aRGoxMWJiaVpkZmF2OVUyTU82T19hU0lHdkxRWkZlUHBYSlRla3c3WWNmNThUUlZqZHItMEZRcmU4UnY4WkNhZTItUkpIUHA3ODlmLUVpdEI5NXVKdG14Y1pGX3lscllOR1hEUFRzYXlHd0Ryb1gzOUFael81OHlwbWJONFdEVEI1ZG5uT2kyMjRtMm1DRlIwU1BSWUwtZGNZc0FEQVRLZ2hyNVZn?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Dubai and the Middle East</span>
+          <h3>How the UAE can turn longer lives into a longevity economy</h3>
+          <div class="src">Gulf News · 30 August 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMi2AFBVV95cUxORUVXbXhGTkg0a0d2VjVqNTE0cncyTl9zTkItRkNVd1pCVmZvckYySGktemlRTTZ5SDFuYmVBV3dJaUktem1kUUJ1RWVUU0xjTUdmR0hCX1dEOE1uTVU3bDZRMVQwRDVDSEhFQmJXSEtPaW9XZlJkeWRZM2VrZTUwbmNDU2FSUWR3QXg4U1ZUQkt2NjJaV0FyV1Fibk10YkZtYmVNZFNPeEV2YjFMYkFaX3hTVllWY05ndDVHU1dGbm9maHlNelA5dmEyQ3RManR2UXJyY3pCaEk?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Europe</span>
+          <h3>Private equity consolidation and M&amp;A in the UK occupational healthcare market</h3>
+          <div class="src">healthcare.digital · 30 August 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMi0AFBVV95cUxNSm1EYlN3NHdIbFFFU2xLYW1WTlFRRDNhRjZmTUtILVlfM3BwN29tWUI0djRxLUZzSEFhTGFuR2NrcjZrNmtUVFk3ZzluUkFNQnQ2M083T1ZzR0FLY1hYd3JSUUR0b2pub2JoNTcyWGc2YjMtY2l6LWo0ejVMZm45OHZSbTkwLXFPeVI0RncxWVQtNWkyWkFQLUtpQjdXZllXcjZBdzhSZDVIeGVRZXQ0TzRDLXVVN1hjQ2tRN0dSQUhCMVV6OENfZzVpQWp0aGgx?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Asia</span>
+          <h3>Singapore to get a new not-for-profit private hospital amid high occupancy</h3>
+          <div class="src">The Straits Times · 30 August 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMitwFBVV95cUxNZ050b2h6bWg2SmllUEh3SzVSMUxqSHZvaUtuQTE0X2Jhb2tvbm02TTdIQ29XZFV0TnJNMEowRDZnZW9xMlFBdE9rVmdzb0FsSEhxQ0ZjX3haeUxqOUhHMXB2WTMxSE0wZkNncmwzMWdZMUNGY2FxTFBZV3NUWTk0TDJaay1KYTh2TE5lbkhpMW5yNWNrNTM5S013dTJUZEpJX25ISWt3Vy1aTkFyVEFKSjFLMl80WFk?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Spain</span>
+          <h3>Revenue at Spain&#x27;s private hospitals exceeds €14.6bn</h3>
+          <div class="src">65 y más · 30 August 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMib0FVX3lxTE8zQ2xqdjJOZF80cUFfcjR1SE1VRGRVdzZ5Z0M2S1pRR2o3LTVjcEo1WHQtak5CbGlFLWdtWGlEdE03LW1JaDVGam5ZZlB2Nmg0R3Z3NXhVaWxjS3Q0TDFzdXFHZU5KTl83anBXNFRKcw?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Market, funding and technology</span>
+          <h3>Hospitals are betting big on AI, but testing and oversight are failing to keep pace</h3>
+          <div class="src">MedCity News · 30 August 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMi-AFBVV95cUxNZVFxZjVWZFkydWROeXJqRWk3MEc5S3YtTEZSWWxMVlQ2QUE1UmZvOFdqVzR5Q1paT1FWbkNvZU9lNkp0ejNzQ1pDTFdPU0V6NEdhRlh2QzZ6M1RlYUV1TGppWnpCa0FuOHFPeUk5V1h3V3M4ek1aTlNObjVOYzVnT2pPOHhPZElZUTBnNHkyT25xY2s2dnJ2aG9tZHRORGFHcEUwdm80bEl2STJCNlB6WDJvZjhncXJKYUpTaGg0MW8zZjJyTjhjZURyR0Y0NHRZOFJVODhMUzVwWjJPQWhaU3paTGVSRU9jc24zN001bnk1X1NaQVUtTtIB_gFBVV95cUxQMVFQWTN6a0s3MHFmd3NTcU1Nd3BzMml6MmhiX3dQZmtERjI4enQ0T1hOS2dnMWZiMHE1MzZSUmNFTTVUaU43cTdPR3hISkwtMXJoYmxMOXRQTFBYQUl1OVhMN2cxbFZDRGJuWXdDaFdLcWJXa09QemRDRHJvMjktMTdNcGg4WGdCc2h6eHY0aHItVmRiWnF5YjE5Mk5JY2JxazJndmJ6bng0d3NOYVdycGQ1aF9VdmswU1FpTDNTWDVXb1VTVWsxMndKakFxRy1lZ1FsSlR2ejlZb0hUQjE4Y3VqTnNxeklzZWt0NVV1VW1rLUsyV0h4NUg1MDdGZw?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Asia</span>
+          <h3>Even Healthcare to raise Rs 208m in Khosla Ventures-led Series B, targeting a $300m valuation</h3>
+          <div class="src">Medical Dialogues · 29 August 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMi1wFBVV95cUxPRXZXQk1RZ2c2eU1UR2tzMFMtY1JDZUlPdXNhVG9HTWE0Z3l4bmpBeU54VHB4UENqekpLcTJzWEVtd3hNSm5UeURGSmZvV1NTaGpXZkUwNVd2WXNWeFpkQ0E1MzZyUkNrUkhISGtpODN0RFJLbEo5dHVYdDl4b1lxRF9CZFF0NXZWeTFYVVBHdFJCOExjU2hzMTBpMFpQdFV1MkhRaThGUmlFTnZsRUN1YXlEaGROaFh6dGhwd21YM0ZhaHV6eXZPZzdma01nMW03NDViOUNCQQ?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Market, funding and technology</span>
+          <h3>From static repository to autonomous command centre: Epic Systems&#x27; transition to enterprise AI</h3>
+          <div class="src">healthcare.digital · 29 August 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMihgJBVV95cUxNWFRmanh6eEJyaXE5LWdldTU1U0JMeDVBcXRaSm9GQU0wOG1BOWNMMTZ5a0FRZGRiM0VEakJUQ3Y4U04xMmo5LUI0MWlJbFFxZVhtbmgyem0tR24tcUE4NDI2VFVVZk9sWUowQVhHSkxEWFZkS09UWjh0TFJya3BBaUVJNVc0VTB2dFRHbWYwdXluRGtfNWk2bGtITWgyRU9JcEZQWWcxWloteVlTSWx0QVVrbU5PM1ROVEMtczdtTjBZc21iZjZmalQ0Ung3bThDTEN5THFaOXhrWkhmdWNmcUd2QnE2MEVqaHRGRUJucDJvUW9UTkdPMWExYXB5SnlJamxrNUJ3?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Spain</span>
+          <h3>The rise of aesthetics and wellness clinics: a business growing alongside preventive health and premium consumption</h3>
+          <div class="src">Líder Actual · 29 August 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMi2wFBVV95cUxNSmVDOHdnbzhhay0ydjBSWUY4RTJCMWJFWlhkaHpPamF3eGdSWDFlZzhQdWxxN1g5STBqNXJqNEQ1QjFubEJJUWhiVnJvemdwUm4zOWRfdEhObVYtRGNZazMzSnRyeHBBR21rdmVBOTcxNDNMOU1TTno1N085ZTVlSm4xZGpoTDhDbzhiTW51R09FSmxhT0NEYXJOajdzbjh3cm5qZmduY0FJVmhDckw4ZVJSSDZaUTVsU3pqUjhLdHREVElSbmQ1Q19oVU5Sbm9iRG1nUDRsZnBSUm8?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Europe</span>
+          <h3>Deepinder Goyal&#x27;s Temple acquires Longevous to steer its hardware engineering towards clinical validation</h3>
+          <div class="src">healthcare.digital · 28 August 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMi1wFBVV95cUxNVm50dWFzdjMxaV8tSnZGSXhyVDgwSnozTTJnbHZxYk83YW1rWHg0UzdWdlEwOWdTVlNScUE0MmpJRVJMcmVKbjJJdm95aE81TXNhVlF6a1dqeDVZM3hEeEZkNzhSSENBcWdhajFTbkpWelNzVl9rQndKMTJ4SDhkc01jbGFCUEZpUVFXT0hyT1N5eE8ybWhLQzNaZFpVT09yRV8xUHFGYk16VmpfZHBISVRDTGphNHltZzZJei1RTDE3TTBpLU94ejdFN0VCTUxieFRTcEdPbw?oc=5" target="_blank" rel="noopener">
+          <span class="tag">US</span>
+          <h3>The VIP treatment: why concierge medicine is booming</h3>
+          <div class="src">The Jewish News · 28 August 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMihAFBVV95cUxQd3BqM2hpUi1Bc2swZ0ljTEVTRFU4RlFkWkRZVDd1X3ZtNHFPNDJzOWVFZWIxSXI2ZzF0U3VwMTlTNVVaQ2FxRFZKOHJlUkMxUzFCbFcwbnRVbHJueklNRzNqTmFRMHhHSWo3NU9YZGV1MG5qaUl4ZG0wZTVjQ3lyQ0RTZmw?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Market, funding and technology</span>
+          <h3>The ‘cowboy clinics’ selling unproven longevity treatments</h3>
+          <div class="src">Financial Times · 28 August 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMijgFBVV95cUxQaFJTdWtYZzBuMHVULWhJWFV3dVB3d0NfeEE1V0RMcV82Z2VFZ2ZtV2x2ZDBYTG1ZUnQ1RGFsZ0pFWmNFZW1rczNCOFRDUjFCTlFvUEplLVFuZmpHRVpfS2pZX3M1ZjZDaFUzZVV3QURjclpScmZlVndpaWlaN3hBNU11dWRpMkxmamp5ZXhR?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Market, funding and technology</span>
+          <h3>Healthtech fundraising: Arintra raises $25m; Happy Health closes $75m round</h3>
+          <div class="src">Fierce Healthcare · 28 August 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMitwFBVV95cUxPMnFlYnFTazFwdVVGVm5kZmNJNmxfdEtZdzNFZk5od1N3U1ZSMlBvMElMR3hWM3FOVDRkenpfZ1dwX2xaLUJrTVRzMzdZakdBdXdXWXpkOXREMEFjeFpmc3lrZjRfd0JhR29QbUExZ2xuWGNlS25iM3d1Z21iWVYzbUllOVhIalNNX01MRDBzX0x6TTBKempHQ3lOYlIwN3dLZV91SEcwN1RaOGRxSUNhM082NmJ6Q2s?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Asia</span>
+          <h3>The most expensive cities for a premium lifestyle</h3>
+          <div class="src">Funds Society · 28 August 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMinAFBVV95cUxPcDhLcHAwLVY1MnFLQ3BFaG04Q0RtM25xa3RjMmNyY3lJRUNmNVVEZGxJZXdEcjZsanQxRFhqWU9IcTRjYnhvZ2NTUUJMQ0owcTk2a2tTb2EzbWRaLUZTT21GUTdoUmQta0lONnp1bkZkcUdkemVLQkZ0S1NQMVJxcy1iaDVQU3EtM0ZMM2dZZElxQV9JeEhsbHd1Zms?oc=5" target="_blank" rel="noopener">
+          <span class="tag">US</span>
+          <h3>Is concierge medicine worth it? Dr Ari M. Cohen&#x27;s honest view</h3>
+          <div class="src">Haute Living · 28 August 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMizAFBVV95cUxOck41Q3NnT3hXQkp4dVZGZDBGb0Rtb285WmFtOThDNEsyTEFNTmNoR2lfTWJ4TmdIUnVBMTQ2TlhoTF82M0JjVHViTHRSTFVRMU1TOHRucl9HUUxWNXZqZUdXUUx2MUg1TTJNd2lNaHRUZkhXenQtZTdaZE01bGw3bGVybm81NVJrNU5XS01jUnRNTHdkc1pYT2Y3dlQyTXlhUjhxamlEMXBrWk80ajREVXBNa0RUdk5tSFJSRENKM3pHV2pZTm9kaHN4WTnSAecBQVVfeXFMTXZyYXdhVXNmbnNFNHB6a2trU1lyOExMcnZXZmdsdmRhb1NEbVYwN08wZHg0T19tclFsdlNJaU4xSmFOa2RlVE1XMnRNSDhNSHZZT1ZYTzhySHdxUEF4bGdMMmxJQlBDSjliYWcxTHpDRFEzdUlkY0NNNGRBT0dfQjV6RzFCbm14al90V0p5OEI3UGZ3Q0ZRXzd3SFdOVkN2aGNFVEpQT3kxRzZVaENKelY4RF91V2tWdm9IcUdWWUJWMjJjamJBNmFuX3dNLVFqNXNKaTZWOE8wY3lvYW1wRGIzc083ejdr?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Spain</span>
+          <h3>The exclusive longevity treatment at a luxury Swiss clinic that everyone is talking about</h3>
+          <div class="src">Infobae · 28 August 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMiwgFBVV95cUxNLS05TXFjbW1QTDUwTnRaTGJfNWI2OC1zUkVURVluejExa1RBRXVmbXhmVzBqdnRfODhXSDBrRlgxeTlHRXB0M2c0cTBhdDNkOUk1eTg4Q1VqOU94RmNIaVNJX2xKeUpqZ2lFYml2MkJqbUs4Zk52c05aVnpYRWhycHFFQndNX1NFQmh2cnJ0MkliTlA3dzJhQmVYSWVwX2RrRkRXZkhtRm12cHU5NmZ6NFB3OG8xN2RLVnI2Ny1FSlR5QQ?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Market, funding and technology</span>
+          <h3>Weekly round-up: ECRI expands its reporting to include AI errors</h3>
+          <div class="src">Fierce Healthcare · 28 August 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMikwFBVV95cUxNdFctOGFEX1Q3Zi1JSU5jazJmcGxQSXk3U0pDVE1GMW5ucG5kNDJyaDc3WEY4Z2praWVURkdIaXNFeG96TW41bGNXMjdyVHpXenpXcExWWXVWSU9rVTBBclREaWplOUFFbExWalR2azNEVWROWFh2ekRkTzhmSGlocXVlREZ6N3RaSGVzcjcyNE41dTA?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Europe</span>
+          <h3>triplebond launches a science-backed luxury wellness club at The BoTree in London</h3>
+          <div class="src">Nomad Lawyer · 27 August 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMi6AFBVV95cUxPa0RqdVFKX1ZBRXhhNS12a2w1eW5vMVQ3LUtKejJVVzJ1NV9wRzVqNjJHWl9MWmZpb19VS0tJTE5RZmtPZEVqY3FIZkJ0dm8tRk44R0t6eldNSEw3TkktMldSQ0JqemZVOXFYb0Z6eEZIdjN0WkRwWFJZeVJZUnpwbFl5RWdPamlmVHBSMmY5ZFI0TGQ2OUVRLUZkeGRkNUFaWG9xeGtMemxXN2NkM1dscHBTUnZPOUhzWGtORk5POHVmUkJWOFMwM0JvR2d5NE5jRVNmNXl4dUNneWJDWjAxN09ta1BHX1N6?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Spain</span>
+          <h3>Where medicine is heading in the second quarter of the 21st century (2025–2050). Part I: genomics, data and AI</h3>
+          <div class="src">Redacción Médica · 27 August 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMijgFBVV95cUxPdWtuUkpfR2dWell1b09MU19pMFZaeExlcUJKYTdkem4tZUxTR2EyRHZPbVJUOFplOGl5djJDY1liR0xSTC1tVkRMREZzSlhYNGd4LWkxRGswQ0tOYngzSzBLWXlocWU4WkxVTHZXdmRJR3pZLUtKWWdtTS1JOG5adHRXYVNTdy1Wd1B5TEJn?oc=5" target="_blank" rel="noopener">
+          <span class="tag">US</span>
+          <h3>How AI can transform patient care, not replace it</h3>
+          <div class="src">Medical Economics · 27 August 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMi6wFBVV95cUxQcXk3ZHg2WkJfdEttNlpDTEpvVEltWm1wUTVxVmxUWXFPcUZsM2l5TmhWUXJUSThWWmgzMk1wQnpvVkJqcEJadF8wa0FiRFpnODVaek1CR0hKTEpJb0lKdDliZWJoVGZPLWpKQTRxNWl3bWNMTjRZTTNBUXkyUlFDSW05MDRDa1dWekhIdzVBNldSNHpYMjhKZVJpWDZmRXF4Y2YxUnlycm9XcTZ6c1JHZkpuQXc4MWdkajVRTzYzSFA5d1drV3dwNnpyT2FWT21RZ1lYYUR0cjNfY3RJZ2lEUDZnVXZGUGJvbDhr?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Spain</span>
+          <h3>Clinique La Prairie: the exclusive longevity clinic chosen by the elite</h3>
+          <div class="src">Revista Para Ti · 27 August 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMixAFBVV95cUxOWEw3SmxCUHJFWlVmb3h0UXpSZWdqd0dPTjVMZ3ZmVkZ0d2VqaXhqRlRsT2hRX0JXeTZaRTREUXhSUnY4eFRvT09RRVU4ODJfTURYbnFvR0wtd0hkMURST1h5Uk1Eelk5UWdvdEd0bDdEUWRWYUNwYlJ0eWZZSEtRS1V3NFExU3Vsa3pRWVI3R0IzUjlXcDZsWVVCYkFSb2hWSHp5clBHZ01hVzFxVC1BZTRoMVVfUFhnX0FXaTUta1ZIVzlF0gHEAUFVX3lxTE5YTDdKbEJQckVaVWZveHRRelJlZ2p3R09ONUxndmZWRnR3ZWppeGpGVGxPaFFfQld5NlpFNERReFJSdjh4VG9PT1FFVTg4Ml9NRFhucW9HTC13SGQxRFJPWHlSTUR6WTlRZ290R3RsN0RRZFZhQ3BiUnR5ZllIS1FLVXc0UTFTdWxrelFZUjdHQjNSOVdwNmxZVUJiQVJvaFZIenlyUEdnTWFXMXFULUFlNGgxVV9QWGdfQVdpNS1rVkhXOUU?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Spain</span>
+          <h3>Longevity expert David Céspedes: the myth that we eat better than ever</h3>
+          <div class="src">ABC · 27 August 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMi2gFBVV95cUxQcUR2d016UnBfRWpLNW5GX1luUW5mM2hYaXdrWmFBS1NoVTMwenFZLVY2UFlzcUtZSXhVSzRkc0NBdUtDLVlrd0VsbjZRYmZGVExDbDd6YnpCeWp4cUQ2bzQzeUwxdURyUzNPTHpqYkU5Rk5kczlBcUoxLVU1OTBiVlYycDRRa1hsQ21jNlgyOGpPWjg1U3VZOXVfeHpQTFc5d3R4QjNSYktxQU1UNVFEYjhYU213VXVUNW1PdkNVQ1M2cGI3Ti0xcVRHQ19PcDJpVFlydGdZZnZkdw?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Market, funding and technology</span>
+          <h3>Strategic imperatives for digital health founders: beyond the AI hype</h3>
+          <div class="src">healthcare.digital · 27 August 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMimgFBVV95cUxNLUpNNV9HS0FPWDBDQjZOcUhqajBwd3p3Xzc4a0NRSWNlTmxuZE1UcGxFVlhUXzg2SGNwSE1JLU9qdkxKTzFVVG1ENE5VRDhtM0o5WHVDcmg2ZEtLVmFWMDZqMl9ZWUpMaXdjeUxZZ2UtekRUWTRQZ0tIajZCaGwwQVA2TnppNllMYWNlMVQ2dVpuVm5aNUlsUTBn?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Market, funding and technology</span>
+          <h3>The week in health: clinic expansion, AI governance and chronic care</h3>
+          <div class="src">Mexico Business News · 27 August 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMiigFBVV95cUxNS0twdE1pNnZNTnpQMnhVT00xZjNlMnVYN1VERllrSnVveFVJQzE2d051Q2kyWnBNdUp1ZnNfbXBrTElTekdoRzJyMzFXdnJ6ZlV3Nk5SNTMyelIzNlNMODZlSEtRTzhQelBnUDdfbDJ5RW83MkpEVEN3a2ppcm9SbFotNWRjeHd2OHc?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Asia</span>
+          <h3>How IHH Healthcare CEO Prem Kumar Nair is planning for a longer-living Asia</h3>
+          <div class="src">Fortune · 26 August 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMiigFBVV95cUxNemdCd182d0t6RGpLVTMxRjljNzBmMkl0RmVsRkRUVmx2a2pDV0V6UVRIS0llMjFUMUtkRHNTZ2RYanJpT05OdmhveHROUnBUaGM5SUJBd2lPcHY4UEc1NDZBa1BCSlRJcjNua0steDBPZkRLSDVybXc5WDYwc1d6UUl3RFJUMUpkTnc?oc=5" target="_blank" rel="noopener">
+          <span class="tag">US</span>
+          <h3>AI gave patients answers. They still need judgement.</h3>
+          <div class="src">KevinMD · 26 August 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMijgJBVV95cUxPQWpCZjRvRkVXTkI5cThxYXJIRkVjVVZJLTh4cTQtY2s2MUVwTDJoZFYzRGNXN2Y2VXZ0WEt3c2h1cy00UTlvLWdRQ3hEaFBUYVhtT3V1cC1xVEhmSG1CSjNfSWFOUS1yaUVoaWpZSWI0eEhzLWI0bG1fMk1qSDdKMVVpdDVJNHM5SkdTNWwzdUxTZTdEV0NCcnFIaFFoZThVNkxJaEJ5TWJLUDlvcjhMOXNSYmppVEZ3VVp0b3JJS2x6d2JpVGZNdGNwUU9rY3pQNzZ3U0Zia2RoQ291MjgyVGdGUjVIdUFyRmN3dXM1eFBuTWYzbklmQTBUUlBjODVGTmlqZzBuV3pCVGhpb2c?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Spain</span>
+          <h3>Vithas Foundation launches an interoperable health data space to improve research and innovation</h3>
+          <div class="src">El Español · 26 August 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMinAFBVV95cUxQa3M1dTJ0Y2ltRW42NW16WGxZS1VfMjhiQmtrTEtadTBaUmhkTXYtQWg3VlNCMGRkNjhOQ3JxRDBOTEZlb2NBaXE0MlBtOF90Z2ZYNWJweDhQMWpWZk5fek9BaTJBbHFDR01SRDBYRFFxc0FmLVp5QXdUclppb3N6WHRrWUwxZFMwYkxsY2J5N3gzcHpYSk5MXzBOZ3E?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Market, funding and technology</span>
+          <h3>Tulu Health launches an AI-native ‘longevity OS’ and plans US expansion</h3>
+          <div class="src">Digital Health News · 26 August 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMijgFBVV95cUxOYVIzMWN0UDBoWHpIQWFEeXZOZFY5SFhSUFpYSFEtVHk3T18wZENqcDZ3RVh0WkN2UzdjQ28xYWh0UzRYUE9aSU1ReTJndjFfSjdTSkhZbjhCbjF0NkVVMGlQU0UzMGJGbXpQMm1rWGhRVkpDNk1WcE96bDljUkcxaURZQ01QM3Z4MTJsSjBB?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Market, funding and technology</span>
+          <h3>AI medical advice may affect patients&#x27; trust in their doctors</h3>
+          <div class="src">Telehealth.org · 26 August 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMipwFBVV95cUxPUVM5NTNoeWRPUk55Y05XT3JVZ0tpMWtKSHZRMVNBOG9ReGJoMXNHSm1BZ0Q3RnRVamhLSUUyTlNNNHJzSW9rUEFuVzNQWmNxVHQtei1VQVFRc3hnY2hBWklpWHhXay0tNm5QYXhzemtmWmFSZVMzWVMydmV1bFlKRVhyRjJQMGc5Zlc2TGFlM2FPQ2FxSU5WdzV5T01MVnJBM1M0SERFUQ?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Asia</span>
+          <h3>Hospital insurance leaves Singapore patients with a S$36,000 shortfall</h3>
+          <div class="src">Insurance Asia · 26 August 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMi0gJBVV95cUxPVHpsTktKYnF6N0M5SUFIdUlPQ3NwS0RydHFpd1pNN051V1U4M3o3c1Y4NmdaZ2taSVV5WTJSbkFGZUFXMnZaazRMb1RTUWJzdy1ncUFlSWhKdkdrRmJnYmI4Uk9ib2t0bUJCN3N2RjkwNUdlSHRYV2M5WnJLUVdyXzh5Vi12Wks2cGdGOWVQblg2eW9maHl4LWg1VjlhMEpHWWlHNlR1YmdJVUJFdFJpdWRUb2RoTDFZNm1RY29ZQ29ob1Fia2FNTVhkQ1JwaEVkQ2lTYXJQU2NBSVN5ZERRMVJ1M0FQZm9DX2dRc0ZvT2ZDWkZ5c0daSnBvelpYU3lvU2huWk1iMDlzRzFpLXF3ekJnNzhTOGVBRFBGYVpabWY3dUM0aVluQUtlZnJTNl9QTGUxT29TOHljNS1zVnc2MzdpeDJCWV9ZNjMtN0VyVXVLUQ?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Asia</span>
+          <h3>Merz Aesthetics advances ‘aesthetic longevity’ through a landmark research partnership</h3>
+          <div class="src">Bangkok Post · 25 August 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMinwFBVV95cUxNSklZV1BISG5NY1RYVWlKTUx1WG8zd0FlYk8wTG9WeU10Sm9ZMFFxdVpUSFpXU0g0UFN0Z3c4U1p4Q2ZIS3V2QmtmTDV4Uk9RT1BrQ3JRZ0hOTHZORWl0NmktVFA1Vktub3dfWU1fdVk2OC1wdFhmczQ2ZGg5MWJ5eUdOWHd1OWl0WTMzb1FKbDVCcnpCRndocC1aSjdvOGs?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Spain</span>
+          <h3>Vithas launches an interoperable digital data space for research</h3>
+          <div class="src">Corresponsables / Redacción Médica · 25 August 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMidEFVX3lxTE9La0VheXlxbHpXMWZicktoVnZOV01nc0g3VWQ1NVhIamwzS0xLVjhhWnd0NFlZSHNzSnVrSE9qMUVlbGx6STFQOHZjc1ozcnRaSUN4YThTeV83TXU2TmVHbmNvM3gxRElpdm1NYlp2T2FneE8y?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Market, funding and technology</span>
+          <h3>A blood-drawing robot could be 2026&#x27;s best AI healthcare story</h3>
+          <div class="src">The Next Web · 25 August 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMi0AFBVV95cUxNdXlkblF5WXBydy1YR0h5T2N6V1RRRldLUjRWdjJIeUNjbHB6X08zY1VRRU5XZnlzbGdWdHc1bFYzX2UweW11cXlFV1NnWm1QRXFicjlZWXFFaDNWVUNSMUVsS3l2ZlZDWkRCMF8waVlidVR6V2l6ajhuU1cxREdrVkViemt0OW5QVHltbTdBNGl2U3E5ai1VdXdsUGdrWi1xV3hTeDE2aUsyYjRYZ2NWQkl1MW5MYkQ4c3pIcnQwb2VIOHZXN2pxLW1IaW8tV3Jn0gHgAUFVX3lxTE5OSWgteE1Ja0tVS1JoNE90V1IyMXo4cXhDWk5PaXNnUjVIbXZaZFl5RTZzX1lrZ3BCV0V3aDRaaUl0dm55LWU4MzIydUhkc1MxQjA0LWNvQUxWVHFEcVE1NEEtLU44OEdlRURsdlJSU3Z4Qnk2WU1fR2hIUjRHb2lLOWUwZVJscUdJWU5zVHlsRkJ2ZmlNT0FEMG0yVHZDYW8xbjBiQ0NOYm9fNHZiUlRPLThyal9FRDR3d0o5YVRkSkZfRTdhay03RElPYUxsSWFsTDlRdFp3a01MajdJcWZE?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Dubai and the Middle East</span>
+          <h3>Can ageing really be reversed? UAE doctors separate science from longevity hype</h3>
+          <div class="src">Gulf News · 25 August 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMinAFBVV95cUxQbXlsZjRKMXdoZXhtendxa3Q5YjBrWnByYXdkU21fU0JRY0VueXd3eC1janpRZVUzN1ZyaTMzc2t4ZlNsaWdoc3hlU2pfN2JSY242WDJmbWNBN1pjWUR6MlRzRGRxRDFKeHJ3MW9DR1pRaGpPZDljWHVoSHFtdm84NFd2QXYzQy1pSkFlZnBjUlVFdXVxdDlLdW5PQy0?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Asia</span>
+          <h3>Manulife Asia harnesses AI to drive growth in health and wealth</h3>
+          <div class="src">Insurance Asia · 25 August 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMiwgFBVV95cUxQbk5qWnZ1aTJseDA1X2FxZFVGM25tU3dTNThsRy1qanJjVXVRVGdvXzdxNUpJY0hNX0FDd21xSHhSX3YwSkxESXZYbFhFUnFGeDZUSERZV0xFRVU5ZC0xWExRcUVnMmpvZ3lQanNTQzJTck1zUnpYenhrWTNOSDRtVmsyWEw4Wmw2YVRXOThDazY5S1VybHMzZWY5alVuWTZrNHZiMGk0TXg4S2luQkdDeUw5eV9wOHNDMmxCM0FZYnYxdw?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Asia</span>
+          <h3>He called himself the world&#x27;s healthiest man. Then came a devastating diagnosis</h3>
+          <div class="src">The Business Times · 25 August 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMihwFBVV95cUxPU3pVcVVuNGhlRkhRQlpONWNuQWUyNGF6Uzd4SUdOOWQ3QWtabkdwM2ppd1UzNDNid3AwTU1nOFNjSDJtTXlXT2x6eWNuVHNfM3pRMnlXaTJ1WGpES0g0MFBZMlkzRGxOajFjbVZ6THF3UDNUT1VfTnJXRGNrWVo3YXZEWURHaVk?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Asia</span>
+          <h3>Belo Medical Group&#x27;s Xiglo opens its first precision longevity clinic in Rockwell</h3>
+          <div class="src">Tatler Asia · 25 August 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMivAJBVV95cUxQWllpbUU1X1Q2LVhlV1JPSGltZTgxa3BPVE9EdWh5X2ZEZDR3dDBxdmZ0YTNDUU43dE5OUUFDM3pkSExHVloxcndES3RQYnhKam81U0M0Xzc0ZmpRbXNQMTlBUjF2bHNLeDhHM2N6ZEhQNXlwcDZqQ1h3UkVwWjRxdU1TUUt6eGdTV3RzU2xRTENmS0FxNHI1RXJaQTE1SlBGb1B6R0xrbjJ5UzU1SThpbzV6WklTcHBHN1F2OV9nY2ExQzFoWFk5ak94cXVGMWF2U1N6NENhek5qc2dfU2Z2R1J2NkRzanRJOWNhaFh2Y0h4VUZ2cE50SUkzQWptUUtWbFVsWGNSMzNtWkxBd2NJQ1B5N0JibVFUUnpVLV9NaVU1ZjBDWVlYYk5qeXB6aVB0Mm4xMkJmT1U3MjRv?oc=5" target="_blank" rel="noopener">
+          <span class="tag">US</span>
+          <h3>Monarch expands its top-tier OB-GYN network and equips female doctors to launch independent concierge practices</h3>
+          <div class="src">PR Newswire · 25 August 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMiswFBVV95cUxQSHZBQk81RmFwSXRiWGR3US03WVBnNjBYUUZpdzVsRWFPeDI4UFhaOGFHTkxQU2hPOV91NDEwaktPcHVNMlR5cXZuR0QyVTJOWTRYV1NBLXRpNG1FV0F5djVzM19aVmdLbGJ2LXJ1emZmbHAyVWZHM3Y1eTZrQUlXNHVUa0FzYmJXOVktUVFsTEczdUszM3hoeHdXaW9sbGtvNjktVVA1dWJEcDJ5VXkwUWlSNA?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Market, funding and technology</span>
+          <h3>Report: GCC medical diagnostic AI market through 2029</h3>
+          <div class="src">MarketsandMarkets · 25 August 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMiygFBVV95cUxPTzVzQkV6ZGJjaFBnMkhzNkd1TjdtaEFfS1J4V0szODZIU0h3WXVyZGY0YjZTMmljeDN3WG5TSU9sTzBXRjBTY1M2dmNka2liNWNfQk1PM0tDaFN2TERaNkRud2p5a3pLakYtVnhzTURTaGdfNFB5cHFjejdmcW5ZWWRwMWo5SWZjSk5UbXVpbk5iOXFhSnBQQXFXbmdCeU5IRDBfUnJITWdiZjM4Vms3MTVtaFdUczRtLVprdjRZWTRlWkdvSjdTb2x3?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Dubai and the Middle East</span>
+          <h3>SuperiorMed to go public through SPAC merger with Starry Sea: Dubai platform targets longevity and health tourism</h3>
+          <div class="src">Pulse 2.0 · 25 August 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMisgFBVV95cUxOSVAtMlVHXzlZdlB2eUJjSGhURlRQYjNrRmNoc2hMYXhiYVdGUnZxM3Fqcm1sYXJhbzZReXZnM3g2UWQtOENBUUlMbmx0eEpXaEExdTNKSjhSVU9zQ0JkSEMyMnlXZ3RvTm5vYUNyZ2RDY0Frb05CaUtCd090Ti1NY0lVaDFWc0VWWEdhcUxSXzdhVlBtanA2QndzelBpbnVvdjhsNnZITGpnbzNqaWVEYXN3?oc=5" target="_blank" rel="noopener">
+          <span class="tag">US</span>
+          <h3>Aspire Rejuvenation founder outlines his hormone optimisation strategy in a new book</h3>
+          <div class="src">The National Law Review · 24 August 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMilAFBVV95cUxQb3hLeHloay12aHJKcTRIaG1MUDBmQUZORk9XTGdTMlZEUEN1b0ExVjY2VV96VEhkR1JMVENlZkZKdHBRYXZKd1d2S1VPZXNRaUxhdDR5cklZSWdRbV9Zd1dORlJnelozYVNGbldKc3VzaGlGaVc0Ti1NMnhfakNlN3FnM2Z0dVlLRHJnb1B0QlF4bDhK0gGUAUFVX3lxTFBveEt4eWhrLXZockpxNEhobUxQMGZBRk5GT1dMZ1MyVkRQQ3VvQTFWNjZVX3pUSGRHUkxUQ2VmRkp0cFFhdkp3V3ZLVU9lc1FpTGF0NHlySVlJZ1FtX1l3V05GUmd6WjNhU0ZuV0pzdXNoaUZpVzROLU0yeF9qQ2U3cWczZnR1WUtEcmdvUHRCUXhsOEo?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Spain</span>
+          <h3>The hospitals of the future are already here</h3>
+          <div class="src">IM Médico · 24 August 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMimwFBVV95cUxNalVCRno1ZVZoeFc5N0xqMU1oQ0hQWTVJblJ3QU1fUGQzSTh1WGtnZ05ldDJ4bnFSeXQ5ekN4eVFjZVdCTm5EX19UVVkzc0dpanphbVhjczJxZWt3S2pyTzhuR192SkJaOXZaa2h4eDUtNDkzQWpZdFdNMl82ZmRha3pmamExY0p0Z2xMVkpRdFVja25tdjNJYktHcw?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Market, funding and technology</span>
+          <h3>At-home phlebotomy market set to reach $2.97bn by 2030</h3>
+          <div class="src">openPR · 24 August 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMi6AFBVV95cUxPbmUxRUVYaFVfZ3BCcGZlcExzWDFVUWJtWnV6ZTdlbFNTUVpURkJjWVNtcHQwX3MySURaek9mb1c3M2l4dFpXdUhtaUJZYV9tMFRBMndfeWpnWnpNSFdYQ0sxY0pvWFRFY2FYYjBLUzV2WmVyZ0l1a1lVdkhtMjNFci1NRmJNNWVESk1aQnFGTVlnRUN4SEJkVTJnUnVvbFhhY09hYlN4MnZpTDhXTE1aSk10RXFKU3UtdFM5QlJ1dV9QV3pRd2FJWnY5RkRqVnV5X3lMcV9pcjNQenVBd2ZJQzVwcXJMSjFV?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Spain</span>
+          <h3>Private healthcare carries out up to 42% of surgical procedures</h3>
+          <div class="src">iSanidad · 23 August 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMimgFBVV95cUxNejRRdXlGbVR5ZXE3bDYtLV91SllhNThiaVFUV19jTWxYT2JheW5CNFV6bXNqWVZLR1o3RDk2TmpkQ2RtSmtoQ0MwRlh3R3ZWS2ZXTjNWRjNPS0lxTHY1N0VaeTdfOExtUlh1U2l6OV83clpoQUUtQkpOanJHM0J0cnZrTUpOQVlhcThOS2tsUC1ySzJmMHJUbjR3?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Europe</span>
+          <h3>The yacht that makes you feel younger: Four Seasons embraces longevity</h3>
+          <div class="src">Whoopsee · 22 August 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMipgFBVV95cUxOV1l6YlcxcG9RbzM3YmlNRk9waWRtMGhrTFYtTm1FYl9tdF9DSk9haUt2bFVhVE9qa2dQNnVrbU1IWV9QZF8wek53ZnhxQ0xtekdCMFF1M0YxeEdHY19UaW5VdEdEV2g3U3k2eDhwejNTSlB1LXItTWtfSFhuc2NoLTdZRDAzZFV1ek5RRTJBZ1JkWk82Z2Z2eThRSGc2M2JpODY1NURR?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Asia</span>
+          <h3>The ‘ultimate luxury’? Inside Singapore&#x27;s premium health boom</h3>
+          <div class="src">The Business Times · 21 August 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMi1AFBVV95cUxQZmo3TUdiczFuOE5LX09xd0NDeEVicG0ycEhoR0s2cWQ2c25aX1dNbTZYS2lsempod215bnFMd281R08xS0NJTnVVTk5NbzU0Rmh2VnViRkVZcW9YbFV2eFpFTG1ZZVBrVkRudXZBYmRkNUdVZlJpempqMGpPRmp6dkdUWkFjeDZubkVuUFR5TlRKNUo4cjFQNnRtcEUta3pJS1lUWUVVOUxJZ3RwaDN0RGtCOHZBU2lkdFZfN3g3aWE2cXIzQlRSNlVVS0c2Tmo5VGxSZA?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Spain</span>
+          <h3>What HM&#x27;s major new hospital in Málaga will look like: more than 120 beds, 10 floors and €55.6 million in investment</h3>
+          <div class="src">El Español · 20 August 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMixAFBVV95cUxQaHgwWExTUGhLRUQyV1FPbVpLZUt2MDM1eG5JeHc1dEYtTV9GVWVObFpuYjhYZ0FxRUpDUGRRR3FvT2ppdkZQRFViVjhKU1IwX19ZRDB5eHRIV3I1LURELVNKLTROeTJSeUY4Nkg4M3dRRHFxZ0xVQUcyd1IwNFhQcmsyYmhHUzBRdGxNbmRSTDZXTFVqNFF2MHVFRGRfTGJERFV2aUQwU1hQTVNqMktsamRYRlRwdW1qUGpjOE5vU210ZTlz?oc=5" target="_blank" rel="noopener">
+          <span class="tag">US</span>
+          <h3>Cityblock agrees to buy Homeward Health to enter rural healthcare</h3>
+          <div class="src">Fierce Healthcare · 20 August 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMizwFBVV95cUxOQVRXQm4tbHVjQ0hYa0ZDNS1rMEFLYVozWUR4LTdoMkllX1hvQ0hIX3lQbm1jaUNuMC0wUlNwUEVZeXVSeHBEeVhzdGNuOGwwV043dmx6SDVPYXpRLWREZWNqN2ZUdnZtcFNqWTVsUEJxS01Pam1SRU1OZVBuVl8wV040M0lGc1ptZ09neW03TVJiUWJ3RHBZM0x6eW54U19RMW9MYjk5RG0wdGJYdDlWMWpYaEIxOGw1WEVSUDRiam5WR2ZsdG5zUkRNNk11a2vSAdQBQVVfeXFMT2ZBWlpTZG9uLVlTck03VGNVbnBGVlAya3llVGdpWjkwTnc4eVp0THhjTlVlSW1ZMGlrZnZqZDZSMVlvWkwzXzdrem1WYjlxNUV2eU9VRUZpY0ZFRTctS2F6LVVJOUQyYU1GSUFhcV9RUGZOODhLTzg5dFlUWmhxR3ViTUl6dFhTNEFNRHJOY2Fyd2dsQzc3aFlZU1R5MUtadmlUbzhjU2M4SzdXdDREVFk1Nk5mbkxrNHc0OVRIdVZQSWpUR1VfZnkzWHJHQkd3WnlRNlY?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Spain</span>
+          <h3>Competition investigation into private healthcare affects one of its leading players</h3>
+          <div class="src">elDiario.es · 20 August 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMirAFBVV95cUxQQWpWVzdfS0Z0QURnUXhiOWJsemY5RTNoOXU2WTF5Zk8wR0VnQ2Z3b181X2tQYTV3eEI5WmJzVk5MSmpYR2tlRlppMFMwV202NlU4c1p4U21oVl9JbWtoRWN3OURCYlNrR2FaRVRUYVJHMk9VcFM4aHhiRzJydXZzYUdvdFl3TmRDUzRpRnJzei1BV19nM1drR09nYXNYSjBfd1I0QVF6OUl5WFlk?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Dubai and the Middle East</span>
+          <h3>Amaala reveals $13.6bn investment as its phase one openings progress</h3>
+          <div class="src">Spa Business · 19 August 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMijwJBVV95cUxOSzM0VEZkWXlLSWxLaVlidFV4RTRzcDRBUE9aV2RjcmYtV1c2TjZNUUJPRVN5Y3A1d0tfa2NGaGVZYkJNU1VsWHh2SmIwMmxpai02TlVPSDNRLUpTU1FfSC1QUGc5cUU3WTIyZ1d5YS0zZzVYcHI5V1A1eFUwRGxnNzlpVWI4VVdTZGVQUjBCNDk3N0p5ZkJENlRWZElweDFPUkY3cnBiam1VMHozNlF3VGwyMUQ2N3p0al9NM0tGUUFfaEprV3pETDFtMmR3RDQybTlkNDQwYlpIUTJkS0tsTFBOc2JEZzBLSXoxZklDOVJ0VWJ2UHFTMWQwRmxQQzZEVkRGZmpvRFVoRV9wM0lZ?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Spain</span>
+          <h3>IDIS&#x27;s shared medical record platform surpasses one million registrations and three million accesses</h3>
+          <div class="src">Redacción Médica · 19 August 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMizAFBVV95cUxOQ0x3MzF1enVIdE50cm1xb3Nsa0lxRk1VWWxQc2JGaHU3OHBmQVdEYldHY043NFVUeFlqUTFrTUp6VFUxTDhkbjV5WkIzQ2dacF9zVV8wekZhMm1UMGI5cTdhdnNQNUctUkdwTUZYSVNxb0FlbVBJNWl4S2tMTmFhLU5EVWxZc0VyNWE0MWZJY0N6Z1d1SVJEV0RseGR5Z2RsMjBaVDFLQzNNSHBJblJTVC1SQTZTdGhlaEY5elI1Y3RzdTUxbXJKOHh4ZWU?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Market, funding and technology</span>
+          <h3>Epic expands its AI ambitions with an agent platform, Cosmos-powered predictions and workflow automation</h3>
+          <div class="src">Fierce Healthcare · 19 August 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMi2wFBVV95cUxOeHVybzFEbFVwTTlRWC05U0JTOFRzWHpnRFo1TDh0YjVmanpoRlZyVWozTC1nYW5FQl9JaHlvVEhSUW5haHlyWVNMZWFvY3djVlJ3eFVveEs0QmhMc1VEUjhNZGt0Z1pTS1JKbWh1WFY3cnVjdHZfZEJXemZwMmQyUXRSNWtqMEhlcWZvU2w5VVRfZWhsQlR2SGdTaHktOUdSSjNwZUJSU3NBNmRaNWlXYnEwUkNtNGM3SGRYaFR1NUttb0w3ZjFDWEJlZ1JrTklOUENGTkh5YTNZTmM?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Europe</span>
+          <h3>The potential impact of an AI bubble bursting and a market correction on the European healthtech sector</h3>
+          <div class="src">healthcare.digital · 18 August 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMizwFBVV95cUxNVDNqOVptdUZ0RFZxRkdBTHhkVEJwdVJnYlQ4SUsxZ1BzcHl6ZF9zZkdQQ2NPaW9qakl6cDhoTWliTVg1RURZMl9XcjdVdmstNENxWFpkMXBWNzJRel9neTIzVFlid2t5YnJQYUFDU2FLZDl5YXRyNWVFTS1BcUFMZDRxV01seVNFanJZdlRCU2tCNUVYTnp6amNlME5SYzVXU0tIOXJybzVjTW5yeGdIN0phLUNRWEM1Y0hjc0xWWktPZVU4Wng1U1VSbEZJMXM?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Asia</span>
+          <h3>Perennial Holdings unveils Singapore&#x27;s first private senior living development at 28 Parry Ave</h3>
+          <div class="src">The Edge Singapore · 18 August 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMiogFBVV95cUxPMFNJZlVTRS15Y2ppNUhJeVl4dXhORTd0emgyN19BTVEya2VzREoxcDFmNldHYU56YXNlRzdPRkdDOVdqRndVemF6TGtFbGg5VUlGYmNJN293ZF9WdnIxYjlnNjNjQlNVUjF0TmtzbkNwMmJnTld4eHpjVTM0V3FSc1hYMDIxRWFpS2MxMEJQZ3FKNHVZcGJ1dmQxOWdsMnFSYXc?oc=5" target="_blank" rel="noopener">
+          <span class="tag">US</span>
+          <h3>Neko Health opens its first US clinic in New York this September, with 25,000 people already on the waiting list</h3>
+          <div class="src">New York Post · 18 August 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMi5wFBVV95cUxOd05mc05yRXJ5bUpZcHJKUHhZOTRjbW9nOTk1OTB4VmlqU0Q3TW1QaWN0LXEwQ0gtamg1b3dpU1Qza0YyTHV0MFRycGc4WEk0R3UwQ3o5ZmlXLVVOeFFQa2s2MUFOS2pYMnFlbUZ3SWVmc2ZFdUU3S0hEQW4zWTRaSGduOTBwVjlEM1dIRnhyWnoza21nRExfVWtiQThyS05hS1VRX0F1V1duYmdzUUJ3RDZGeHpYOGs4cDVta0VlU2lBMjZ6Q2ljTUd4M0RYSDB0S3kzUjhQamQwWm9kVGpUOVhfMG1qTkU?oc=5" target="_blank" rel="noopener">
+          <span class="tag">US</span>
+          <h3>Lutanen Health, Boston&#x27;s only longevity-focused practice, named the city&#x27;s best concierge practice</h3>
+          <div class="src">PR Newswire · 18 August 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMi5wFBVV95cUxNTDV6SlVLNkF1YXZ2NzJsVFEta2pkODE2WHp1UFdHNnhlOFZSVW03MEgxdXp2RDZZTGV0dFBfYi1YRXJWMHZSOWZNajlXcGR0b2NrZ0lCUHRNU2lHZl85ckJEdEJsVTZsbFpkTE9MNVJpeXZ4blFxT2xNaEhhN3lhTXVDT3g3a2hLUmFJaTI4TlFaNW8wdVp2bmlyenQwb1F6cXBXVzlRTUdIcmpjbEgtWE04ME9FX1U0QUtzOWFBZ0Z0SUdnQjJFcnU5Y2VDbDNPZXJLWjBLcEUwb0FTRFJJejYtSTNYVWc?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Market, funding and technology</span>
+          <h3>Investment in healthcare AI accelerates towards chronic conditions, home care and workforce training in 2026</h3>
+          <div class="src">MarketScale · 18 August 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMijAFBVV95cUxPbUxmeFZaYXhRaXp6MFdwVC1GSW1CU3hJNFFpVUthaVVVXzBJZjloVHIwR0tPUlE5TGpuOGxiOW91TWhXcWVXN2wwWG92cTJES1hVZm9UX0RRMjhqS3NCb0dvd1RvdGhENGM1b1MxZy1ieFdLQVFaRjA2M0tvNWstS0dFaHZnMzhYcHNURw?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Dubai and the Middle East</span>
+          <h3>Abu Dhabi and Dubai hospitals expand the use of AI in patient care</h3>
+          <div class="src">Arabian Business · 15 August 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMi8wFBVV95cUxPd0JJejI2cjZQalpNNzBibmItbHNJVjNEbngzUVlLZl9TZnkxRkhWOW1VTndFbTRvZW1IZ3lnRmRCTjdVTGloNkdGWVRnNHNpSkY4eUpyYXg5bkVMbzdDR0hGMDdtQjQ4R1BCbmpwb2VrOExXLWlIN0FsX2lrWU0zQ0xHR1FuRXV6Uk5jYkp1Q0I2RVlGSm8tMGFSLUJlRVJEb1BNZWlJX19IMUE2MlZuQzJHc3ozYWVKVWtTdHRnZ2VzVmR0aDR0ZVBFTWF5LTM1dWpneDF3VHNmWHJWYVBiejhOXy16QmFQeXZaUnp4NC1rSjA?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Market, funding and technology</span>
+          <h3>AI-powered clinical decision support is advancing faster than its own evidence base</h3>
+          <div class="src">The Clinical Trial Vanguard · 15 August 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMi8AFBVV95cUxPckhKbWtlOWNIQlBqZjVoY0lLcWpuOEhDazAzSDV1a3p0ckhwMEhhNllyZ29JVEZfRzBhZlJfUmEzOUVjN2UyV0RBZHQxbjJDd3N5aERncHhwVDlpNU44eGZNdXRPTk9NdnVGUTB3X0Q5ckg1UUM3dmZTLVpZbHRaY0plZkd5WGdnbTFRTGhRUk1zdUpjdHBLek9JbEtWNW1tb092QTRqYzBSSnAyeTRfc0dyRXJRVWRUTlhjQWw5RGtVcElLM0oxWnE0MzZnUW1GZ0xoZkFtV1ZKbUhHOVZxcWZKTmx4VTV0azU2eldvX0s?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Dubai and the Middle East</span>
+          <h3>American Hospital Dubai and Abbott sign agreement to bring the first next-generation early cancer detection technology to the UAE</h3>
+          <div class="src">BioSpectrum Asia · 14 August 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMipgFBVV95cUxQeG05UFc5UXFhYlE0akdjMTFpQ0lQRHFxZjB1SEdHTTFCLWV1SUNacUNseGsxcHd4LVlMMkpKWndPVVE3eWRNeDBnSFQyX3B3LTA5WjYyQWNIRWlSMDE4YTdYMUxweHBmZ2RkT1VZZkdRaDd6RXZGLThnWktXWHpINU15SFo0Wmt6a01HTkJxU1ZTODJjWXloUTA4VDZZaVh5TVkzX1ZB?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Europe</span>
+          <h3>Nelson Advisors UK HealthTech Pulse · 10–14 August 2026</h3>
+          <div class="src">healthcare.digital · 14 August 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMilAFBVV95cUxQUllURnhuaEF3VFFVemxCUW5GMFNYX2NYRU9DZ01mdzRsS1BLNXRYOFpDNHlKamNDRGtFdTBid0cxUGhTaVVHdlk1dFhUMUp3RXRwTmF1X05HNFVTMEVUeFFrVC1XTDhVQnFSbFNzUnUyaEYzV3VqZGhLbXdpVUZkcVcxbEd1V1ZpUjVZM0ctTjkyMnJk?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Asia</span>
+          <h3>The Philippines&#x27; first precision longevity clinic opens</h3>
+          <div class="src">PressReader · 14 August 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMi9AFBVV95cUxNc1ljdXh4Q2stOEk2cTNCU3Nlc2JQcW83ckpLM3JKZTl3RGF6bUVNdG4wczl1dlJyNm1BeUUtUmdLVkdwdlV3Y2JiQ3BHZGlsRjl5ODJqRi1fRHhyQ3MxWnIyMGVWbmJUNm53SmM3MUkxeGJfVHFybUkzcEFocTlLLUtqTHdrdEVRbHE3dUlPcENFaGpsVEJaaUN3RWE2VHRsR01pMVF6ZFlJczFmVERIc1BCOWpLMDQwSm9XOXl1bk1SVjYtRTZVMlFDbGV2dzhyMFFQWWM4U1ZodDhXUEJGdWJyR053Mmw4V1oydzQxcXNlMlNO?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Spain</span>
+          <h3>Muface moves away from an interoperable medical record with the SNS and turns to one from the private healthcare sector</h3>
+          <div class="src">Redacción Médica · 14 August 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMipwFBVV95cUxONnJlcGRHUGNBZWhnbm9PSDhKakZnRDUxV1o2amQxQ3NHMDZjUXlMTTVxY0ZndnNZWFlyQzhxNW5WRTVHOEZ1RDNibkFJY1M4dUtXNWR0QVpYQXdxajZSOXIwVWZwOWU4b1FEejViMHNSVTFLQl9mMnIzM200NEJUUHZiNFdkeVU1QUY3c01Da1U5aFBOWWFxaXFVanlCM3ZHcHptWlAtaw?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Market, funding and technology</span>
+          <h3>Healthcare continues to buy AI, but no one is building the workforce to operate it</h3>
+          <div class="src">MedCity News · 14 August 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMimgFBVV95cUxPWEZ0c2RYbGs5cFdVQ2tJWmkxdzMzODlsT1A4YW1PVnBMNktpMk0xbk1aTnYxT080ZFdYUEpaeGtRc19ISm5nWkpCUVlyNFNjNW95ZnBDWXAzYXhjU3RvSTZ5Nlc1Q0k0YjE4M3hfZEZOVHptck9PME9sNHltenFZNV90RzAxSmktOG1xYjBCZUo5MjBBQzBta25R?oc=5" target="_blank" rel="noopener">
+          <span class="tag">US</span>
+          <h3>Next Health opens its health optimisation and longevity centre in Boulder</h3>
+          <div class="src">Yahoo Finance · 13 August 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMi2AFBVV95cUxOdXg2YmhjX2I5aUtxQXNpU25KR1JoaFlfcWhYempQLS03Qjd3VDVGZ0RMMXQ4VG03cGpIbkF0aUt4c1VLdnVCODNzYVBzYUdpZjh3LTIwZXo5ejRQcGxlRVo1YkhreEJPTGRTMGV5Z2xQb1JOM3hQLTQ4c1lIOWRtQWNBZUhXYTBHWjVNZVg2aDg0dno5VWZPLTBaa050RHo3ZktkSzVMb3RQYWp1QVpYVlR1VE1kZS1FLWVrUGl3dWNCck0wV2swUGZyR0VWRmpwc2NQT2xEYWg?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Europe</span>
+          <h3>Investment banking in European healthtech: market architecture and valuation dynamics in the mid-market</h3>
+          <div class="src">healthcare.digital · 12 August 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMiwAFBVV95cUxOQTRMa01raGJxWW9RMlBPVVE1NS1keXV3MjFrdUxOQzJZMWhuY0JTY3haYkJrSzFRZDVqZVhDZ3VxcWdPVEZlSlZ1WWdPbE5mYUZKUUltYUUySEo0RnRtRHU0emM2N01wVUwtSkpsTU9zVXNnOGtDZjlEUTNsWV91MTIwRVpaeHZkQTE3Y1VIcXhELXllQWFnSjVVRWItRkZjaXBoTGNNYmh6ODV6M01KUUpOUFRyYjBVdEtXdjdWclY?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Market, funding and technology</span>
+          <h3>The emerging frontier of ‘datamaxxing’: AI-powered hyper-personalised health coaching</h3>
+          <div class="src">healthcare.digital · 12 August 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMihgFBVV95cUxQY2N3Nk5iczBHd3kyX25EY2gyZFQ3alE4QWt5c1puU2hPZjV3cmZMbV9RcDc1XzRzRzA2MXZfellTaWg0bF9MUWVTQkxsNmNYMXpNWkNYaVB1LUgxeEFUYTJ1VjRjam5YazE4YXZGWUZ0eWJ4VjBZYWxGYWZDaE94VGhxUy0xZw?oc=5" target="_blank" rel="noopener">
+          <span class="tag">US</span>
+          <h3>Boston&#x27;s best concierge doctors for longevity care in 2026</h3>
+          <div class="src">Modern Luxury · 12 August 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMimgFBVV95cUxQRUl6azB3bWotbDdaTUpLVGhkZ0J2bTlpdHEzaFZYejZXQUVOZjE3elA4YTRfVkxRbjE5WXFGZnNxekJuT2Z2SnVZejVzM1Y5UE0xMnZELTYwbEptSllqVC01QUFkQ29tTHA5YnpqVk5JT3hzYmVSMmhIQm1WMy14bEExX2wzTUxmcFFqVUVFQkpJT0RCOEx6SW93?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Dubai and the Middle East</span>
+          <h3>Ready, set, go: Dubai&#x27;s DXB airport turns waiting time into a fitness session</h3>
+          <div class="src">Gulf Business · 11 August 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMi4gFBVV95cUxPZVVhQ1dfLTVZV1hiU3ZkUzNmdmF0dVlBbUVtWGhmcWFwMnkzUmFlVEFqMllyTkRfb3BDQ2U0bGlBZnc0cWEwYmdVN3JaMDJHT3h5SzlqZHlSMmpDWTVlWW9LOUszMFZKRjNqNksyS1psRkJ4MHlKdi05eWdvZjc1UUV1b2lkNG1kUGx0TzFPZTJTeXdIbUlUZmJCQ1ppdmI2Wlc5TmVUaVlzVURKcldDLWx2OW9scEZ4RXdFWUZCTmp6OVZjQTB0ZFIzQzRiblpkWV9aY3lOempTVURVR1A3VXFB?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Spain</span>
+          <h3>IMED Hospitales increases its 2025 turnover to €232 million, up 15%</h3>
+          <div class="src">Valencia Plaza · 11 August 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMi4wFBVV95cUxOeWJlTkRnaXVXUG9heFNiLVNWTlRSLTZIaHpvMVcyRlZZdXJFSHpfYzZhRkFmMjJCZG5PNkl5cXRiQUNZenZfcnFlQy1tNzhRTEJBNEpnWXFobldURDdPdGNMdHg4b0ZSVUtKTVNjZVZuZmpQMWIwdnB1ZHFYVXk1TWxfdXQybHNJTE9JMUZIODVCYXBLb2ZNdTZKS1JfdG00VXYybGI4QmdnR3BGRjZwSzh2NkVHSlhXRjljQkUxNzZ3ektMMlhaVDA0ZDNTaWN4Q0FSOGJDWkR6SUtrRU8wZkRKMNIB6AFBVV95cUxQY3hUX2tfZkhwSGhoUGdHMW1GMWl5SXNUaVJPOC1ZZ3UzRXFsRU45OHZoOXQxTFJGY2gtUHNPZkkwRENEMXppXzNfcnpvaUwweThYMTJuZG5FMGF6TFpjY3VFdnQ0Z0dad1lBdlZVZ0QtdXVFOWUzenFRanhzVFlJcmhIaDZTT1pjdmZHdzkya0dJSG13dUFNRnFJbExyY2UyaDhncF9wZnNPUnd6eWdOTFA1aTdvNWFVSjZ6NGtiR1FKUnVXV3JRVUdOeHFQUWE3cFE4ZUZNZXZvbGlFVkNqRUgtdU1Bd1l3?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Spain</span>
+          <h3>HM Modelo Hospital in A Coruña marks 80 years as a benchmark for private healthcare in Galicia</h3>
+          <div class="src">El Español · 11 August 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMiigFBVV95cUxNX2hOMnNMWlozdHNERXV4LTB3cmdHNTFUN2tFbVI4Nm16T0d5Qi1wclJkOHpqLUtxaEFRcnNLZWlLaEV4S1F4VV9kTXhHVzRXWG83eFcxUUFrZXhjUUF0TmxsVE1UTVBaLWVHaHh4RExPWUtDQkFHa3hFZDYyRzAwSDBxb3dtV2hHUkE?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Market, funding and technology</span>
+          <h3>Nurses demand a seat at the table as clinical AI expands</h3>
+          <div class="src">STAT News · 11 August 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMivAFBVV95cUxQalRVclo5NkNTS1hjNGRzNmI4NUlqVHpUR3R5Z1NUUUpDTnk1OHJEQ0RseUM4THQxZ3k5T01MaHZwcFVoWU9lbTE4YUt2OHd3SDlwVkp3d0tzZjdHTDhZSzlVbjNCdG1MSzNFWGJtcU5rVHNkdlAxWDVOVlZaSnF1emhfX0RyTllfOXpFeG5hcGRMSnRsdXRvWGVnb1J3NE5Ea0xwTHUwMEduTVl3blJlaWhCR29qTy04c0Y1QQ?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Asia</span>
+          <h3>New biological age test uses Asian cohort data to measure how quickly you are ageing</h3>
+          <div class="src">The Straits Times · 11 August 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMibEFVX3lxTE9CYWpPMDFiQXN2YkxfZThXcDB5MmRldkdtaGdka0JzRXotX2daXzB5aUx2S3J2UWRnYTJseXQtcFVDN0R3SkxkVUo2S0c5YnZSWWVuZ2otQVlJQUlyRHJfTTMwNk9JZUhSMlVubg?oc=5" target="_blank" rel="noopener">
+          <span class="tag">US</span>
+          <h3>Whole-body MRI cost in 2026: Prenuvo vs Ezra and others</h3>
+          <div class="src">Haute Living · 11 August 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMipgFBVV95cUxNR21RTkMzcDQxeVhGTGJ3RGFTdDlEY0dwRFJUWGJtT2pNTmNNclFHeVpyN1QwUlNtbWdCQ1RKZnBOZXhPck1tZm1pal95WUxqVjQ0NTluMEY5ZlI4MXYtMTdjWnQ4TnpyZ0Nybm5VdldsdXhUZTkyM2c2US10bmRTcmVDUnN3QURwcEdCeEFJa3dfNVBSOGhrQk5URERrLWY1dzBKZnNR?oc=5" target="_blank" rel="noopener">
+          <span class="tag">US</span>
+          <h3>OpenAI brings Apple Health to ChatGPT, raising new questions for clinicians</h3>
+          <div class="src">Telehealth.org · 11 August 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMitgFBVV95cUxNV1RHS1NiS0x5WHplX2xLLXpDNVdWSV9lLUwxa25aMXFtLTZBaUFVTHdLOHJrbnktWTFVc3BsRWhPSGl0Qmt2cHlfMGl6LXl6OW5rRnBkTGhHM2lPWnRFenlNUXNrcGx6REN1UllkQ0c2U21FX2Y0Qld1ZnVUSndNNmZ2WjU2Y0xYOUxUVFJHVFBQQTYzelJOakptMElpOEJSSHo2SFRsRGRBMElYS1NRNnNxd1hMd9IBtgFBVV95cUxNV1RHS1NiS0x5WHplX2xLLXpDNVdWSV9lLUwxa25aMXFtLTZBaUFVTHdLOHJrbnktWTFVc3BsRWhPSGl0Qmt2cHlfMGl6LXl6OW5rRnBkTGhHM2lPWnRFenlNUXNrcGx6REN1UllkQ0c2U21FX2Y0Qld1ZnVUSndNNmZ2WjU2Y0xYOUxUVFJHVFBQQTYzelJOakptMElpOEJSSHo2SFRsRGRBMElYS1NRNnNxd1hMdw?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Spain</span>
+          <h3>The Private Healthcare Data Space enables the sector&#x27;s information to be harnessed within a secure, governed and interoperable framework</h3>
+          <div class="src">IM Médico · 11 August 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMipwFBVV95cUxPbzhrcHFpeXdtb0JLbTh4ZEdJVHRWNGtZOXpfeC1rLXdvTV9KcUw0V0FwR0pNQVhHUTg3bVR0TFQwQXY1Vm1KQVdoZTQtMmM5amdyVzI2OUxGVzNza1VQWkF4OHJfc25qajdDNkh1QkNlWkd0TjNSQUR1SHdKSFFVUVp3VUh2bDlhXzlZeUxWSWdqQ0FQQklQVFJjQUYtT0FRZUNfU011RQ?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Market, funding and technology</span>
+          <h3>From GLP-1s to biosensors: Cornucopian Capital&#x27;s precision health playbook</h3>
+          <div class="src">AgFunderNews · 11 August 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMiqwFBVV95cUxPenJkU3hlOHhxNnBpZE9ZU1BhajJEWnRjR0lTZkxfMG1CSTlUX09KU2hsWEFBdjdNeTlpRlhSdW4wZVFlVTdmQnVvS3Q2enhnQlY0aGU3Y2dyYmVsbXRMMWJKU3E1R3BCOEJidFdxcDY3YUJMSnJsRW0xSlJZNkJEeUpjOHVkbG1tbmh1dDlRNTBVaU9yRlJzN2hIZGpFOUZXVndnaG5rUmRUZXPSAbABQVVfeXFMTm9hQXpfanV0WUo4alFwYlRkb2xES1VYLWhtNmN0MFRGMzlkYzJ1X2htR2xONldONjVwZTh6YlZGcWxXbUxkWUpQVmpkSFh1ck9yM19Mc1NMSVNSelc1ZHZtZHgwem02TldCaTlrU0FoVEhmWWZfTVNGRHRySFQ4cGtwa0g5U0JFMTVTNlEtMkN6WFF4UHE0RHpLWjhadllHdUtLR2FzNjYxTnBRd2x3bEo?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Europe</span>
+          <h3>IPMI roundtable at the House of Lords: clients demand a ‘luxury service’</h3>
+          <div class="src">Health &amp; Protection · 10 August 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMiigFBVV95cUxPT3VCWWhoOEpSY2tJMlV3dHlyTW1FNmlXaVdRWWwwTW50cFl3Y3ozZi1MSl9IU2o3S1dZLWQydHJ0amJMV1pGRVhnSzZGQWlqVFY4aVdDY2VXRWsteVRMRDBFY2l6QmtCaTNFX0paNVJ5VkZtckhIUzc2UFByU3czTTZUN1VJaVFaalE?oc=5" target="_blank" rel="noopener">
+          <span class="tag">US</span>
+          <h3>Before pasting your test results into ChatGPT, read this</h3>
+          <div class="src">KevinMD · 10 August 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMiqwFBVV95cUxQZjU1OVFOWWhrci02MTJFaHNHRloxdl81eHM3WUliMGxnUjVyYzdJTm9CLTBsMVFfX1RNblVOMXNDNXNYT2NjRWVTeHBjVDc2S0RheF9UamZOOTdZTzJLM0t0UGtMSlBIWUZVZ05qVnlYTUtST1JYb2xIUzB3T0UzbHhUZFdFSWVrNVA3RUc5c3Vlbk1fbWhvZHp4MDlCWDR5MGxvRGJYdjA1WVU?oc=5" target="_blank" rel="noopener">
+          <span class="tag">US</span>
+          <h3>Hims &amp; Hers: transforming telemedicine with a doctor-led, ‘AI-native’ care experience</h3>
+          <div class="src">Hims &amp; Hers Newsroom · 10 August 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMi0AFBVV95cUxPQldfWTUyeHRaZThILUs5N1hJSnVYQkdmVzBHLTRxc2Zsa1dRRjZaWWNiellxM095ZnFWYVROR3J6NjRJVGhFQzJobjJGVDFMQXJzWDI4TGlGT2F5dG1UOHh2YWVuZ2JQNU03bng0eFFuaGNwUk9pTk1TbXQ2clJUVlRBV3RILTlpN204eEJLWWtEZXVhZm1qNzVfbkptU3kyNDBHN0tkQm1Zc1hOVHRyajJrN3AxVzVuTGJCRUl6OHlPQ3dHSFVuUTV2RzV6NnNV?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Market, funding and technology</span>
+          <h3>The patent cliff meets the GLP-1 liquidity wave: is pharma the new exit route for digital health?</h3>
+          <div class="src">healthcare.digital · 10 August 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMixAFBVV95cUxQR2NnNzF2ZGlhdnBFNEJYaXlIMTJMbDY1Ukg1anlFb21RQXQxQnBZQWhJQW1oWlhSY3ZHUE9URHlaNnd4b1VCRGZ3dTBFNERGZGs1Si1TNk1rbVhWc2pRbVN6QXo5eHJub2RVM0p5Q2VrNUNGMEQ1X3ZlZm9EUWhsOFUxS3JZLWNnc0FRZ0JOSThnRURwUkV1QVJaZmxvRGh6dVZFeTBTaEpDWU5tazQ1VU1GRm1ScHJGOVFhaWFISTJGZV9l?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Dubai and the Middle East</span>
+          <h3>Saudi Arabia and the UAE are building a bioeconomy from genomics, biofuels and diagnostics</h3>
+          <div class="src">Fast Company Middle East · 10 August 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMi2gFBVV95cUxPYTU2cFhQN0hMNDBxUEwzTzlNTkJVWHJ1S0pZNk1yVG1ubHYwUE56NGx5QWM2akR1bGRoT2lBQ3N0UTY0eUlfOGVJTEF6MFg5aEVDMkVpbl9LY0xIcDE4V2Y2MG0tVk5HMkFPbGNTVnVMcGZsb0UwM3pRa2RreHhBdUlkR1JwOGlQdmlKZ1JyeTIzcEp6Z1V4cGIzVE9EV215aUoyc2ctZFNMSDNOWnpOdzRBdTkwalNtWDMzVDFhcmlaM0dQai1uZ0RSUzNMYVg3ZUgzS3RCblFUUQ?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Europe</span>
+          <h3>European healthtech buy-and-build strategy report: geographic arbitrage across the UK, DACH, Nordics and Benelux</h3>
+          <div class="src">healthcare.digital · 9 August 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMilwFBVV95cUxOS2J3ZkRMZnUzNFIwS0piZVlyYlVZNldaVFQ4NDVZcG1GNkQ5TmJhb25MbFg1OFFnWmFUSnBIRS0xVjJsdVpfVDd3cEZPbmZnZnZ1X1BxR3dqaHdBcWdKVjhlbGEySTBxNDNzSGdkM3gzbkhjbGFmSHdZLXMyRmI2Sy1Lb0NneXBWa2FWYzNHc1QxOUlwWTlF?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Asia</span>
+          <h3>Apollo Hospitals acquires Curecreteconnect for 1.2 billion rupees</h3>
+          <div class="src">Dealroom · 9 August 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMikAFBVV95cUxPam1YMzZ2N1JHSm9WZVZNLUtRM180aEFCSXhDeUlfNGtJZnNZQUJZbjJQT0wtQmVGSGFfWFV6cWtheFRCR2Q1SVpYNnJJOGpoVE4xa3Y4d0NpVVl1YWlianJnd2RoYlNGU2pEQW1QMEMxcXluS0Q4T21iZGI5QVM4MkFiSEF4dzV4QUlPOGdYYUc?oc=5" target="_blank" rel="noopener">
+          <span class="tag">US</span>
+          <h3>The dark side of the obsession with longevity</h3>
+          <div class="src">Robb Report · 8 August 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMioAFBVV95cUxPamJ1dnpGc0E2a1hVbzl0WEpQY3hNU181SnliMmxRR0JISzFGYlR2MnpZOFd6TjFlanFVTE1jNjJFX3pxU3FVWThZNGlCNHBqQ1hOU1NNdjB6VC16cmN1VDZJREJ2U3gxcmpmY1FZdU5vTGk2RWRqU2xSa1ltTjRuQnVCblZHczZrMG1zY1c2MHVLOGdVOHlyMUlZVHN2eW9f?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Dubai and the Middle East</span>
+          <h3>Is the Middle East&#x27;s longevity economy moving from hype to science?</h3>
+          <div class="src">Fast Company Middle East · 7 August 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMiqAFBVV95cUxOcG5WWHlOVHlYbXFqNExwZTFlUHFXZzRTMjl3dFNLZWwwTkl5eHRBMjF3dkJDbFNvdUR5LUwyM2t0SGxYTHlKWnJvSDAyTGp5dzRZeXN3ZlRBWllhZ3JFRVJWMlk4WXNFc1FoMWkyeE9uSUZPMGZYYjY1NHZfZlFWR2lHSHFfOFNlYmdmWndaSzhyYWwyNk1ocGlOU2VLaWNQNHpVNGprOVE?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Dubai and the Middle East</span>
+          <h3>Human Longevity Global and Smart Cities Council launch the Healthspan Scorecard™</h3>
+          <div class="src">The National Law Review · 6 August 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMi1AFBVV95cUxPTWU3RTlkVEw3Q19xOHlUS0JnVTl1ek5CcXhsMU9ud0RUcGcxT0NBZnNnaU4wbXA4R0R1MUVySFF6WW9VTWhxS0kxbFRNZEg4M2RWcVcxTFRhUGFoNUhuczZLbExzVzhRVW1OT29fSzJ6WmNYWkcyOExmbG5yRHVFcjhsMDYxdHp1dFRJV25KVWJNM2l2aDRrSWNrOWVsbnVWRDVYV1VEQTNvRFdpRF9UcTc0TnRNNTF1c1hnakxYTFpxZ1gzbVBTeUJraTJOWmF1RVVRSw?oc=5" target="_blank" rel="noopener">
+          <span class="tag">US</span>
+          <h3>thriveMD announces expansion with a new premium clinic in Cherry Creek North, Denver</h3>
+          <div class="src">PR Newswire · 6 August 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMioAFBVV95cUxPSnJyWXBteEk3ME1LWjE0WmdTUEN1WFhZYlRyek5QWjloUnhHaGVySFQzLWJ0Nk9YYXhHaGJrWG13VkxsOERHczBfaklqYmo5TVBnTm9iQnpOYzZyYWsyWHV4MW9kZXFrdjgwWFRYeVlZaUR2em42U0dtcjBxSUlHdkMxQ0pUWHNpWFVZVWxrc2Q3SlZRX3BzNFNyaURNMEtt0gGmAUFVX3lxTE9vNHBmbzUxQnE2Nkx4clNpNWlNNHhpZTlnOGJISW1JWGx0cF9saHdmbDNuY3JEWnJ4V3VfMzBWZU52VHdGeFl3Q25VX2VxTFJQTzMybUV2em5oaXBxdGZwR19ZOXhxMHN6MElfeHBGUFY1cmtxUmRISnI1aUx4bV94amZ2Q3IzNnVLLVMxbmJKa3BYMVVES1FtRUZNVlVVTEFSei16anc?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Spain</span>
+          <h3>Vithas Vigo becomes the third hospital in Spain to administer the first Alzheimer&#x27;s drugs</h3>
+          <div class="src">Faro de Vigo · 6 August 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMipwFBVV95cUxOQmxxVXJuQTBVcXBqc3JSY1lwMkoxNzJVeHpveDJpanZRNDcxbFFvMkNIdFpXX1IwZVBrcWFxLVd1c0Z0MmxMcFBrTTg2bnVvbldqRHZpTm40aDN3bmMtWXlmM2Rjd2EyQ3JQMzEwWHVmVXBQTkpnTE1EY05wdzhkV3lHd0FOSWFrS2VNYTRGd2FFamtjNktKTl9VaGxlU3NaNXFvUHNyRQ?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Spain</span>
+          <h3>Public healthcare&#x27;s failings do not improve private-sector outcomes</h3>
+          <div class="src">iSanidad · 6 August 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMi0gFBVV95cUxNemxraWVvcmR4Rk52bVgwZktCNUNOdlFzSnV1QkNRbmFHeEhMSVNsRUozY0hJM3JGNnhWbVV6TWtnd1VGdElKbXVRSVJMMGczc2swSDNTQUtsb1NfOWJlalFLMlgzNVpaSkR3d2xuQWNkaGs5V0VaMzkzQUdCWXhra2pObzZNYXFGekNFMlJWMVZnd01CejcteUo3dTU2THBHeWtTZFRqYXFONWVfS1dFTGwwb2VZWXVEd0lxajVicGZsbUpMMDUxX3VFanI3M3pHOEE?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Europe</span>
+          <h3>UK healthtech M&amp;A landscape: 20 high-probability acquisition targets</h3>
+          <div class="src">healthcare.digital · 5 August 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMijwFBVV95cUxQUHcyaVV0TTgyc0tzVmppY0tsVm5uY3BIT0pTNVNyTjE0amsxOU1tWEtta3FaTk5YUkJCLS1VVW40Y0tfNTZ0NnBFZTh6WlRuU0xWNmlCcGpUOXdScm1NTlRKRDZFSF9wRWVNcEk4dW1vSHVLbThvMkFNM0RSTzVlcjlTUEgwNjBIczE1djdlMA?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Asia</span>
+          <h3>Morrow opens its preventive care flagship in Singapore (targeting $230m in annual revenue)</h3>
+          <div class="src">Longevity.Technology · 5 August 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMiwwFBVV95cUxOekVqWmJFaWdZM296UWdKRlBYQWI1TGgyN08tMkxiR0I3alVyNDRlV3l4NmpFUzl0NmZBaHY1WFFNUS1lMmlBQ0FNSFJHVVVJQUVCSENxWWVMOTZEelVqRDU4VUwwZ0x4WmJQb0YzQk9KajBoTGV0TlM5UExYbWhyTk1qTGhPeS1GeFoyTkRWbGh4cG1jQ053ZGlwMUFTekpScWdVU2RFUkU5dEg3aUI2QnR1SFVMVkxaZUppYzdKX0dlMFk?oc=5" target="_blank" rel="noopener">
+          <span class="tag">US</span>
+          <h3>Analysis: emergency medicine gains ground in the concierge sector</h3>
+          <div class="src">Family Wealth Report · 5 August 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMiogFBVV95cUxPRW50a2VMbmZtRHBHSnM5MDZZNXJXUnY1cVRwMk5CRkxKZkt5ZWRKbTFFUm5OMHhPUUY4WWF5bGFDWk9Ub3A0d2VGcTdCeEl5NGg2RnVrSVZWNGx1U0xNdWphX1pDRG1OTFJRLTNkTG5VSThxN08xSXZYbHVXdHFGTmR3d2JsakRrOXdaVnNyWE1tUDFTTi1BT3ZzbnYtNENHbnc?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Market, funding and technology</span>
+          <h3>Your healthcare AI strategy has a data problem. And it is an interoperability problem.</h3>
+          <div class="src">HIT Consultant · 5 August 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMinAFBVV95cUxOY1k5Y2VCSXFXM3E4R0hFODlIcUJTU2UzQ0dvMVJyOExnRGNVdUttOFV0ZlJ4ZFhyaVpIV0JROW5pSGxoQ1ZITlJsOTR5RTg4NmtoWW1Lb3ZMa0xJb2I5LXBnM0cwaGYwa1BGVS03aXFveXhmNEtWelJ6YXlSNV9aRjd4blU3VU00VWo4UFZBWWlpWVJRby04aU94OXk?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Asia</span>
+          <h3>Korea accelerates the commercialisation of medical AI, backing Lunit and JLK</h3>
+          <div class="src">Seoul Economic Daily · 4 August 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMitAFBVV95cUxPY0J4NEVVQkh6MU50Tkl2azhxaDYtbjV5b0J2M2EteVRPekU2Y1RiVWF1ZTgwN1M2T0VwSkxwcGhFODBNMGZfWkV4OEdXTXN1elVmM1hhZXAtRk1wMEViajAwQ0xaU1RBOVhtbE5nbmdyNGxmMUxnbmNnb3F6c052U1BkY28wZWhaTGllc0p0a1QxelhNVklKdlZRQmNFU3RfczMtVlZDdVlyRXdEaTJYTko4c0E?oc=5" target="_blank" rel="noopener">
+          <span class="tag">US</span>
+          <h3>‘The longevity gold rush’: Utah&#x27;s booming business of living better and longer</h3>
+          <div class="src">KSL.com · 4 August 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMi8AFBVV95cUxQbmVJTDR3WXYzb09nWXgwM1FnaDRFV3FRXzVJZmlxUGttLVRNeG9fbHNRTzdHUnVYYTVzeThqVDdxeU9WQjJlWml5UVJ3VW8yYmtuX19YdFpHa3pZaTRMeHNfLTVrd3N5WC1XRXAtVEtxWUswOGF0V2EyWUJ2QUFqVUF1Rzd5cXBRTW0wcXpfT0VCV3BEOS1tLU8zT3I5RHQ5Q1Q0Ulk4OUl2NGtqSmVkWkJ0c3drUklOQ3NwSjd2WDhqcTNIM25mQmFONnU4dkVvQUtSU3JQOG5iaWF5RjNxR25rX3N5UFFNOHQtYnRibTg?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Market, funding and technology</span>
+          <h3>Digital health VC investment reaches $7.4bn in H1 2026, driven by AI agents and chronic care</h3>
+          <div class="src">MarketScale · 4 August 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMi-wFBVV95cUxON1R1Mk0zQWhIc0Y1QmFULVNJNUg3dVFtTW96TVczVm4yU0VqeUpLVXpCRmNOUlFTRmMtTm16Q25aeDhMbDNmTW9hdWFVTmZlc3oxaFBLVHkyMVplRmJEb2JobFBCTTQydFhCR2FhQVhvM1N6aWlpUFNCbU81c0hjUXdsdkpTRDRtTFRqU3IyLV9BcmtraWNVVURRenFoa3hFT2djcmxnZ1B5VjFoZDlCWmE0djdTTk41RURpRmJDQm5iQkY1bThReUJxVnVydEt4SFhoT21qVzJ2TmtCV0xLUnpJWFFqWTNNMjhyVjlZem5ETzc4N3FvYmFSQQ?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Dubai and the Middle East</span>
+          <h3>A new Longevity AI Research Lab will open at Dubai Science Park in Q4 2026</h3>
+          <div class="src">Zawya · 3 August 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMi2AFBVV95cUxNa3F1VmRYODBVNUg4eUVYWFl3bDUxSXVDdW13Q0ZMMUVYT3JTRDk4Uk5SNU1FZkEyY2J2V0d5RllaaWxoOUVEb3VIbHBUdUd0S3JPRlFaRDI0TlVIS1FLUmFYVzN3OW9wZjdUaXE3MjB2bExnNVEwMlIzU1pKb21VVGN0RlcyTUlQejlSblVpRU4tUVN2RUVaREpuNmZ2a2c5bkZFbjlJa2t5VnJzaEJUWXRvU05JU1dhMDlxOHJ1cThrVUJENGJFR1UwVnZDT3hpazBXOVdGRjI?oc=5" target="_blank" rel="noopener">
+          <span class="tag">US</span>
+          <h3>Human Longevity offers clinical-grade whole-genome sequencing to everyone for $5,000</h3>
+          <div class="src">PR Newswire · 3 August 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMimgJBVV95cUxOSXZDZW9wbnZhd2VSbHBRZ1ZPSHRVTEVIMW5IanZDSWVONTJUdTdRVUc3TWo0QUhEbFRzOXJManNHQlNiUm1TQXBDYm1kRVA0cTlGRXVzYnlzWTR6Q201UnFFUS1nVzVtazBYTm5KY19vZUNjZ0VlNHRvaGFGTlc1UmdVeGNLT09hNm84aHl6WjZRMm1FemRkb3RkM0pOTUswVGxkMFVKWXNmajBlZmxDOER0VkhXdFBuVDUwaUZ3ZnVMSmloRVhoWUpmcEdveXJRTFlmOEdpR3FwMzg1d0RJRUJQMkt2VzRCeTdjMGR0SFFUd1Nzc1RRbFNvdXNmV3Z3c0tlNjdkZ0pUMWl6bk9SS2x0eHUwY1M3YWc?oc=5" target="_blank" rel="noopener">
+          <span class="tag">US</span>
+          <h3>Three pharmaceutical deals in a single day reshape medtech M&amp;A in 2026</h3>
+          <div class="src">MarketScale · 3 August 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMiqwFBVV95cUxNUzVxbjBLOHRoZGRYWW5fR2tVQVBXWW1WVWtZZjlKbXhCWEJKQ2wtYTlyMWJkbXZhQ29oZmE4MTBYSnc4R1hLZTlVQ3lDekU5NUF0bFYzNDhxS1Q1TWNaNGZXZFg3c1dRMS1UQkEydjdncGFKX3VnOU50NXVySnFzbnlxaVZyTUF2YjRKaEtOU0x2WnhENFFtTFBGRlc4S0ZIWEJtUDBXb1ZHLWvSAbABQVVfeXFMUHZPSldBcGFHSmkxbnNtZkxvOEhXcmtDOVpzdG5NMjFnRFZJUXM2c3I4eEpSR1hHLU5MU1VBQ1g4ZGQ4cU95NnNuN1Jld1ZzN2RfREF6OVVmNkg2VkliYWc2Rk1kT1o4dTNaMGxkZzlGaHF1SktKN0NqTGxDSnc2VHlEU3hqeEFiNHllV3ZMUTkzZXRtZnJuQzZ3dEJYaTU2dk1qdmxSUUp1alFkU1I0cHY?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Spain</span>
+          <h3>Private healthcare strengthens its digital defences amid rising cyber threats</h3>
+          <div class="src">OkDiario · 3 August 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMimgFBVV95cUxOYWZsRDFVN25WdG94RGFOOTNRVkozWTZ6LUpOLXdzS2VzRlNOeDFnVXBVT2hhcWc1c3hQSzJMbUZySC1iSVFYUkV0UXI2YVJ4R1lsSjZfZi1UOTJoU19naHNldVZudHUzZVVRT1ZYRjl3QnRSZ1loMHpVVklyMFFkS1lZZmdyUXNMNHdCNnhNZFYzQllUVTYwaUl3?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Spain</span>
+          <h3>51.8% of clinical trials conducted in Spain are concentrated in private healthcare</h3>
+          <div class="src">iSanidad · 2 August 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMiswFBVV95cUxQZVp0MmRaUWtUMjhjcmM5OFBWejZnVGNxbnNxOUQzOHZiU2hTN1JGWG1Dc3dJYjFHb3VxMFJSekFXMXJMdkRDNHpPMnF2R3A3aWFWSUkwTl9YQV91em1KcUx2dzJ5OWhJRVg1ME9pZHlqVUV3SlZScV9aRXdhYXdxRkZlRzBvQkNXdzh3WkFzZmNySlczeTQ4VmttZmRFbXZ6OFBpUHVQS0MtSmw1ZUFFLWhFQdIBuAFBVV95cUxQRUhtZ21OeUV5MkRlTGEtZUNSYm5fQVBzSl9jcUl1LXhxOEtqNTJ3VjU0aVFhZWR1NlZjWFBld1pKMW1jYkRxNXlEMDlSU1gtZzRxOHBPYXZLZEZKSTJ2UmoyQTdTVlhLZ2VVVGRIZDJTSGN5ZndUR1FjanhLbjVhTFhqZUY4b3VWaUJ6ZlliNUxRM0hNVG9nWHo2SkczZW95bGl5NFlpeHR0TlU1UnVjUDRqelJkUnh3?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Market, funding and technology</span>
+          <h3>CareCloud breach exposes the medical and financial data of 345,000 people</h3>
+          <div class="src">Security Affairs · 2 August 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMi2gFBVV95cUxNNDNUMjRSWlFJT0pRT3o4azZabTdDalU3V1RsaXBQM1haM2JDVHhQNVo0WUh2T2FuSERBdmE1MklPeTBzVGIxQk1VRzdXX3B5WXZLZi1qZXluYjNUXy1Zck1VUGt5aVBkNl9pd1p4S3FleE1fRG1GcjY2dnVBblNVdnRMUnM0dS11VEdPTTZoeTlKRU5HYThvUkh6UEpkZGFoUEwwcW9taHFadFdCRXFjUENYVXRQTloxM216TWtRMUxJZzRVSWowOWp5ZldESWwtNFVNdVhLcncxdw?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Market, funding and technology</span>
+          <h3>CMS centralises AI and interoperability in a new Office of Health Technology</h3>
+          <div class="src">MarketScale · 1 August 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMi0wFBVV95cUxQam5jVFJaYlpSVUFWY1FZM29xbmlCbl8zSWxicTlzM2JiaTAzNmxMUTV3aHVwMmQ4UnFodXlhYVY5ejdMdXVxQ3hmbzB6UDRDYjBXTWJmRmZnTzlRY2hYcGZudzZ4cFpRRWd4d2ZnOTlvZDZNXzktN0lXSFJJN1NHcXE1QU5INXl1dkVqZHh5Q0NHaHZXdHZFR1I2NE9jZmxzcHJOOWM1ZUk5WmlrZjJHODJXR2FOUGlJUWdRbXNUdGZhczc3Z19BX1BCbVZyMEctOGM4?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Asia</span>
+          <h3>Southeast Asia&#x27;s fourth-richest nation backs wellness tourism as a new growth engine</h3>
+          <div class="src">VnExpress International · 31 July 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMipgFBVV95cUxPN1Yxb3A5cGpZUE9qM3F4NWN2cEstVVF0MUxvZVQ3TFREUDV6a0t2dXFmU0loUG9hMTBHVi0zcmVkYVpYa1JaVXNFQVZHMkd5Mnd1RUFIemc3QXB3N29qRENHbTVqb25ST2VyYlNDU2E1eUtxRDZ2eHNrVmVTaEVlcUQ5bmZnNS1ma1R3dDVpWGRnTkFDcmpQSnhKZmpKRFd3eVJVNUln0gGrAUFVX3lxTE9ONnVjQ1hiNC0zd1NVU29LU1RGdHJ2aktlcXNfVEVWZS01Q212WThBWFA1UW5UV2xHbWk3N2Q5c1NoSDkzWW9XQlZGWTZKdExNT1dvUDMzLXJLZHZ4TU5TTDV4SmEwUDVSbDhfNXdZaFVyWkxRRHB0bkU0emZHSnRKamY0eTh2dnJ1RTZoNHpoc2RMOGwtLXBDTHMzUjdCbXBqakVNd3NXT2VSOA?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Spain</span>
+          <h3>Jaén leads growth in the private healthcare business in Andalusia</h3>
+          <div class="src">Jaén Hoy · 31 July 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMi6AFBVV95cUxQN0tmNFo3WnFxOWQwTENIaU5sWkZQclhudGFScDVENnU4cFZsRGNwS0VEaERZeDBIUDhUdE9udGcwQ3BQZk85SERWUDRHSExJY240MjVpMEo0eXRBNDN4Yk8zSzIyY2lyaldrLUhjMjFhRnBQYi10aFBVZmpUM2o5OWFJYkx2LXpPdnpFeWdMYklBWmE4UUVzc2ljVEFVeGJidHM5cHAtNl9vaU5uSzBkeEt1ajJZUjFzV2tjZ3l5ZkNPRXJaVXA2M1ZuNHkyRXVJLUpaNXV1bmRlY2dHcEp5V2Rid2gtLXE5?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Spain</span>
+          <h3>Cyberattacks and digital threats focus their offensives on the healthcare sector</h3>
+          <div class="src">El Español · 31 July 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMi5AFBVV95cUxNNl9BNDFXYUlzSTVDVXlCWUhWTUtoVlBPX09rWHhEaWZhRGRWQ241RngtMEFuSUMyNG4zcHVfVDJRZHRhbHhDUUF4U2RiTWE5aGktU1ZTZ3pGSVNGY01IQ1hHdms2czBLczNsODBORlQxaUc4MWxqQlJzR0dJVDFaOU9UYXBXV0dOU3g1a242NFVsSm1hVXMxUjVvdFpwWWItbWpXczdsU1ZlV29rREZmQTVMUGZkaGNpNTh1UUZhenpRdzNONnNBY29ERy1SY091blZ6VVM5aDV4OEo0WjdrLTVVZ04?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Europe</span>
+          <h3>Swiss preventive healthtech Ahead Health raises €8.7m and launches in Germany</h3>
+          <div class="src">EU-Startups · 30 July 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMiswFBVV95cUxPR3A2Z0w3ZExmcUFtMUFUWkF3YXFPMVlaREhjWmpTcGE5dUZ5enE1SlZqOUV1X0VrNW03U0ZSM0t5akhOVzFJTXgzeG50bzNRcUpkOHJFZ1lzR3hZSDFkTThsLWNiQVB4RXJKekNjb0hvSkNTRTJheW56RnBlUUxkc2pja0NqeGotajB2c3lSNk04aUFma3BRTVNsRTh5OGpmZG1zSDdUS0RoZWZITFRYZVgwbw?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Spain</span>
+          <h3>Leading health insurers face the challenge of growing without sacrificing profitability</h3>
+          <div class="src">SegurosNews · 30 July 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMijgJBVV95cUxObFhEUE9rYjNMdlA1WUswVkcwS1U3Vk1tWVd2T0ZSVkwzbTNYcEZ3aU1xOEVna2hHMkY0UEtpcUp2THJ4UWlWYUwtOVA3YUZBSEtvTDBWN3J4MjZiNTJoLXlmN0N3cDJVM1BjOE5VS0llV2xoejBsNVY4Zlg2NGZHaEVyV3ZfUGNNODRUdDFySXdPbV9fQXYtN0pRSWktN3hESTRjZG5aOFBYRHM2elFqd2ZSTE5RX2c5ejRBVGdQLUNRUnFjeHdxbkFDdkljb1RSZFBXdzBHZjFqWV83aUZVdzVIRlRvRDBFSW4zUFBHOVNBQjA4QjNIRkszTUNLTFBKY0I4WU5GdFdiRWxQclE?oc=5" target="_blank" rel="noopener">
+          <span class="tag">US</span>
+          <h3>Tempus AI acquires Personalis for $1.7bn as digital health M&amp;A surges</h3>
+          <div class="src">MarketScale · 30 July 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMi8gFBVV95cUxOd2c1S252aEJVYy1yQUxhZld1MUJNLW1JT3pRWnZBSW84YjRXM2hJemgtcEJYQWttNjNSX2o0Rm8tZ0pUNzE0WkZLam9DR2ZCWTVNMTJqdjE4UnFXTjZaSVhjNmVrNlFNWFJWbXoxRHc0Zlk5Q1NKREk5UHVfLXNHUTFfM0laRVdKUG1ENDl5YUZTdk1MNVB6TU9lNFVabkdXcks2UW1Jc0szeEVOZHFONHI0YTV5bEVPV1ZteF9lVnBUcDFteTI2bjFHblZfSThrUm10Z2stb2xZcTRjVVF1cXZ0Rnl0dEpfZ3NTbGR0eGZ0QQ?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Spain</span>
+          <h3>The future of oncology embraces precision: ‘every patient should receive the optimal option’</h3>
+          <div class="src">consalud.es · 30 July 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMiuwFBVV95cUxQZzBjTUdYTkJCbHFIeHFZZ0FOU1dWdVVpbmhLdW51emJwU1lFUTQ2Q0xDOW5sbnBqeDhhYkxQM0V5TEZ4OEJlTHJoRDhQYTlSNm5FdXhPSmJQQTFFSnpRUXRUdjhkVkUzWnE3TGpHYWtHbklYVTd4VFZobFRpQTJSbHlSYkJYTUVIOTZqUmM2aUZtUW1pdE1IT0ZEVFlMT0NmREF1Y0loZFJzVFRfR3owMmFMLTlXYjhVWjdv?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Market, funding and technology</span>
+          <h3>CareCloud notifies hundreds of thousands of patients following the theft of medical records</h3>
+          <div class="src">TechCrunch · 30 July 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMipwFBVV95cUxNempSUjVJdW1HOVFsQVE2TC1saWQ1UEthRF8zVFYxekZkLU9XcjdDMG1JaWxxcWpkcW5UWDJqeW14QloybkhzSW5rejNnMTZMWjJjYjFLRU9QWndyaksxRG5uSHpXU0tKTWx1QzVRZEE5cTFUcVZpZWZaY0NxcGxIMl8ycWJRWF8zS1g1UWdmWkMwZWpEN3VCQU4tTzJBVFdBSndCYzBJMA?oc=5" target="_blank" rel="noopener">
+          <span class="tag">US</span>
+          <h3>Clinical chatbots are taking medicine by storm. Should doctors trust them?</h3>
+          <div class="src">STAT · 29 July 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMi0AFBVV95cUxObEpaWjYwSjJPY0RvMmdjeFRzdG0xdDU2LWUzN1Y2cmNBLVAtYmhPZjZGa25GVl91ajB3RE5WX2xuSnAyMnhSNFFiVTRHMTZLSktKektwZksyLVJYaFRnZHp1YVV4MndJb2ZXRXh6aHZxNGZJUTJVU3pfdmRaSUFYNmtael9rc01oUktWMkpYck9jc0J2a1czNVdSWTd4aGJIQXdYbHJia190VUFtVjdlak1xVThJOFZUVnU0eGczc3lNWTZmZHBYeHh2ZVZjeHJ00gHWAUFVX3lxTE1yMm0zaDJQcGxiYThjWjNETHNoOEdrVEt2Y2dJbE83dEw5RlpEVWpwcVhENVFKSW1FSFZoSGJsQ2Z0ZklyMUtQQ3FLU2NBT3VpLUtVdjFweGhvQ1pTVG1JbExmY3Y0d3kyZnlGSXFqX0xnVnk4Z2s3bmdNbVAzWDJnMldhYWNjYUFtQjFINDJOMmJyY1J1d2Jnc0FaeUg1VlVtNHY2MEZLckE2ZVlBclQ5LW9xT25HejdfeXp2ZF9GNDRZSzU1NmFrVkFfQzZwX1BYMEFia0E?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Spain</span>
+          <h3>Quirónsalud, Ribera and HM drive growth in the private hospital business</h3>
+          <div class="src">Expansión / El Observador · 29 July 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMiqAFBVV95cUxNdE8tWXZXNDBUOFY0MGdfYl9QQnVMbXF6aWlRTW5TQW02bnMzaFdKQW9qdEM5TU51MmREdzRZZFdpM3ZwbWwyR3lYNFAyQWlCemFXS2x3N1hfSFhoZXhQUVppb1VSZFc2OTFiM2ZhZWRtN09PQ25JcEs5aDRfUi16M0xuS2VXeGtMVGdkNXpjQ3NtS2xEajRRdXhmZXVhZWJOcktJWE91T3I?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Spain</span>
+          <h3>Spanish Government approves €50m for the 2026 IMPaCT call (personalised medicine)</h3>
+          <div class="src">ciencia.gob.es · 28 July 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMiswFBVV95cUxPcE52SjgxNUVwZGhhX0hVSjEyVjdtZ0k1TGZHWVZ4YlFrUU5nV3JVeDZYMDdOa21zVUJXMVlSSXFFRXBYYmhFZ1BiNm5pY2hoeF81OUYzQkxhMWhMOHkzcE9KMUxVb05IeVJPdnFzQWFhN2k0b25WbVViNjZHMHhnckp6THJOUXZOUGxISzd4SXZrZURSQlNmcjUwRE5XSkwxbTNiUTdpSVpSeWhQQ0ZMNjJqTQ?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Market, funding and technology</span>
+          <h3>Digital health funding rises in 2026, driven by AI</h3>
+          <div class="src">TechTarget · 28 July 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMipwFBVV95cUxQcXRBS054R1NYazc4YzlJTTlJSlBsSXpLVHUxMGpJZWFCQ3NsdWtZNVA1Qzlvbk90bW51YzlJLURBZWVHVXRBVkJHbl9sTzhvS0E4VmlwTHFxYm1PcWN5aHptSDZQVmk4SDZBSVdHZFJrakpfWXRLYTd3Qnl2TmstaE9uYXBkMFFiU1RaYzM5ZVBKRE9kQlVRQUVHVW5kczQ4LWhjbHlTNA?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Asia</span>
+          <h3>Thailand steps up its wellness tourism growth ambitions</h3>
+          <div class="src">Bangkok Post · 27 July 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMiywFBVV95cUxQbW85d0ZLaE9CUC1JNFNoMWZpV0N6YTJCbi15SmZvS09iWjNWYmlfS3FKVDMxM3NkR09YbnZHaWlWQ2ZWRlJmcW9rcHRtakU2cmZuX1VKOGpac01hemMyQmRSLXE5MVdKTWV3bHhXZEhBZG12TUtnamF5UVhjWVUtX3FURERkWmVzQUYtX0FpbEJiSXF4ODgwRjRYNElRVjZMbWY2NWlncmlON0hoa1A3a1VzOGJDdGpRanVQV1UzYXR6X0NYSXRfVk5VYw?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Asia</span>
+          <h3>Singapore must grow its longevity economy without driving up healthcare spending (Ong Ye Kung)</h3>
+          <div class="src">The Straits Times · 25 July 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMiZkFVX3lxTE1udkVEcWZsZGQ0bmFBdjNvekV0cm1lNUJLM01kM0hRY0NOODlfNFNrYnI4dEJ1Mjk1TXk2NHpoWUloeFFuSEs0YnRNeV9BNTVSX2ZZOGVYalBoME9GYkZrQTFaUjQ2QQ?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Asia</span>
+          <h3>Thailand&#x27;s health minister pledges to turn traditional medicine into a global export empire</h3>
+          <div class="src">Nation Thailand · 24 July 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMijwFBVV95cUxOSEJfOGFQa0d4TW9ONGVxSWx1NkRVQm5WUThYdkZmRWJ4cG5GNGtDMXlSUVh5dlo5YWoyeDJSdEo2SVg4M19GTk5XcEttbE8zV1FEMS11V1BJTU1OdWFEOGpMZThPVVBRXzRxZGdlbTVaQ29zR0JtQzZiRDBOQld6Um9mTlRzdTVwZW4wSWJEOA?oc=5" target="_blank" rel="noopener">
+          <span class="tag">US</span>
+          <h3>AI Tracker: Teladoc launches a new virtual care model</h3>
+          <div class="src">Modern Healthcare · 24 July 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMilwFBVV95cUxNb1VwNVl1dFkweTR2dld4Zl91MGw2WFo3QnowZ0FGTFJwSDBjTGhJTDVSLXZwTlo5MTd4U2F6MUZTVG05LWpjZ2RVTDA2NS1UT0ktd0NjYlRkS1pILU1LSHNLOHpRa3VtZUtCNktmQXJJLV8tNjZxUU90QTdyRFpLY2s0UUZQT2FwM0VXYUt1TjVCTm1rbzJz?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Spain</span>
+          <h3>SegurCaixa, Sanitas and Asisa grow by 10% in health insurance and now control 60% of the market</h3>
+          <div class="src">roams.es · 24 July 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMi0gFBVV95cUxOZTZmQ2MtY0Y5TDB2cE9GZWlYY2lKdWRFSjM4TjdtTngwVm4yUFh0N0JabDktZXpja0pGSVJxYUxEaGRESVhyZEpyc3g0bjc0NC02OVpHZHhBdV9XRUpQazNGVE1SQ2JCcEZDX2hJd2hYVmZreWQyRlp3bngyamp1ZHJINVJpejZrQjVjQWNyTTRmRGdXamtVMVdRbm5oN2NobkVhakVMT3Q3TGJ2OWVFc3FFdW4zSWNVRkhicWpMWEtlV3ZnaTdadmJYQ3hUNWZpT2c?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Market, funding and technology</span>
+          <h3>NIH harmonises 12 petabytes of biomedical data to drive the next wave of healthcare AI</h3>
+          <div class="src">MarketScale · 24 July 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMipAFBVV95cUxNS1RJeE9fU1czSXJfcVdRR1JrZ1FJNEpoOWRYaThzVjhjVmwxSF9pOWt2b0FBOXBnUEJTMENTV1JBbmZFQ0hZU3duUl9SWTFORzRlQXFYUkR0bHZCZzNtMEw5TE5RR1JuVVIwNkNaeGZYU2tLUDRtMW1YeGUzMEdhbnBSODN3X2RtWU1WR2RWREw2bHMtQ1R3TTJMZHhLdVJKV1R2Tw?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Market, funding and technology</span>
+          <h3>Global Wellness Summit announces speakers and topics — including the latest developments in longevity</h3>
+          <div class="src">Yahoo Finance / PR Newswire · 24 July 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMiZkFVX3lxTE13REN4SVF6a3pNQjc5aU5ITVk0OWdIX0U4ZW5ob3JUdHFXeGVDV3lYSVgzOUFnNmJCMndDMC0tV25VbE9XQ3lnc0hydjIwa25jS3JlaWhaSEZfVDRNS1ZqaUtNZFFCUQ?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Asia</span>
+          <h3>Thailand backs wellness and longevity as a new economic growth engine</h3>
+          <div class="src">Nation Thailand · 23 July 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMiigFBVV95cUxQVkFtaldyZ3ZIWEhldk1vdVZBVUVBNkg3ODF1RzdLQk4tbS03NEZ6Mlp0dXloelpRX0pFOUhBaG5LRHRqamh0b0NiUjVwbXdFTDk4eVpleWg1RGpaWVlIVDFpOEJUaGtqdUlBZ1k3d1pZMDdNTThJLWVnU0pPM2N4NzNzQ0dyVE9tVWc?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Asia</span>
+          <h3>BDMS launches WellEra Bangkok, an $865m wellness complex with Capella Hotel Group</h3>
+          <div class="src">Vietnam Investment Review · 23 July 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMivwFBVV95cUxPTUNLOFg4djlnaWZIaVh2VUFXV0x0THN2UjZNOEVSZVU1X24tbjBldzY0Nkl0ZlRRblRHWDhHS1pGWmR2Ulp4STA4eENSbUZ0NkcwM2lyRnRFWjFacG5HWG9GQmFmZC1zTmE4N2FxUDk5TzczeFJ6VVRaN0NiOUgzV3dsaURvMVVQdFdROU1IYzdXbE9SU2ExWmJtTm9OVmtuVkVudFh5b0Fqd3YxTGVoeGFjOUF6UzlRYXFtOVE0OA?oc=5" target="_blank" rel="noopener">
+          <span class="tag">US</span>
+          <h3>Prosper Medical raises $16m to scale an AI-powered concierge care platform</h3>
+          <div class="src">Fierce Healthcare · 23 July 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMi0gFBVV95cUxQd1dUQmx4NGNiNUtrTEh0Vl84b2d2eFFBaDR4WVlYN0E4SUhZaXVRaFpPRDBhUnZRaVBDN1hVelE5UzVYRmhpakhnMEdmd1ZmTWpiSEdOMEhiMnVCR082TDJUQTlrLUxqSmlLRDZGbGJaOG1fUmZ0ZXdwOC1ZOU9KZlZHWVFuN0pSXzY0aDlsNk9yd2RqR1RDeUEzeDZJc3lXQ3VZeWMtdUFvdGo2TXNUY2Q0YmFMVi15LWU5TWlxSHJQSnNZazBnS0tac3I5alpoVlE?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Spain</span>
+          <h3>IDIS Foundation promotes a shared catalogue of services for hospitals and insurers</h3>
+          <div class="src">Infosalus · 23 July 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMi8AFBVV95cUxNVlktZ09MZEY1VE94NXBGdUgtODRVa2owOGE2ODB0NGFHZ2dhN3piQmdnbjhLaFRyeUFveTRJM0xKLWZSRl95NmVibEx0UC1vVk03SjRGOFpSUjNWYTN3QzNZUnhyZ3dJdkRNeGZBRHRsTDZmZDhHY3BlZl9OODM5V0RYeEJmekkxaGUzUmI3NW9rSFl6RWpnTmYxdktyaEE2YnM4U0txUWVCNHIwb1pmV21OeDJFQXlFN1hUdzJTOVJNMTgyNHpvNVROMG1zeTJSYVhZTzhhX194dDZzR291dllSbWNiZFFfLWtSRmh1M3I?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Spain</span>
+          <h3>Sanitas and Universidad Europea develop a campus in Valdebebas to train healthcare professionals</h3>
+          <div class="src">RRHH Digital · 23 July 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMixgFBVV95cUxNck12ZVZCZGtSb01yUVp0UzdQVTNSdG13Ykd1VEZZT25oUk9DSGtMc1FoTGJJTnFjNGlJcGpJeTlzdkNlQW1KYm5UTHR3RlRIZWE0UVA1eFFlSW0zdUg5Q0tyOEZDSnA2aXBMSmFfWGx5ZDhBNXdvaG0zaXhNR0pfSEthb0VXZTRlQ04tcFBWMVJLUWNuQ0NtX3dlRGxxX1NPMUdHNHV6RFZqZjRJX3BKY2V1Y2U2NC1yRXpDcThYcGduN3l1MXfSAdoBQVVfeXFMTU9MLTkzQXJPWkhsUmNVdVQ2VmxlbjhWWW5MN2k3dmZHSUp0STJxbXVWcVJuMHNNTEtMZjl4OU1ZS1lOZHRyWkhiTk4weW10c3E4UDJ2N092NmpYemhybjlUZ3ljWTJESU9qZDdjZ05GRzlxMXNLeFcyekt5aTBDOEEzeEF3aGlJX0dYR3pKSUIzZ0tpejRadXE4MkZCZGtIc3NCWjF3cWxnMUU2Rzg3SHk2ajNNNU5RbFQ4eGhpSkpIcTZtQU5HdVllbUZOT2p6b25Dc0pvYkhJWVE?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Spain</span>
+          <h3>Mapfre buys US insurer Safety Insurance for $1.542bn</h3>
+          <div class="src">EL PAÍS · 23 July 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMilgFBVV95cUxPMXA4RkNIdUJ6RHlubkdMMWQzMDNKd3lxNUU5Vno3a0pjNkg3UVFnOXpHeXp6czBoNEQyTjNiUEN4TExwdGhIZkw3MDZBUlM1c1gzRERCSzU3VW1fVTNoOWxNeEZZM21nSlNwNTVuN3lZNHRIZ3BhTVZadURoYWs1NG1COGprSmVRQjRRU2tGSHV1NEdQZnc?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Dubai and the Middle East</span>
+          <h3>Nova Capital commits $100m to back a longevity platform in the UAE</h3>
+          <div class="src">Longevity.Technology · 22 July 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMiiwFBVV95cUxQOFhTRTQtaVZnYTA2UnhaSVVJOXZHQ0RQWkRWR09wYlMxcEQ3ZjNxX29hcU9CYW9PZC1YV01FYzFSOUpFZ2VLdzZ0VEZxVXJKOGlEU3RfMVBzMTdmb2hGamZmSXVqVHR0clQ5M2VyNklyYVJIZkZSMEoyakkyUlhCTXk2dlhXMXVzRGVF?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Asia</span>
+          <h3>NOVI Health named wellness partner for Visa Infinite&#x27;s reimagined premium ecosystem in Asia</h3>
+          <div class="src">Yahoo Finance UK · 22 July 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMi4gJBVV95cUxNY2FlNlFIakVYb0dXZ1VfQ1dTbmQ3V0U1MW1fMTlubEU2VEhfTEdabUhWQ25yUUl3QTM0REZiODdieGVmdXpqMVg1ak9ONmxmMTdydTBxajg3QzBheExZbzFpUFA2TW9hYXpSWnZnSnYxYTBoTEFEaHRBY3B6MXd3eWpuWHBEYlNiVmlVR2ZBMWJvTmRqdzBtNEFnZURsenpBb2pCY2N4bXg0R3U2ZGM0azQzTUN1QUN1LUJ0dFI5NElCX2MwVzlyLVJaamlCaHU2YTl4UW5NZWsyam4wTFNJLUFKY2pTd1BlYmRwcldLTEVpZEJ2UmVqaEhGYjNRUHhUNmxIaGd2N214eDJkaXRVRWRrZnQ0M2FiZ3FEVXFnWGdmdUZFZHVqaWVrY0VCcms0ajNsbTZoMDdBanBaeTVaUk8tS2JtYjZOMXEzSTYyY19TWmhiNnQ5R0VRTWNIdkd6OUHSAcwCQVVfeXFMTkNTc01xY3U4TS1qcmZWVWFUQWxtVEhoY2NPdEN2S2NjUDRULTA4bzdVa0tGZk9Ib1ZJTjIyV3JNT1MzRTByUHNYdnp5cjlKdjdGVENXV1ZNY1A5a3FvYUlEZTYtVU13NmxVY2l2WG04S08wNWpPazhqUEl1THRGWGZzcEFrRzVYVVF0bG1fTnhSTTBJMDlGbXhwNk83azNBQnRRRWJkcnhHYVNWdWxZUVkxQzZGVHE0UnpXcF8waFVnaXJxMEFHaklKZHlOdjliZW1sNXRaenBtT3k2VGxPc19odDZhQkc2SDhDV2ZzWE15MDZja3JfTkZlYktIdC1Bb0x3MWMzWGpMYUhLRExKbl9RSnVtVWMzMUNoRDNPUDdWV0UxamZjeTFpZGhKcnFHNW9BQ1pGS210b01jdHRSLURNNHRJcUdYdWMtUkw?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Spain</span>
+          <h3>Vithas acquires GenesisCare Spain, creating one of the largest private oncology operators</h3>
+          <div class="src">El Economista · 21 July 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMitgFBVV95cUxNUkNkRFdKQ2JoUG5lenVxejBLckdlOFlSdm5rd1IzZzI5Y0x2ZUF5UndLRkJaV2J4cksxX2NuRFhtWmxTTEdVR0kyb21fX3p3N2xlc2xDR2xLUHFNR21HYzladHQtU3FHbUtDMUNubThfMDg4dTY0a2JqdjBhTl92MTcyOVVPUEVERlFMTlAydGV1ZTQtRDNBZEN4M0ZvZlhYa1BVLTk1RDU0T2ttWTBfUnRjYmNiQQ?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Market, funding and technology</span>
+          <h3>23andMe settles multi-state data breach lawsuit for $18m</h3>
+          <div class="src">TechTarget · 21 July 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMigwJBVV95cUxQU0xkX3c3NjhkY1pmTjRyVUwycS1xeVZEN2lzNy11czUwb2RCaVlGU0l3Wmg1aVBTNExtRUxtUWduYjJ1ckVDVDVCN3hmN19MVzVES0pRbk5PUUcyWGtPTjFia3hNb091T2FTcWFzb2MzZlVRaW9iZnRxWHg2QjI4eTU3c285U1V3aEZrRlppSHNRM3liQ0M2Ql95bFdVZ1EtZGdoVll0ZWRTSC1BZ0xkVjdDV1RGWWEyTjQ1QnNtMlVuUG5WWXNULUtKZXg1cmFrOUNwRDlYZWliLVBMZXU5dk9mM3UwVmVfSEg0c21HYmxuRTBrUFhLRXRLT3RPcHZtNUFz?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Asia</span>
+          <h3>NIA highlights Thailand’s wellness boom: global consumers are spending without limit on longevity</h3>
+          <div class="src">Zawya / Caledonian Record · 20 July 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMiswFBVV95cUxOMDhRWFJlYWNLNjRtS0FEY1k1SGk5d1ZBQkN0cEszREg2RUZMMmVpMnVyZ0xlX004WG1nUGhVVjFvN2pSTHdpR0RoSERUbmstQTJSXzUwUVRzMVZ4NDU3WV9xUjBucDNCZnBESnczeGs0aFZ3SHdYcVpBYnRISHp6a3V1NHhtZ1BJaG05S0NiNHcxQjZpeGw3VUFoNUY5WXNZUGQtUy1rLXp1b0JCUlRkZzQzRQ?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Spain</span>
+          <h3>Hospital Ruber Internacional named among Forbes’ TOP 25 hospitals for 2026</h3>
+          <div class="src">Quirónsalud · 20 July 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMiwgFBVV95cUxQaVdlQklvUWQtcF9aeWc2eTlMcmhSSWNWUXRCTkxLLTVHNGZBeW01MTI1MVgwbEJCSHdoSzhVWDRpZkFURWFCY3BNejBtSFdEZ2RKNHRQUVBnOUdXbndmS0xEdXNZTEprcjlCZTFyVURYUzloMEVaQnV5VjVZdnNPN3NnOVA1VV9WbWstdEo3Wm0tcndmeTVDSHU2alF3UjRfSXNIaF9YUktIYjRYaERlZzdPNG1xLTJPeU9vcWJrc1JKd9IB1gFBVV95cUxQUmFLUG1PV3JESVNRaXVsVDJQbTBlOWVmeVg2QmZiNmZUczJMVW4yLVZCSUM4dUdyUl9qT3A2NjNqbWd0X1c3MG1DeV9YZmhVZ2hkU2VuZjZWWkIxdmNPU3RQRVFiM00wNVFFcHRPRVh3WW85bHZkcFdTbUJTSGJOY2o5U1FnLXhGWFZmZE9NbXRSR3QwWVhLSjlCZVk4MWpScW1XY0xIejJwZTNNV0hYQUljeE93NE1KR1k4M3BOQ2RUcFdPNW9EZDdua1l5QUtPMFNoSVhn?oc=5" target="_blank" rel="noopener">
+          <span class="tag">US</span>
+          <h3>University Hospitals opens ‘UH Select’, a concierge primary care practice, in Westlake</h3>
+          <div class="src">Cleveland.com · 20 July 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMingFBVV95cUxPU1lSZ2x3R0J5Y0ZRbW41eXV0Z21KVkktZUw5Y0UtNkc5TGRqbzBNd1oxTTFBQktCSC0wZzZGT2JTMEpVaVBKcmZadDE5bGV4YVU0Rzh4aTc5eTJ5TDFCSXZKcTJUNmNCQWNjblV6SEQ0S0dHOUh1T1IyQm1fZl9DVkhUcElwblRCZ1JsTFpVU01BOWlvV3BKcU15MGhpQQ?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Spain</span>
+          <h3>MIR places in private healthcare rise by 14% over the past year</h3>
+          <div class="src">iSanidad · 20 July 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMi4wFBVV95cUxNTG1JcnFKbnV1OWJISTNHUXRraTNlbGdGVVlzQnBTOXNoeThZWmdQam1CMTlaZzRaZ2dfOGhBUTNidTE4YVFnT3dvdHNrQ1hGUkJ4dkx6ckxiN2xlNE5uZXoxckhyYUgyNVlYcDAzNVdBUUxLU243Ry12ZUpIWm02c2swTVA1ZzRUcWZ4ZHEtMllqNG9qX3FJR2FLdUo1UzF2MVhiUFJrak5jb0g4RmhrOHpmS3BLYTVyeHc3TTdkaFVGZWtKcU1mQnpuWUxvTWJGOHQ4VWN6OXFmLVBvV1dQdHFMOA?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Market, funding and technology</span>
+          <h3>AI agents for patient care secure $335m in a single month as healthtech investment accelerates</h3>
+          <div class="src">MarketScale · 20 July 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMiiAFBVV95cUxOaXpKVTRpVVY1QWJNUEk4eFlIc092eE1IT1dsc2J1QzFtNDJpQURTdy1sMkNYNEpQNF85Y2FsT1AtZFJ1eEtXa1NlbTNFakdfOG1zMWRKdTNxZHRrcnVYb1NTSGFjbk44d2FKdHlsUUZ4TUk4LVFiZ21KRUp0SWo3Y2UwZ21FeW9l0gGIAUFVX3lxTE4tOFR1UXpIYXdNd2FyQUpKV0hzc05JMnJER1FVWFREbGpKMm96cU9fbVhxRGhNNVRPUEE2dkNVcGRwdGZyamx3bWpueHJzQWFzUjF2aHlYSHZhZzctaUVzcHhqNlZsVklmZkx0Rm95U1k1V3ZWd0xCdlRaREQ4SGpCOHVBaEpucm0?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Spain</span>
+          <h3>Fernando Campos (DKV Seguros): ‘The fact that 40% of ChatGPT queries are health-related…’</h3>
+          <div class="src">El Mundo · 19 July 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMihwJBVV95cUxORG5mV1B3cWUwZVA5M2lUX0R6THlQQWowQVdyYU5RS3R6TkMtMU1LMFI2UDFlZUgtYnlFOXU1dFJLbG9pbEJKdVB2MFZ0emZXWlp5WFJtaElibm0zUUwtdExLX19ra195ZlJNd1VoZVdKeXFsalFBbkNwLTU2aWU2aThCN05JUDRVdllBMDd4LWoxSFdyV2dYaG1JT2hIMHRpeGRkQ1FhQW5YUHBqaXZOTVczb3NBN2lUdHhZUzR3WUN2QTRpbklSeWtiMFB4eXUxcy1YNGltNEVqMEctc3gyeFJ2YmZXeGNRQkZnUlpxYXlTa0JubEJ3Q3lKWVpmVUZVWmlIamZLNA?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Spain</span>
+          <h3>Private healthcare reinforces its commitment to digital transformation through IDIS initiatives</h3>
+          <div class="src">consalud.es · 19 July 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMipgFBVV95cUxNRXR1SnBEM1hVMXpDTHFXUXJwQTFRTEdCTm5GUnptMGxFekwzS01DWXpvYzdBVTZUbnlGLU5NWGRZc3g5QVJaNTM5TTJIby1DZG1XWVRvTXo4WGNzQk92WDcydGE1ODZxQURuWlo2VUtmVzlQMU1Ma2kwNXFURHk1d0ZKTi00SW04Vm9kYXJtUF9CdF9kaTNmcGcwMFEzQVZjcFRJS0hn?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Dubai and the Middle East</span>
+          <h3>Aesthetic and wellness treatments in the UAE: Novomed’s approach in 2026</h3>
+          <div class="src">Menafn / Khaleej Times · 18 July 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMiygFBVV95cUxNdDBQVVEzWllPYXBUcHRxUW0xRHRfUWUtR3p0VnJadGF5NEpESFEyRFRWSzVCeFhrWS1iZ2pzWExEQ2hZWUIxQ21JVUh3Yk04RVhOY2NMYWZnVkN2WWZwNXRraGxPU0FkTkFMYlNRZ1JJVE9rd1RGTUlGbWVaVFV1VXNFaGZ5Zm42eDlKdEUwRmhYMl9MMEJJVkpBcEx0aWEzd1lvV0dWakJJV25vMURkWkZBelkzeFNSS0lXN18tYm11M2o0NzFfV1ln?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Spain</span>
+          <h3>Clínica Bioever launches the Canary Islands’ first Executive Longevity Programme</h3>
+          <div class="src">Noticias Fuerteventura / elDiario.es · 18 July 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMipgFBVV95cUxNN2dXQTNwMTBGSXYxOUw1WDhvVTk2Z2NIbnROX09NTlI1ODVuQ3laTHhnWWN2d1FLaDY0TVBibFBDajgwcVl1Vzdqbk5GNWNvNWtBZ0dsZEQ1eEZHNktnYXd0TEd6TGZ4dEZJVmtRRmdXd2tlY1JYV0VKMkJLMEozeHV1OTNlRmtaRmdsZ1JOd0FTdktKb3NVQ2hFOEgxTjlhNlNkeWpR?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Dubai and the Middle East</span>
+          <h3>Mediclinic City Hospital reaches 100 kidney transplants in Dubai</h3>
+          <div class="src">ZAWYA · 17 July 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMiqgFBVV95cUxPOTJHU2NKZElIamZzd0pOeHBfcXNSZzRGVi1XQ1h5bEtISkdfc09ZWDJNbXRGTDZ1blIxM3ZEWlA3Qi11QWU1WVAyVGJQZTQxV1ZMdU1SUG54WkYzLXVUUGJWU3VhTXdSZGJhZzVoY3BfSFZ4dm9ybHptczhKT1A2YlZKUVE0cnc5T2lxSnI0UEJkUnNYUHBfb0ZkMU1jaDRUa3ZVa2dGakMyZw?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Dubai and the Middle East</span>
+          <h3>From the Arctic to Abu Dhabi: how extreme sport forged a wellness empire</h3>
+          <div class="src">Streamline · 17 July 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMikwJBVV95cUxPZGdwTjctRzBRcm9yZXlCMmF4c3QzZWk2YlBLQXhBUFhobmZUNy1maTVreXIzankxWThfVktNeXRIa2lwSzRHZGtGOVFZZm5SQlgyd19Jc0Qxdmw0b2tiZGI3TGVoa2xVZkVranRtZ1BiMUdjYS16MlFvbEQxTXA5d2swb3I5VWI2STJXcWVxaE90Wm5rWVplZm5McFp5cGdJVVRUd0hvdnhKZ2lhTHcyMnVzM3RUeWM4ZVlLdG8yOFN2MllHME4yT3FZUHhpVjd0UXYzSnkyV2ZHV3F6d1FtVEo2U19KVk84eVQ0ZmxGNUdpcDlGVEotdDB3R0N2ZVp5NEFodXF1Y3hZdm16a2hJdXpzd9IBpwJBVV95cUxNSEkwMk54Rl8yRU9hOUFKdUwtSVhpbE1wODlKNTlsOEk1dEtnaTh4bVJiV3hXV0EtWDUxQXdoUVBqemk1eEd6R25nZk9BR3hNRzh1YmlSa0ItcnVUZDMyZWd4eVpHRWZhcXh5bDMwY3hQc2hINFM3QmlZMWtSSXg3b2N3VTQwaGNwNkRNR0dNbmNqRDNoaHQ3T19pRnpkZGhpMmwyTUFfek1xZmdhdEdQbE5XQkZGNF90UWY4NURHamhKRzBWaWs1M3c3MlVEekFjbWQxWmc4eFVkODJPWnJVTGV1WXFjVUlMWXBOWldOd3Z5djR1cGtJelVNWS1LRGdIeVRlaS1wd28zN3VObHl1T25DdzVxUGFRbDBoZW9vekt2VDl2VWpV?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Spain</span>
+          <h3>IDIS Foundation: ‘The draft Healthcare Act is a direct attack on private healthcare’</h3>
+          <div class="src">Cinco Días · 17 July 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMijANBVV95cUxNbkV0TGh3ajJkS1A0TFl6YXpucnJjakxsVDEzSFdWQUVRM2FiTFRxbGNmdFk4aWNFelZoVWNtTzRqcGptV1h5YkYyd2lRQUkyLURjbFlpRkVvODdHSG93ZF80QXhLS2ZHblFUQUZRR0VVYTFScEhXVUgzSkF4YVdiSjFuUXVZMm8waDltWHNublhORkFWY0pxYnE3VnlDMWtWSWxPbmtlem5TNnhZQ1BWaktITURTdFNTdDQ0c1pyN3B3MmlHcllmTXZvZHVtYkdENVdhUEdza01Sd2xPcFNVYkp4TlZEdElwb2VLa2JRVTFMYXE3bEt2RDhRb0dFQWxBX3JpOFJ3YTk3ZnE4OF9samZSaXlIajBxVFQ1cThCME1aQjJYQ3I5YlpGRUR6T1EtU1Jzd1JYZkNhbHhMRmhSdnMzQWhRVkdjWVk1dGJ5Z0t5TlJVeElQbW1XOWhzajh6YVpsYXZyQXhIWVVaUmJZTzE4Z05hSWhHckZaZ01INTc4ZHpXNzgyanh6a2Q?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Spain</span>
+          <h3>Private vocational healthcare education consolidates its rise with more employment and clinical practice</h3>
+          <div class="src">Redacción Médica · 17 July 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMikAFBVV95cUxPY1B2eVF0em5YUzBIemFfZXl1UHJ3SEtEaVJEc3pYU2hrVGFTTE1RT0RGR0pRS3VrTjNhc0N5am5OTHU2SXU4MVhDV3BpSTlHY2M5dnhxenZsQURzS1NIM2dzMWZwTmJfT1V2WmpBS2JIeFZfUUNWektIMDg2TVBQLTVFT0JXY1BKNHpVbVdQcVg?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Market, funding and technology</span>
+          <h3>AMA launches a new SNOMED CT ↔ CPT mapping initiative</h3>
+          <div class="src">Healthcare IT News · 17 July 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMi4wFBVV95cUxPNW4xaU56Z3YwX2dkbTZtblZhTzZXZDB6UVp1QlQ4a0hnRm1WdnVvelBSTHJ6aWVMX29hRUUyWWJvb2d0U1ZhWE9Ddkc3LVNlS21sRFJpNTVPOFpzZWVsU3JKWEZORWQ5X1d4RlNXSm1iSHRDZENoLTZVZUxXVUJzbTlCWEo3U1Y1QUNNc0NmNkxKaThnVzJRUVBUSnZIMXFpTTNlNUZvenp6eWRjQnNkSHlUX0ZxVFczSzNUNXF5Rk9HQ3NobTlLeWJ1dHIyblRoY3dxNmJ1ZzhQaUtkdzBKUTdqaw?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Dubai and the Middle East</span>
+          <h3>Dubai Health’s Youth programmes aim to train a new generation of healthcare changemakers</h3>
+          <div class="src">Zawya · 17 July 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMimgFBVV95cUxNRXJ1YXB4Nkp3dnJtdlBaTUYtWGUzcEY1M21IamxMMGFlNlBXQ0tVcWZjM0JKWU1zdVhkX1QxOUdFdTR1UmQ3X1BLYmxGazlPYTFKSUNyNTlVMVlhYjM5ckFvaUljSUFJUXQ0T1lkeVI5bkJBa2JhNnUzVkZlWmZBSHQwak9vOEpEOXZuMmRjT0ZIb045dHVEMDZR?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Market, funding and technology</span>
+          <h3>An international group of researchers says we are focusing on longevity at the wrong stage of life</h3>
+          <div class="src">ScienceAlert · 17 July 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMisgFBVV95cUxPVTJVVThOcGRJNWh1Qm5QVkpiQVZLS1V3R2tFLVpnV3lJNF91Z0RkcDNLQllXT1FsVmZuRDAwazRBRzlkbHlhYmx2b21STDJUbTd5ZnBsVGZNcnRZS1hqMnpnNnI1MU1Vc2FtU3RMQWZMVGVnSk83Y21pWHdHSkZqdEVSSzVMOTNHTW40d2d5Nm1FUWNoX0E3LUlVTlFWS2ZlV3o4MFJPOGctQmIybnU5NGJn?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Europe</span>
+          <h3>Healf’s Gen Z brothers lead the UK’s £97bn wellness boom</h3>
+          <div class="src">The Times · 17 July 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMioAFBVV95cUxNbXNPcjFaVHFQNkhmQ0Z5VHpDdjFfR29SY0VCXzVaUm5sbjFUN0w2VTVLSG1HMTRpWk9xRU5CUEtvbzc0X3R5RXRmeHBpQU42NFRyRDdGOUF4TEI3Ym13M0N2YTVGMThQMi1RaVc0cHVrR3ZUNVV3ZVhlRmNrVHI5Z3pKZm5MUlk0UXNTRmI3QXJrcjByRV9uU0JRZUtKTkt3?oc=5" target="_blank" rel="noopener">
+          <span class="tag">US</span>
+          <h3>Bunkerhill Health raises $55m to put AI agents to work inside hospitals</h3>
+          <div class="src">Fortune · 16 July 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMisgFBVV95cUxOdHYtdFpUOC13cllVaEJOcGV5Z0gxN1B3MWFsTHNHb2dLS3VPQWxPWHl3SFZNdi1YZm5MNWFvSmdfa0lzMVRpNERiVE9jNHp4QzZaM1dRblhoTEpqRExicWc0ODlZd3plWWIwRzVIdlRLSElWa0t3azhoQlNheFNaNjVva2JEbTRYdVQ3VldySEhEbUh1T1BTTlRWZ3BuLVVka0dfUjl6T2ZGcVF2cnBZVlV3?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Dubai and the Middle East</span>
+          <h3>Aldar and PureHealth partner to build longevity-focused communities in Abu Dhabi</h3>
+          <div class="src">Fast Company Middle East · 15 July 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMikgFBVV95cUxOTWRWaTlrcWthSE1WNVVXYlBQTmZvYXB2SXo4aHV2NnNfU1d1S1pxcnRJazVPakNtT0FlcFJubk9aX3Nadkpib2JhUzdXV0FRWklWaGY4SUF1SnZjLWdUSGxtOG4yd3ByMHFVbGF3QktxbktXeDZtSXloZmtqdHdUTHNkRDJyQ2FUcUV0a1BUMGIxQQ?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Europe</span>
+          <h3>Neko Health (from Spotify’s founder) raises $700m to take its AI body scans worldwide</h3>
+          <div class="src">Streamline / Fierce Healthcare · 15 July 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMitAFBVV95cUxOazVpeDdSQzROa1dEbGFDYnpqRHFycXJFbk1ZUWNOdTllTDdXTFBqTG1Zb0ZETzZKU1JzampDQjhac2owNXo1QVhveDhVOHpxR0QyWkllQWlJWTVGc3FFUGpFN3paNk4wVG5odURkRkx1OGF1OGJOX2E4SXo0cndlWXBOVzNhZ185Qmo4TTVwQ3BHcXRGY04zYzVwQWxCdkxPbHFZWlJGNnlhdzVvdTh2TVZpSkg?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Spain</span>
+          <h3>Hospital Ruber Internacional named among Spain’s ten leading hospitals by Forbes</h3>
+          <div class="src">Quirónsalud · 15 July 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMickFVX3lxTFBYMjlOZzdLbi1jOHlITFpJMFgxY3JBZFFaS3RWVVAzODI0WWhJeWN6b3lvT2xnYnl6ZDRhNm5GS0sxRFBiWFRUOWdJMmF0SktEalI5OWhmM1llVnhLRmJOU2l2SGExMklXRVhKMUd2RDlSQQ?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Market and funding</span>
+          <h3>The new ‘wellness reset’: inside a global $6.8tn shift</h3>
+          <div class="src">Today&#x27;s Traveller · 15 July 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMibkFVX3lxTFBfdkVVeWsxZXlQV2NGX1ZJQmZjaW90N2xCNkExNGV3SEtEYnY4WjA4WHVSV2VFVHBHd3Y0LUNEcGRrX1lUc2RNVFc0YXI1UkhsQ0l1Q3ItYkpWLTBPQUhLbWxlYkxKb2EycFMyYjh3?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Asia</span>
+          <h3>The longevity economy</h3>
+          <div class="src">Khmer Times · 15 July 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMihgFBVV95cUxQb1M4TFBhOG1KaUNiRW9hbnlzVWNpV3EtaV9ycFhGZVZpVnNfbk8zMU9ZYXBjVmQzdEd4NmxBeEFuZmx3OWQ4eV96ckNQUzZmTHFkcXdzQWFzMHdnUmlOZFhwSlUwNzQ3Qm5DZUpHN01xNElSdnVRVFp0Q1ZubjJabGF4ZjVoUQ?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Dubai and the Middle East</span>
+          <h3>Riyadh debuts its first luxury ‘brain wellness’ assessment with the launch of Brainify.AI</h3>
+          <div class="src">Yahoo Finance Singapore · 14 July 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMixAFBVV95cUxNY0xoVi1YTDVvblp0SS1xMjZRd1VDdVYwTTU5bFBhbEdadlAxVElmQ3pzWkZ4MUtKeGNIOTNJcDJYTnhIREhQSlJCcnFHYXM1QTFXbThoa2w4OUF5R2s5OEFhLWhud1V1bGpLeW1aWUt5NG5ERE1OWkhldkU0dW04cG52emwwQzI3NU1oS0dXNmhhaEtBT0s5cWF3LUxNOFc0U3B6Zk5ZVHpxMTF4ZWNjSExsWlpBemJsYmdlVHhFWFlvYUhh?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Europe</span>
+          <h3>The EU faces a shrinking workforce and growing care needs: its population could fall by 12% by 2100</h3>
+          <div class="src">Business Review · 14 July 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMiwwFBVV95cUxQcFRjY2cwREZzNEJqaTdSYU9HOTY2VWd1U3BON0RQZzV3WE42eVdIdEsyZTNtWmhfbHAzUnVmemp3UGtRT25ackIwSWZxclc4Z0djSnhrTnhzUXRaMmhaMTNmY2ZDNW9DcmFQdkdnZlY0b0dfdGxoNXA0N3MyczJ0UzB6cUxsUldJbmNyM1N0Z1QxY1g5RU1CcFpfOThfd3dWYkhLTHJaVGc0YnlRcG9ZTVJXOTNDMjBVd0E1Z0t3ZW9kYlE?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Spain</span>
+          <h3>Adeslas launches a space to promote healthcare within the family</h3>
+          <div class="src">SegurosNews · 14 July 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMikwFBVV95cUxQN1ZQMktTQXhkZkd2NWpfVTRXVmFYeDFZdWhUemtSbkh5aTAwc3JVZ0loWW9GUnVmMVdSaHRKLVZsY2VoemNycGZqVkItQS1HVklhSkNHVGlGeHpVbEpMbW5HcG5Qc1l6N2ZXMThVTGQ5S084aEYxY25tYmRKSDlLZWxzZGNYOEVrcXQxaDE4Nl9iZkE?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Spain</span>
+          <h3>DKV and Sanitas tackle health insurance inflation from opposite ends</h3>
+          <div class="src">roams.es · 14 July 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMi4wFBVV95cUxNX1FSUnBFUnhtQURvajdQbUwxOFg4Z2ViSDd6ZEt6NkF0aC1WWmh0UjRXQTRGUV9VZ2FOM1dlRXJoVFZwemttc29SQ1ZfRlBRaGNkTU1qQ29NZkR1V3NBLVViX2NOTFZSSDk1Ql9aRjFISTAxUVJJeHl6cU1DbXBRMzZoUVhPQktHRVZ1UEtaWUZkUTlnUnVVZWdCUEtLWWNac0RlOHlGZkdobjJGemtnRmprTzhhY25TNzVOZzRTcXhGWjY1V1ZHVnlEVnczVnRGcEhTS00yLWU2NlJqenFiNHZTNA?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Dubai and the Middle East</span>
+          <h3>Longevium opens three clinics in Dubai with a new clinical model for healthy ageing</h3>
+          <div class="src">ZAWYA · 13 July 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMiwwFBVV95cUxOQVI3UW1ZMlNsSEJ5OWtFc3dYVFA5VTJPMWJCbEIwOUJYOUpCLWpBTE5zQS1IZUdLU2RkOHJjVk45bF9JMXdGM25NczRlZmdfY0hnR3pXMHlvSTl5UzBBdXk4SmJ1dUN3ZThTV3pfd3puQkkwdWdpY3kzMWw4SnhQTG5OSlRIUzBFaVB4T3d6YkZZVHRoTjJyei1PQkIwNHhsRkJaMmxGS1JBcnN3cnM1cnRPcm5YVXpXSmhiZk9Rb3RLTlXSAcMBQVVfeXFMTUZ4RmhzdTJBSkhRTUd2YV9fN2JpV3JySDVhT3NHVFZoV2JoRGRmUF9lZkp6N1pra2F5dU9KSFJXRHRnWGZVZm1HY05NcVMyYTV1MmJWMmFxeVBONEptdjdGSFhURlF6VnEtaEdnaVlXMXVpNGFoeHRadl95dnBBbGphMmpWTFFFaGhabjQzd1EyLV8waDF2YzkwV29ROF9BbDJ1M3JMUy05aGI0OTRCVVVrTmE5UXZSOTJHNGpZOGxRazdn?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Asia</span>
+          <h3>Opinion: Hong Kong can become Asia-Pacific’s longevity hub</h3>
+          <div class="src">South China Morning Post · 11 July 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMitAJBVV95cUxONElJYk1ZVU5OQUJJQ1QzQ21Iei1rc3A3Q25FakI5VDFtM0MyLXZoR3lEVXVkZ1J3dFY4UDBZVVpWb3IzV2Q3RGh6eVB4SkUzazg0WG9Ua0FPdE5kU2lYcjZRUXVtVFRxZWM0VzR0b1NXU1JkUzU1a0RmTGJDNVROcmNURkZ3eUZrekk1ZDZtSFNobXJZRFBGSFFqdHRTaktVT0VaLUNId3VySVlONXM0MFIwX3A1SVlPM0FwQy1ud2h5WS1idWN3Tm9FalJXQ05oRzNTbDRHUWgwb1Z4d2t1dHZyYkRJWi1JbHIwTjMwMGkzSDZWNU5HSUFPZFo5QnEyQ09aVFBseG1ibkh6OFVqUnFLdDZNUENmRl9Qb19wak5Lb0pSUG8zaDdlU3o5NGp4QjI5bw?oc=5" target="_blank" rel="noopener">
+          <span class="tag">US</span>
+          <h3>Northlake Concierge Medical Center announces a boutique Class A medical office development</h3>
+          <div class="src">mykxlg.com · 11 July 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMivgFBVV95cUxQT3F0TjJhUC1JQU1PeHpua0hoM2pmOGpKZzhVaGFrNFVIYzNZSWhETU56TDBZTGVNaUJaSDBqS0RadXQzUF9Nc1ZHOENWaEZUMmU1S3hxVTE4RXlySGZwSmE3dFcyYWw2b05tLWFsOGlJbHdpS2VnNmpKMVpqcld6amFvbzU3WV9jcUt5VE9fVTlKcHdRNVMxTkpJbmNhNFJ4cEh0dEdxR2dCMTFGU29kOGQ0WjR1SWMwZXFqQkhn?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Dubai and the Middle East</span>
+          <h3>Why the future of healthcare in the UAE depends on ‘connected intelligence’</h3>
+          <div class="src">Gulf News · 10 July 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMiiwFBVV95cUxNZUFFN2laUEx2eWxqZXBjVVd4RnNyYWIxd0ZjdGJOUEFaTHZnWUJYY1dySnFZVVBCUWR5NFBGREZYdXF3bXM2TEV5ajExc3BzTDJ0emF2TVBaMXdBZE9CbnQ3MFFmUUV4dTJEM2V2SUFFLVJqT1A2UGFWNVF6OGpLZUVDRWJJb3FZYkkw?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Market, funding and technology</span>
+          <h3>IKS Health acquires TruBridge in a $557m deal</h3>
+          <div class="src">Fierce Healthcare · 10 July 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMi2AFBVV95cUxOaDNsbE01NDVjNURrQXNXZVh6dnhYVTlzYmhUUzFSWmJRQVliZWJoWEJ0aC1Xbm40WlNJRmFteVBTaWF1aXV2djRBUE9Ra0FDZTE0MG1pdmdxN1FuYXpwbEd2MGoyUkZIR3BhdEtSQkh0MW1yVTBPUncyb2JLTzJuZ3RuQnoyVUtrWWJ1TEsxNk43LWhTcXRXSUZDNV8xblYwNFl3cl9zeG0yR29NYk5HZkZnRnZYUEdPdDB5ZktSRjQ3QTRXVDNBWDFERW9mdmFhWFo2dmtTYnA?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Dubai and the Middle East</span>
+          <h3>Al Nasser Holdings (PE) and Metamorph launch a $200m wellness-focused investment JV</h3>
+          <div class="src">Enterprise AM · 9 July 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMibkFVX3lxTE1hZGdPWkNjZXEzVmlUekR4RnRaODc2ekVaX2ViNEtPM0pkY243ZEFtaWJ0Mnhod21PS1JWRVVCRGQ4VWR0M0NuNUowWnNIWWcwZjRyeENCa19BQmFrZk5MUXRJNlBhR3lUOUNzbjZB?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Dubai and the Middle East</span>
+          <h3>Saudi Arabia partners with the UAE, Maldives, Seychelles and Oman to boost global wellness tourism</h3>
+          <div class="src">Travel And Tour World · 9 July 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMinAFBVV95cUxQQTJ4WEdXc2JMcWQ1WmJjVVlyOXlKZjgxQzI3bjFlWExTcDkwaGd4amxfNTZ4dHpuZEVzRVpvUTI0bUdIdXhQODZrbWFndTZsSTQ2Qmo2UktTM3hvNERDVmdpWV9CdjR1b1ItbFc4SWlVLTJvdUsya0FGbkRDVG5RcWZYM2p4bERmMVBCcGdvdXFvb3BFYk44djZqS0s?oc=5" target="_blank" rel="noopener">
+          <span class="tag">US</span>
+          <h3>Concierge medicine expands far beyond primary care</h3>
+          <div class="src">Medical Economics · 9 July 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMioAFBVV95cUxQWElqOTRfU2V3b3hTMGVNWVBLY2dxeEdrcGM0Q2dJS0Jkc0UtWl9xNTBhY0lZbnRMMG9HcmM2S3l4NzZUZ3dzYVo1eU1MM09qZXlRaFNZa0xVNjdTZ1V6Sm5fUHU1MVE5TGdKeXZBRFpQYkhzZWMzeldDR0dXZV9JYlZtS3MyQUdmSG1hYlBUd1lhWngydEo4eEVleTBjRC1n?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Market, funding and technology</span>
+          <h3>EHR market cools in 2026 as leaders pivot to AI</h3>
+          <div class="src">Healthcare IT Today · 9 July 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMie0FVX3lxTE1heEZWOXZHZllqZmtHNGx6SEdSUDIwR3JxTmZtd1NEelFXQmk0U09vQWh6alRGTENkaDdjc1ZfNlprbEN1b0o0bm5EUS1WMU1MbXE2MFltb2NEQzAtV3FJMzBvVjVHbmhzTV81bWFMWUl4QWstZGszWENXUQ?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Asia</span>
+          <h3>Asia’s super-aged societies fuel a boom in high-end longevity clinics</h3>
+          <div class="src">Fortune · 8 July 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMibkFVX3lxTE8zVHVHMU40VmRzU09WYVFGRDJtQTZiVkRnMVFsNk9TNnh2d2ZSd1gtQ04wY2NKZWxMczB4dkFidnc0X3RvTVIyZEI3NnRsN011NzN6QUNHZjJ1Ulp2TmdLSGE2MDNKYURRNDlrRU53?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Europe</span>
+          <h3>Rocco Forte Hotels partners with SHA Wellness to bring longevity to European luxury hospitality</h3>
+          <div class="src">Travel And Tour World · 8 July 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMid0FVX3lxTE9kR09TRjlWQ3hhTXJsdU9rQkpyYktBNDhOYUZ1Z0dwMWY2eHhnRi1OaG8wci12SWdHWXUteGt3UW9aalAxb1MtT1VWejQ5X21IX05sUEhCWHZDV2t3LV9aLXJNOVhpbWhYNllGaGV5WWlOcGFTbVdz?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Europe</span>
+          <h3>Longevity capital moves to Gstaad</h3>
+          <div class="src">Longevity.Technology · 8 July 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMigAFBVV95cUxNbDJ0SGdEcmFPMDdRZnE2OEVWeFA3UUxZME9xU0pCSjBNWHFINWJCa0NYd2UxSnBUUFV4Z0xta0FRVEhJbUdXUnJnUmgyaW5JYlZOdHlzTktuQ25IYU9HendVMTJ3T2ZDd0owZmQ1amtnVWNad3MyVlRqWkFubGd6cw?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Asia</span>
+          <h3>Sansiri partners with VitalLife to bring hospital-grade wellness to Phuket residences</h3>
+          <div class="src">Thaiger · 8 July 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMikwFBVV95cUxQRDlBZFBybEREa3lQNUY0dEt3NUlxM1pEOTNQZWRtN3JrcUhvLXFqYkdIVmZzNl9YUGZfUnVGX1o5YkNBNEFSN2F1N29JUWxsR0xLMW8xanh4R2M2LUlqXzFpbGM4Z0ZSZG1PYXNMZGlRSEpXWTE2RU9fTkx1dzc2MjZBWUZ6MFdSa09mczNFVjZzRU0?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Asia</span>
+          <h3>How Asia is changing the meaning of longevity</h3>
+          <div class="src">Tatler Asia · 8 July 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMi_wFBVV95cUxQTk9aanZ3MEdtVHZrWXpraURuT0kxSnVjemhzcTlYUG16ZVNjMXhtMTgwMUhVY1c2akp3QTdGZDFiSzlMMXhaWFNLNUplYVlsNE1FamFMZ0ZoZk83MjcxNkRIM1lseU9GVHQwSlVzSzI2bmU3WkFGeWk4RXB1N3h2X1Z0Wk5xSzZrYmVxU0JSNHZpSlk3Wm5jdGRQTjAzS2dGcXRvY1d4LWxLb3Vtc1dEQ0l1ODJLc0lqV1N0UGtrcDR3ZGRRcE82Z1laX1hpMWRGTlJsUHlYbThXY2NaQk1FQl9FdXZpNVV1NGxLZ1Jnb1U1ekZVSnRhS01DOHRPX1k?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Market, funding and technology</span>
+          <h3>Beyond the individual: an FHIR-based Family Health Record (FHR) framework</h3>
+          <div class="src">Healthcare IT Today · 8 July 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMimwJBVV95cUxON2lFMXdtSmpac0h2WmNWd0paWFBxTE5EbEZqaXhCS3NiMWQ2aUpvY2QxOEdkWXlobE5SblU4bG9IcVRkSlQzSDdWZEkwdHRaOXJKYnQxX2xRNjZqazAyMUNzZXRzRXZneUFVeTFIVlgwbEF5a2gzaVdfVnRLdEZVM2lCcURTWWlYeXRTd2VjeWpXU2hGeWwxTlhQX0ZMUEg3OHFPTjBnai1tWU1RWVpnUlBwTE1rdWwwUWUyOE9yRDVtS0xOXzVVN2ZOcVY1cG1uMUtnc29KQ0xld3NKaUdyc0c5NWk4Z3hUZHNPUGphM0xSWnJxaGEtUVhULUp1UjhDeGlSTXlfUW9ibDhzb1JZMG1hTmNqRVNLUmFv?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Market, funding and technology</span>
+          <h3>Pearl Health raises $110m to expand its Medicare-focused AI platform</h3>
+          <div class="src">Modern Healthcare · 8 July 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMipgFBVV95cUxQYV9oWllXaDNIS3k3dVplNDNYYTM0YUVPSXBnVWliR00tZFpWbm5hSHM0NzA2RkhJQVhhTlBsR0lIS0lacTNUVVhsZkNZMVB4U09pckRiUW15U29yOTlvbUN2WnVyZENwRWlsVzAwZXBkS0YwQXRNdVBIUDJ2LUh0a1BxU1k0ZHpuNmJuc180bTNZUEN3UWNHZExMcWtIOERnSUtQamVR?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Dubai and the Middle East</span>
+          <h3>Red Sea Global announces the opening of Six Senses AMAALA</h3>
+          <div class="src">Sleeper Magazine · 8 July 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMi1wFBVV95cUxPYm1PYlJxa3RQRnNNWmh1VXJyTklxWTdSaTF2VEJaVUNJcFdKUFVJQi1ZYTZ6RFBmVEZVM2tESGxOUklSckN6d3NIWXFRMzY0NHEzSFBFOEE5VVJWSnN5N1g2WG5LOXZEdDFCdUUzblNGa0Y3Rmg5YTE0TGRyYXVHWVBSV2N2ZU1ndGgxQVdNcjZXTG1wN0FMNy04UG5sZVNSMEZZdkJRR012b1JqcHd2TmV3X2tVdC1VNVROWkp1UzdvTUY2MHgzaDJaZ3lrRnJ5LXNZdEtBOA?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Europe</span>
+          <h3>Funds managed by Blue Owl Capital complete acquisition of Spire Healthcare portfolio</h3>
+          <div class="src">PR Newswire · 8 July 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMibkFVX3lxTE5zUGs2S0Vkd3c5NnIzcXJnb2dxQW1TSWFrNW1Ic3FCVGpEY3Q5S1FGUjgyMWNRQ2xxdklxM0FSdDRDR0NhdGdtbVpHVWlHZzBMOGJqZEtQSzJqbjdia3lXN0w1NHRYaVg5NF9MMmFB?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Asia</span>
+          <h3>Japan connects with China, Thailand and beyond as global wellness tourism creates new medical corridors</h3>
+          <div class="src">Travel And Tour World · 8 July 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMiwwFBVV95cUxPM0dkeGc5clBmVE1SakQ2S2hOOGVuMFFxWHN3UllYVG9taTl3YWFaWWRyTzc3Zk5WZVJ1ZjFRUDhWcmxybFdKbGNkSVozRXJyUXBDbTlKYTZEVDNrZ2E5Zm1lMzI1dF9rMzFrRGZ6THhOc3FhZ2djUEVpYm1GQVJhWlQzY0Y3dHFVRHJBN2VfM0FDZ3h4cjYwbEg1Wml0Q3RfM0VSV19UWWFKQTdOUkxPemd2UUZ2dW1hSjE3cm5hUFM1eW_SAcgBQVVfeXFMUG1EemFnckNSM2tKUHFaUkNHSkthTUUxSlp4NWtGZ0xDYm04V2o5ZzNxWDZMVm9XTEprRDBEbW1RLVJ0VXExVmhpakllRFdETVpORmM1eXNNS21mS2s0OEhacHBDUEZSdktHZldRNkNOTUl1NUFGM2RxUFJuQm9HRlByUjRmYjQtbkRZSUVBMHl0bFhTMEhTcngzOFJlUV9kVkhnS3JBN0pDZUZQRUZjRXdyWHBEVFhNckxlbmF5ZEE4akJJZzkxTFY?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Spain</span>
+          <h3>Quirónsalud Marbella advances a new preventive medicine model with personalised health checks</h3>
+          <div class="src">Málaga Hoy · 8 July 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMiugFBVV95cUxQdE1ZbWRVSkxqUnRQOFhpSzI3M09YelZzU1d4WDM5Ykt3LUhMUDZqR195NV9GcWd0S0NMdFozLTJhQlRhQ3poRVFUNjlTS1REQVFybTFOVzc3enV0NzFWQ3lzNGlYWjhScWVxOHNEb0RVUFRKeF9BX2l0YUJ0Ni1zbWhYLWtPRC1rNFFsNmlWYnNpTnBlaHFaMmI0eUVBMWVmX0hLdmlUY1ctQjVqOFhoYmNPRDZjbm1oeFE?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Dubai and the Middle East</span>
+          <h3>Nova Capital and Metamorph launch a UAE-led $100m wellness and longevity investment platform</h3>
+          <div class="src">International Business Magazine · 7 July 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMirgFBVV95cUxQSTdEbk9NMFRQcXd0aF9jLVptX0JsQ2VuLWpBNlUzOXNGZ0VKanVoRWRzT0ZvQVNLQmRmZHJUdU0zVUp6UV9UUWlWSVo5eGNpUGFSaXQzM2JhQ2dXTHp6Z2hldDAtczVOYmh4OFJ1eGtfRWh5anJ0WE1veXBYQzgzWFpqUGE2dFlnNzRmMGxlQS1tNDRlbnA2VXp6VmprWHFzNkRxV2Y4YjhxZ2NuVHfSAbMBQVVfeXFMTUktci15c1Bzbl9obmMtWm5PYmQyaWF4WVpkUWJPOTRxbjNCQVFhZ2g2MDg3bFNqSXY3OV92QmtseHVERkJ4Q2kwd19hTXoxdk1ldXdaS2pxaDZTaVBFT0l0RDNubVdpS2xVajdoZ21wUEs0ZjRLRjVWWkZ3NW4wcFRORHo4TmJ2OW4yT21NQlVnMmhqSmlDV0dnaUlsanFWVV80ckpzZWRiUkFORklNUnhVRTg?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Europe</span>
+          <h3>British HNWIs spend nearly £10,000 a year on longevity treatments (AXA Global)</h3>
+          <div class="src">Health &amp; Protection · 7 July 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMijgFBVV95cUxQelMzbzVnMUZmSi1sQkFPTHNjMTVhYk1jWF9HWU1TRzRyZm1Xc21nVkJSX01fVW9YbThLUFJtSmJ0SVdEYlNYYVJtbVZGMnUzdkROVXFmaDZJTHVyRi1MMVBYNmJRVmZheXJOVGNIMnNSQ09FdGZtWG1Md0V5cVVCS0d3aVlTZEZnMHItUl93?oc=5" target="_blank" rel="noopener">
+          <span class="tag">US</span>
+          <h3>Next Health announces its first Longevity Summit in Nashville, featuring leading health experts</h3>
+          <div class="src">AOL / Next Health · 7 July 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMipAFBVV95cUxPdHd4cUpsZml4Ylh0Z29tcWdKYkRxQlBmYVlLLUVHajQ1NV94UWZmbkNBV0dOMkN6WGVoVTFWTS1tcGtEUEc0cmMyUmJSUzZMeExmZjJXSUszTnJkRXRDWlRSZDVGelVCWDRNUFdOdklhd3NXc195Q2VfbXEwV0o3Q280aXdhYlRqSGNvOFJjZm9DcDM5LUMxMy1NYWhIVEplaWFDbA?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Spain</span>
+          <h3>Double crisis at Muface: legal action by private doctors and stand-off with trade unions</h3>
+          <div class="src">roams.es · 7 July 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMiogFBVV95cUxOWmJ4amlnd28tUFJ4SFhVbU1nQl9YZGVSRHJKN01KTWt2ZWNHNjI2eld0aVN3akhzNDF3NXRfQ0RjZmF2TDNqekh4YXNKSi13ODV4Y2JlNWQ5RW50OUF0dDIxVnZKUFdBbTNiNTk2REc2bU9RNElRdDhla2IzTW1JcDJjRmJORW1rbWFPejVTeFZOa1QweXQzSGtvLXVtNG1pRHc?oc=5" target="_blank" rel="noopener">
+          <span class="tag">US</span>
+          <h3>The future of healthcare: why subscription medicine is gaining ground</h3>
+          <div class="src">HLTH · 7 July 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMijgFBVV95cUxNNjJvdkIyVmlRZU9GRmkyZ2tjaHAwZVdIODNPNFhjcVdJWlh6cEZSVGRyYkJoYWRNbkphb2FwVnJnalM3Sm9CR2xSdEY3TUxsS2FxRmJQc2VJM2hkaUYzZE1EaUZ5M014V2JETmx2ckY0X3EySWgyM2lTVFNBY2lTc0xDdDl4TkhGdlJtU3F3?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Europe</span>
+          <h3>Cedars-Sinai opens London clinic as part of its global expansion</h3>
+          <div class="src">Hoodline · 6 July 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMiiwFBVV95cUxOd2FuNTdzVk1TOVJSY0JnX3RPaWZrbWR1cGk5a1NTSF81UG1YYlItbWZYcXJKWGExZndhY2E4TnVDOWNQOE9SZXNINEFPTXJ4RHZKQWFWV3RDWG40a1B4SGhtZ3NiVDFJcVBESmVuYTBGa1UzZXhfMF9PVzF1dmxieDlnNFV3LWp4ZGZZ?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Europe</span>
+          <h3>‘Give us £166,000 or we will strike’, NHS consultants demand</h3>
+          <div class="src">The Telegraph · 6 July 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMikgJBVV95cUxNUFZkazFEdnA0S2Z5VzRVTUFMb1RqWXVPOFppTkduWVRwNmdPOVFRemVjRkJ3SWdIUkt2LWF1OXI1eTZjS0ZZTmhQUUVDZGJ1emxqcjFNdUpBXzlBaVNyODdsaFhqOFowZ21UdmRqRWgzNm5JTFlCR1J1QnlYZjQ5dUhRcFhORndyeGlBWFdfdDN1WkRwcWZXRWZVdldRTWlUSnRYWjdWd3F4TGFiclNVQjRjQlFfblRkSEd4MHliUFp4a2J2STBKalg2YWctYWVuXzMtRW14alNhS1R3S3MzYmJka1VTdHBOUElwTlhSd09tcnhoaGhRMnhVZFVtR1pWVjUzRlRPTkVRcmVJT1F0ZVBB?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Spain</span>
+          <h3>Living longer also moves money: why the longevity economy attracts investment in health, wellness and insurance</h3>
+          <div class="src">Líder Actual · 6 July 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMi2wFBVV95cUxQb1FDWTZrT3dUTDduTWpCUmxxeGpBNVVnbG5HRjUwb3d0ckdpNGxxeHI0Q1kyUVNrVlJpWEdQdXNtdm56NGlRVG5VYkNfZkx1a2pvdFkzSHU4ZEIzU3BocU5RalRvMXJxaGJjd0NTYnN2LUtjUHM1cmFuZm9QRDNsbTJkVjc0TzkxcC1nVm9UM09xbGxrYk5vRFdVbmU1VFhoOXotQVdYSlUwZGRpNmh3aWdEMkQ0Q3pBWnRHeTVfQlpRTXBBY0tmR1NQN21ZMkE2R0NDa3lvblcwdjDSAeABQVVfeXFMT1ZFUXVidk1lcnVHbk1HcGRrVG93YWd5QjU3SEZPR3JYQW5mLVpUejVWQXU2MS1TVlZjRkRGQlFvRjhFT3lTV0hJMU1qWHJJNlBJVkljSjZfYmtXcTZGeWdtU0dzdHBKRUhWV0RUUzA0WjZaVDFsMHREcm1FSWVXOEt0eEJFNFlOX1ZxcWhpODF3UkplODFlS2M2X0ZFbVhfeXcyajBlaU1CXzg0Xy15dkE5WGh6UVdRMUVNN0dEeEFWeVI1Wm5GYWVYOENMbzJiZmJsZEd4QzNDMDEtOW1kQXo?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Spain</span>
+          <h3>Investment funds are on a buying spree in Spain, targeting private healthcare</h3>
+          <div class="src">El Español · 5 July 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMipgFBVV95cUxOR251UGkwU1d4QXBMOGlwTjBtU2RkSUtsYkxsYjNEMi0xS3BxbHdxVFBYR3NVak9WSWFNdW5lQURSNFFxVGQzY3QyemJ4aEtaVk5Ud29XQUdOYVV3NTJFbmhvaGJ1b0JWMjlnVXNfWkdjSWJ6cWxSRzY4Nzh5SnVzQnV0VG9sY3daZWRZUnJ2WVFCV3lKNnpJcHJldGV5ZERITzMzSDV3?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Asia</span>
+          <h3>Indonesia anchors ‘Longevity 5.0’ amid regional stem-cell disparities</h3>
+          <div class="src">Healthcare Asia Magazine · 3 July 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMimwFBVV95cUxQV3lmaGhUakQ2RWp6dXVrbE53akhkX1VCM2cyVjVwdU0zdmt3TzhOZ0RXOXFBV2V1cnFRczlLVE9HVjZnSzJUN01vS1Q1U2RPSGstT0xqTFk1S3I2TGk5MF9Xai1FdDJnYzRPM1dlb1N5eFU4bU4tWklvaC1wZHlFNXRXWkU5czYyb2NvaUpXUG9mMTVDQzdMLV8xWQ?oc=5" target="_blank" rel="noopener">
+          <span class="tag">US</span>
+          <h3>Fountain Life makes longevity accessible with a $595 membership</h3>
+          <div class="src">Longevity.Technology · 3 July 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMi1wFBVV95cUxNTUM2ektJRnBqSVYyaTFHU2xyVnEzNEo1VkhCZS1RTENmTUxiNnF4cnVlQ2E4SE9jYzlmNkN0VTlLMXBUN0VhYzNYT0xHQnBPaUlfV0c5MkE0eFlLQi12N1BjZmw4dUJ4UEVWaDZsNzRocHpicXBjWkhZM25ZVmFOWFdwZW84RFpNcWJZa0ZZMXFkS09EQUhfN19EbXdKQmhlZ011TTNUVzg3LUdzYk9BTGVzOXNienJEOHhLVlljTy12LVM0SmotWDQyaWtaUTVkYkQzV1Nwcw?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Europe</span>
+          <h3>The International Longevity Summit Madrid returns in 2026</h3>
+          <div class="src">Cryptopolitan · 2 July 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMiekFVX3lxTFA4eGNFanhLYjZDWnIzYzdiYWlFU1g0eUZxWF8ySm5JcDZtZ0ZFTDdTRFBra21ULVo3UjFvQm1NamFNMjAwY2luMXo5bnVPcHNJVEh6NzZTSmwwTFVza3RWRUs0NU12VGNSOFhyU2hZV3pVNnUtWUVBcndR?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Europe</span>
+          <h3>One-third of British adults doubt the NHS can fully meet their needs</h3>
+          <div class="src">Cover Magazine · 2 July 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMi6wFBVV95cUxPSU9CVk9uRDZrRS16d1VKcGY0emZjQVh3YkVsTkI1QW13eHBLamhTQlljeElKcVZKc215dkJsdk81TnI5aW5LOEdzVkRXQVRFMVRBRi03UjhiYXRPT2VybnJleldQWS1tY1QyNjRhM1ZUdTJSWHNmV2VjX2l4a0RXTXl2UDdOOTlwOVBpZHRzUjcteGJNTDdfSS00Nlo4QjcwOS1iRlVfSnllbEF0U2I3dy0tRzR4Tl9pY2d3NjY5T1pLclNuYjlMVEwwVElfOTJGSDJtd1duUHFpVVNseElPTFpyYjRkZjJ3aHVF?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Market and funding</span>
+          <h3>Concierge medicine market to reach $37.98bn by 2031</h3>
+          <div class="src">Barchart · 2 July 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMi5wFBVV95cUxQZzQ3ZnFzb2RJVkRPZkZoOVZKWGEwdF9EQ0l3Xzl0ekdEZzIzZ3RRZUl5Z2YxUU5XLXY4YWJjaTlCYlhUTGt0cUpheGpsWUVVQlBCRlJaWk1CeUx1djB4WVhobmRRLWo4OTRnNklPMWZzeEMyQXB5VFhsZnlaaEc3eDBaOGhRMXJMN0xmZDBuTWVDcE1qY0xuS2NzUlNvSkFDNG1LODF6dVMzRGZPZWZRWjdaNFhpLTN2a3I1SEI0ZDRHMlZyNk8yVVA4X0FrU0JBYzNPZDJHd0xVbHlvWXQ0UjRXckFKUWc?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Spain</span>
+          <h3>Elsa Pataky embraces Sanitas preventive medicine: from personal genomics to individual drug response</h3>
+          <div class="src">Sanitas · 1 July 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMixAFBVV95cUxOcHo5dFlBdjZ0bUF0V0l4di1ZYVRnUnZSTGVTOEtwdDRVTDhkTmNPTXdqd3g4MEdacl81WTFjaEVZTDZfNTM1QzdpUkVaNXlsb1J0bk9RV0gwQW9fN0N4MlNWWUtRM0FnQTc0ME5PdHFCV3ZOQjdJRHJmYl9ueXZhZ3NxLTc5eEpISUd1MmR1QkZvcGpFSllsdXJ0eWItc25PZENjdW9wNkp0Z1I0dVNhR08wV1d0MjY5SER5YThaUHpKYnM20gHYAUFVX3lxTE80UjFReTAtNzdxOUZPNXlhNHMtVGhyV0dnSDFoaTY5Y0RfRjVXd01VTW9XVzd4WXY0QlItUmloWGhMZ0ZWMWV1ejRnREkzVUFmS1B1ZjZCUHJ4ZmQxLVJwM1F6WE5EWnhDSlpnTGdRcDFWQU9abGhZazBxOEI1Z2JKaUs0TmsydS1CcG45dlF1emVKb1ZYMXAtNGtPVlo3clpPdHp6c0ZsNWVWbG85NUUtOFNqaDZ6aHB3Q2ppaFdQdjVvV2ZBSjZBMkI0aU9IV0s5Q19qaW1HZA?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Spain</span>
+          <h3>DKV rebrands as ERGO to lead Spain’s health insurance market</h3>
+          <div class="src">Cinco Días · 29 June 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMijgFBVV95cUxOU2E2QnJfWHF1Z1hMV3Rpc2NXcENQUzBtc3VMNTZpRElnaTZlZU45M3d4MHZGY2ZLTnVSTnkzb3YyRHBGLUltU1pFVjB5T3dMcE00eHp0dnFxejVBY1V4UGh2R3czTWQxWGZuc3d5TWk5SEtmOVdVdTVtSnR2N2JVcUlkVmZOVUF0Y1RhLUNB?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Europe</span>
+          <h3>Longevity: the next frontier of branded living</h3>
+          <div class="src">Hospitality Investor · 28 June 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMiwgFBVV95cUxOUkxrVmtraS0ybjNHUy1hTUluVzZXRE1hc2l2MzJMZGtwdnN1SVFuZzhCeWF6eHZVUENnQmktbGlKNTBPaVllWHpRMTFPRnhGZnE2ajIxcl81b3FIeWVBSGlqb2xHRUNZcGhVVlk2UHNRNzRibTdDb3BZX0hZQnQ1MDBCd2xYNG1sbzlwOXBSVWUzSHppSXlFaU14UEVibzR1cmJYcE1ldFpHalR1QTA0d3o3SWNRNkEzcnpfbnlFMG9qdw?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Europe</span>
+          <h3>Clinique La Prairie: ‘We are building a global longevity ecosystem’</h3>
+          <div class="src">Luxury Tribune · 25 June 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMihAFBVV95cUxPZXBUdWh0dlEyLTRqLWdPUkJtcnIyOWhxXzZaQzRURl80RGZSUGE5NkhpQjk5eXZVOWVQbmJpX05xWnRyemprcmJMX05HQzFVUFc1ZkhBWnNoMWcxd3Ewc3U3aEw3M0pCZFU1ODNCdmphb3R2RzNVLU9Rb0IwZDNjbFVITVg?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Market and funding</span>
+          <h3>Prosus leads €480m investment in French healthtech company Alan</h3>
+          <div class="src">Financial Times · 24 June 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMi_AFBVV95cUxQMFFtSV8ya1VNc21rdERVcVhxOWhLaUlWN1IzVFdMaG1nRGlsaTNtcWROb2JSQmRKV0I3dlh0TjgzaUEzS2ZwaUYzTE1keGtOM3F6VDBMRWhUOVlGMzRDZE16Q3E2Tk1yZ0RncGtfVDZjVGpvYWlBVnhyMFFpNjd3UU9yeS1WemhseVJVamt2cVJEbFozTEkyU1h3TV9rWS0tOUlIWWE4SlJuR3Z3Z2l3TUdOb1V6RjFFSVFwRUZDdXpuTXdHZnYtdXhROGVIMEJnZ0lnRFJCRDByczNneG5qMFBoLVlKVW5nNERDTWRqY0x0OUhHRFFYZ1p4NGQ?oc=5" target="_blank" rel="noopener">
+          <span class="tag">US</span>
+          <h3>Next Health opens its East Coast flagship in Chestnut Hill, Boston</h3>
+          <div class="src">Business Wire · 22 June 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMiY0FVX3lxTE9nM1MtNFMxRlVoZmNkVDQ5cV9ybWhsRm5vV05UaXdQQlJDVkxXam9GNW9EWUVGUnFYVlFZSjgtTS0tMFdqdlhQYXlDZ0xqOS1SbVNqQVpiT3lSWjB6WmF5VlFuMA?oc=5" target="_blank" rel="noopener">
+          <span class="tag">US</span>
+          <h3>ShinyHunters threatens to leak 8.8 TB of data stolen from One Medical</h3>
+          <div class="src">The HIPAA Journal · 22 June 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMikwFBVV95cUxQTUlMRFltTm9zN2ZBLVFtZkNHWXM3VVRRMXZDd0F1MzNLMTQ4bnhsYVJRWF9rSW1yVTNnbnVrZkRMYlB6V0NTVnNTbTZWQTBtWUZIWEFyR2FMdVdwTnRlS0p6X2NtMzRiVVZ6UDJVU3J0YWdYRUZQcE9XZGR5RkhQOGhWdDhhRE9RVF9YX0xhNnJnR0k?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Dubai and the Middle East</span>
+          <h3>The UAE’s wellness boom is built on recovery</h3>
+          <div class="src">Fast Company Middle East · 19 June 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMi5AFBVV95cUxOR200ZkgyY1d6Zi1UeG1DMHdFeTV1TW5CLWFkSlk1UlZ6M2NjRnV2VnA1WkdVQUZ6cjhNQ0I1MVZqdjg4eFpteDcwLUwwMFB1UHI1WGgzRTNJYmtzWWxjUE1LTGo2QzNiYXBmaU91Z3E0Mm1QWkRXV21PRUFDU0g0Z0NrNHpaRTU3S203SXAtX3NOTUJFM0ZhSlVzMTctZGdqMHpBSmFfUmFmTzkwSXUtN0lLOFNEZjk4VThkNk1Lb1pRUnMzVkFaZ3p5LWpTR2J3TGpITTBBWmxuTjVNYnE3cXJET0Y?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Spain</span>
+          <h3>Beyond Longevity: technology- and experience-based longevity medicine</h3>
+          <div class="src">El Economista · 19 June 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMijgFBVV95cUxOWWJJRlpzTUdpVnJMcnVEaEhPNHAxS3lPWGNRWDBlbVlZX0lCZEZscXFub2VnSnpiNTcwMDNHaTQ0TXVhMkd6bEFIZUpic3FCcHJQUlRRSWZ2QzJhd1NsTVc3ZTFKTHJsb0E3TGdENVlpLWc4Q2NlUFFHU0Z4NVg4T0hfTGo0SlZJRURYbFlB?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Dubai and the Middle East</span>
+          <h3>Dubai launches longevity authority to lead the wellness sector</h3>
+          <div class="src">Travel Daily Media · 18 June 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+        <a class="news-card" href="https://news.google.com/rss/articles/CBMisgFBVV95cUxORzhsSGljc0RXYTJYS1g5VEtHbVpTWG42UUNmRGx1X2JjYW11dnFXdHZxNTVqbHhIY3YzRDlwbmVNX1RsRW1DT1ZtcTlTYXlETmhzVUxtV1Bad09EdnBSZFVqVlhOX1BCeGUzZzFYZkJJTWREY3RXdUs3SVpIRk45Z1pmZnh2aXBqM2tiRlhUWV9yamRHb1R5Y3otaUtGcWlwV0JHX1RPVVdwYkNnc19BM0dn?oc=5" target="_blank" rel="noopener">
+          <span class="tag">Asia</span>
+          <h3>Thailand’s wellness economy drives demand for longevity and preventive health clinics</h3>
+          <div class="src">The National Law Review · 16 June 2026</div>
+          <span class="readsrc">Read the source &#8599;</span>
+        </a>
+
+      </div>
+    </div>
+  </section>
+  <!-- NEWS:END -->
+
+  <!-- Newsletter -->
+  <section class="news">
+    <div class="container">
+      <span class="kicker">Newsletter</span>
+      <h2>Receive our insights on health and longevity</h2>
+      <p>No spam. Just clinically informed content, once or twice a month.</p>
+      <form onsubmit="return false;">
+        <input type="email" placeholder="Your email address" aria-label="Email address" />
+        <button type="submit">Subscribe</button>
+      </form>
+    </div>
+  </section>
+
+  <footer class="site">
+    <div class="container">
+      <div class="name">PRIVIA HEALTH</div>
+      <p>Private, preventive and precision medicine. With the best technology and AI serving your health and your family's.</p>
+    </div>
+  </footer>
+
+  <script>
+    document.querySelectorAll('.nav-toggle').forEach(function (btn) {
+      var nav = btn.parentElement.querySelector('.site-nav');
+      btn.addEventListener('click', function () {
+        var open = nav.classList.toggle('open');
+        btn.classList.toggle('open', open);
+        btn.setAttribute('aria-expanded', String(open));
+      });
+      nav.querySelectorAll('a').forEach(function (a) {
+        a.addEventListener('click', function () {
+          nav.classList.remove('open');
+          btn.classList.remove('open');
+          btn.setAttribute('aria-expanded', 'false');
+        });
+      });
+    });
+  </script>
+</body>
+</html>

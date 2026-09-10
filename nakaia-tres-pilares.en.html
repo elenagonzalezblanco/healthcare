@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="en" data-static-language="true">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>PRIVIA HEALTH — Three Pillars</title>
+<link rel="icon" type="image/png" sizes="512x512" href="images/favicon.png" />
+<link rel="apple-touch-icon" href="images/favicon.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    /* ===== Tokens guía de estilo Privia Health ===== */
+    --color-primary: #1F3D34;        /* verde grafito médico */
+    --color-primary-soft: #A7BCA4;   /* verde salvia */
+    --color-premium: #C9A97A;        /* oro suave / champagne */
+    --color-tech: #3D5E8A;           /* azul niebla tecnológico */
+
+    --color-background: #F3F5F2;      /* marfil clínico */
+    --color-surface: #FFFFFF;
+    --color-surface-warm: #E8E2D8;   /* piedra cálida */
+
+    --color-text: #1D2528;           /* grafito texto */
+    --color-text-muted: #5F6865;
+    --color-border: #DED8CE;
+
+    --num: #D9D4CB;
+
+    --font-heading: "Poppins", "Sora", "Inter", sans-serif;
+    --font-body: "Inter", "Satoshi", "Helvetica Neue", sans-serif;
+
+    --radius-md: 16px;
+    --radius-lg: 24px;
+    --radius-xl: 32px;
+    --radius-pill: 999px;
+
+    --shadow-soft: 0 12px 40px rgba(31, 61, 52, 0.08);
+    --shadow-card: 0 8px 24px rgba(31, 61, 52, 0.06);
+    --shadow-hover: 0 16px 48px rgba(31, 61, 52, 0.12);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: var(--font-body);
+    color: var(--color-text);
+    background: var(--color-background);
+    -webkit-font-smoothing: antialiased;
+    font-weight: 400;
+    line-height: 1.55;
+  }
+  h1, h2, h3 { font-family: var(--font-heading); color: var(--color-primary); }
+
+  .container { width: min(1280px, calc(100% - 96px)); margin: 0 auto; }
+
+  /* ===== Header ===== */
+  header.site {
+    position: sticky; top: 0; z-index: 40;
+    background: rgba(243,245,242,0.86);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--color-border);
+  }
+  header.site .container { display: flex; align-items: center; justify-content: space-between; height: 74px; }
+  .brand { display: flex; flex-direction: row; align-items: center; gap: 12px; line-height: 1; text-decoration: none; }
+  .brand-mark { width: 38px; height: 38px; display: block; }
+  .brand-txt { display: flex; flex-direction: column; }
+  .brand .name { font-family: var(--font-heading); font-weight: 500; font-size: 22px; letter-spacing: 0.34em; color: var(--color-primary); }
+  .brand .sub { font-size: 8.5px; letter-spacing: 0.56em; color: #9AA39C; margin-top: 5px; padding-left: 3px; }
+  .site-nav { display: flex; align-items: center; gap: 20px; }
+  .site-nav a { font-size: 14px; color: var(--color-text-muted); text-decoration: none; transition: color .2s; }
+  .site-nav a:hover { color: var(--color-primary); }
+  .button-primary {
+    background: var(--color-primary); color: #fff; border: 0;
+    border-radius: var(--radius-pill); padding: 12px 24px;
+    font-family: var(--font-body); font-size: 14px; font-weight: 500; cursor: pointer;
+    text-decoration: none; transition: background .2s, box-shadow .2s;
+  }
+  .button-primary:hover { background: #163028; box-shadow: 0 12px 32px rgba(31,61,52,0.18); }
+  .site-nav a.button-primary { color: #fff; }
+  .site-nav a.button-primary:hover { color: #fff; }
+  .nav-toggle { display: none; background: none; border: 0; cursor: pointer; padding: 8px; }
+  .nav-toggle span { display: block; width: 24px; height: 2px; background: var(--color-primary); border-radius: 2px; transition: transform .25s, opacity .2s; }
+  .nav-toggle span + span { margin-top: 5px; }
+  .nav-toggle.open span:nth-child(1){ transform: translateY(7px) rotate(45deg); }
+  .nav-toggle.open span:nth-child(2){ opacity: 0; }
+  .nav-toggle.open span:nth-child(3){ transform: translateY(-7px) rotate(-45deg); }
+  @media (max-width: 1200px){
+    .nav-toggle { display: block; }
+    .site-nav { position: absolute; top: 74px; left: 0; right: 0; display: none; flex-direction: column; align-items: stretch; gap: 0; padding: 8px 24px 22px; background: rgba(243,245,242,0.98); backdrop-filter: blur(16px); border-bottom: 1px solid var(--color-border); box-shadow: 0 20px 40px -24px rgba(31,61,52,0.3); }
+    .site-nav.open { display: flex; }
+    .site-nav a { display: block; padding: 15px 0; font-size: 16px; border-bottom: 1px solid var(--color-border); }
+    .site-nav a.button-primary { text-align: center; margin-top: 16px; border-bottom: 0; }
+  }
+
+  /* ===== Sección ===== */
+  .section { padding: 84px 0 96px; }
+  .kicker {
+    display: inline-block; font-size: 12px; font-weight: 500;
+    letter-spacing: 0.2em; text-transform: uppercase; color: var(--color-premium);
+  }
+
+  /* ===== Banda Tres Pilares ===== */
+  .band {
+    display: grid;
+    grid-template-columns: 0.92fr 1fr 1fr 1fr;
+    gap: 28px;
+    align-items: stretch;
+  }
+  @media (max-width: 1040px){ .band { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 640px){ .band { grid-template-columns: 1fr; } }
+
+  /* ---- Columna intro ---- */
+  .intro { padding: 4px 10px 0 2px; align-self: center; }
+  .intro .kicker { margin-bottom: 14px; }
+  .intro h1 {
+    font-weight: 600;
+    font-size: clamp(30px, 3vw, 40px);
+    line-height: 1.12;
+    letter-spacing: -0.03em;
+    color: var(--color-primary);
+  }
+  .intro h1 .gold { color: var(--color-premium); }
+  .intro p {
+    margin-top: 22px;
+    font-size: 15px;
+    color: var(--color-text-muted);
+    max-width: 260px;
+    line-height: 1.6;
+  }
+  .intro .cta { margin-top: 28px; }
+
+  /* ---- Tarjetas pilar ---- */
+  .pillar {
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+    background: var(--color-surface);
+    border: 1px solid rgba(31,61,52,0.10);
+    box-shadow: var(--shadow-card);
+    display: flex; flex-direction: column;
+    transition: transform .3s ease, box-shadow .3s ease;
+  }
+  .pillar:hover { transform: translateY(-5px); box-shadow: var(--shadow-hover); }
+  .pillar .body { padding: 30px 28px 26px; flex: 1; }
+
+  .pillar--health { background: linear-gradient(180deg, rgba(167,188,164,0.22), #FFFFFF 62%); }
+  .pillar--medical { background: linear-gradient(180deg, rgba(201,169,122,0.22), #FFFFFF 62%); }
+  .pillar--tech { background: linear-gradient(180deg, rgba(61,94,138,0.18), #FFFFFF 62%); }
+
+  .pillar .num {
+    font-family: var(--font-heading);
+    font-weight: 400; font-size: 42px; line-height: 1;
+    color: var(--num);
+  }
+  .pillar--medical .num { color: #E2CFAF; }
+  .pillar--tech .num { color: #C4D0DE; }
+
+  .pillar .ic {
+    width: 46px; height: 46px; border-radius: var(--radius-pill);
+    display: flex; align-items: center; justify-content: center;
+    margin: 20px 0 18px; background: rgba(255,255,255,0.6);
+  }
+  .pillar--health .ic { border: 1px solid rgba(167,188,164,0.9); }
+  .pillar--medical .ic { border: 1px solid rgba(201,169,122,0.9); }
+  .pillar--tech .ic { border: 1px solid rgba(61,94,138,0.5); }
+
+  .pillar h3 {
+    font-family: var(--font-body);
+    font-weight: 600; font-size: 14px;
+    letter-spacing: 0.07em; text-transform: uppercase;
+    line-height: 1.5; color: var(--color-primary);
+  }
+  .pillar--tech h3 { color: #2C4160; }
+  .pillar .desc {
+    font-size: 13px; color: var(--color-text-muted);
+    margin-top: 14px; line-height: 1.6; min-height: 60px;
+  }
+
+  /* ---- Zona foto con fallback ---- */
+  .photo {
+    height: 170px; position: relative; overflow: hidden;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .photo img {
+    position: absolute; inset: 0; width: 100%; height: 100%;
+    object-fit: cover; z-index: 2;
+  }
+  .photo .fallback { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; z-index: 1; }
+  .fb-health { background: linear-gradient(150deg, #DCE4DC 0%, #B9C7B6 100%); }
+  .fb-medical { background: linear-gradient(135deg, #E8DED0 0%, #CBB89B 55%, #A98F6E 100%); }
+  .fb-tech { background: linear-gradient(150deg, #E4E9EE 0%, #C3CEDA 100%); }
+  .fb-note {
+    position: absolute; left: 16px; bottom: 12px; z-index: 3;
+    font-size: 10px; letter-spacing: .12em; text-transform: uppercase;
+    color: rgba(255,255,255,0.92);
+  }
+
+  /* mini mockup tablet */
+  .mini-tablet {
+    width: 80%; height: 120px; background: #fff; border-radius: 12px;
+    box-shadow: 0 12px 26px -14px rgba(31,61,52,0.5);
+    display: flex; align-items: center; gap: 14px; padding: 16px;
+  }
+  .mini-ring { width: 82px; height: 82px; position: relative; flex-shrink: 0; }
+  .mini-ring svg { transform: rotate(-90deg); }
+  .mini-ring .v { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+  .mini-ring .v b { font-family: var(--font-heading); font-weight: 400; font-size: 24px; color: var(--color-primary); }
+  .mini-ring .v span { font-size: 7px; letter-spacing: .1em; text-transform: uppercase; color: var(--color-primary-soft); }
+  .mini-lines { flex: 1; display: flex; flex-direction: column; gap: 8px; }
+  .mini-lines i { height: 5px; border-radius: 4px; background: #EDEFEC; display: block; }
+  .mini-lines i:nth-child(2){ width: 72%; background:#E4EAE3; }
+  .mini-lines i:nth-child(3){ width: 86%; }
+  .mini-lines i:nth-child(4){ width: 56%; background:#E4EAE3; }
+
+  /* mini mockup phone */
+  .mini-phone {
+    width: 104px; height: 142px; background: #fff; border-radius: 16px 16px 0 0;
+    box-shadow: 0 12px 26px -14px rgba(31,61,52,0.5); padding: 15px 13px;
+    display: flex; flex-direction: column; gap: 9px;
+  }
+  .mini-phone .ph-hd { font-size: 8.5px; color: var(--color-text-muted); }
+  .mini-phone .ph-row { display:flex; align-items:center; gap:8px; }
+  .mini-phone .ph-dot { width: 18px; height:18px; border-radius:50%; background:#EAF0E8; flex-shrink:0; }
+  .mini-phone .ph-bar { height:5px; border-radius:4px; background:#EDEFEC; flex:1; }
+  .mini-phone .ph-chart { margin-top:4px; height:38px; border-radius:8px; background: linear-gradient(180deg, #EEF3FB, #fff); position: relative; overflow:hidden; }
+  .mini-phone .ph-chart svg { position:absolute; inset:0; }
+
+  /* ===== Banda de beneficios ===== */
+  .benefits { border-top: 1px solid var(--color-border); }
+  .benefits .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 28px; }
+  @media (max-width: 900px){ .benefits .grid { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 520px){ .benefits .grid { grid-template-columns: 1fr; } }
+  .benefit { background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-card); display: flex; flex-direction: column; transition: transform .3s ease, box-shadow .3s ease; }
+  .benefit:hover { transform: translateY(-4px); box-shadow: var(--shadow-hover); }
+  .benefit .bphoto { width: 100%; height: 158px; object-fit: cover; display: block; }
+  .benefit .bbody { padding: 6px 28px 34px; }
+  .benefit .bic { width: 46px; height: 46px; display: flex; align-items: center; justify-content: center; border-radius: var(--radius-pill); background: var(--color-surface); box-shadow: var(--shadow-card); margin: -24px 0 20px; position: relative; z-index: 2; }
+  .benefit h4 { font-family: var(--font-body); font-weight: 600; font-size: 16px; letter-spacing: -0.01em; color: var(--color-primary); }
+  .benefit p { font-size: 14px; color: var(--color-text-muted); margin-top: 12px; line-height: 1.65; }
+
+  /* ===== Modelo / Qué somos ===== */
+  .modelo { border-top: 1px solid var(--color-border); scroll-margin-top: 90px; }
+  .modelo .grid { display: grid; grid-template-columns: 1.05fr 1fr; gap: 64px; align-items: center; }
+  @media (max-width: 860px){ .modelo .grid { grid-template-columns: 1fr; gap: 40px; } }
+  .modelo h2 { font-weight: 400; font-size: clamp(26px, 3vw, 40px); line-height: 1.18; letter-spacing: -0.02em; color: var(--color-primary); margin-top: 16px; }
+  .modelo .rule { width: 96px; height: 1px; background: var(--color-premium); opacity: .75; margin: 30px 0; }
+  .modelo .lead { font-size: 16px; color: var(--color-text-muted); max-width: 460px; line-height: 1.7; }
+  .modelo ul { list-style: none; }
+  .modelo li { display: grid; grid-template-columns: 34px 1fr; gap: 12px; padding: 22px 0; border-bottom: 1px solid var(--color-border); font-size: 16px; color: var(--color-text); align-items: start; line-height: 1.5; }
+  .modelo li:first-child { padding-top: 0; }
+  .modelo li .dash { width: 26px; height: 3px; border-radius: 2px; background: var(--color-premium); margin-top: 11px; }
+
+  /* ===== Para quién ===== */
+  .audience { border-top: 1px solid var(--color-border); text-align: center; scroll-margin-top: 90px; }
+  .audience h2 { font-weight: 400; font-size: clamp(30px, 3.8vw, 46px); line-height: 1.14; letter-spacing: -0.02em; color: var(--color-primary); max-width: 900px; margin: 16px auto 0; }
+  .audience .cards { display: grid; grid-template-columns: repeat(3,1fr); gap: 28px; margin-top: 56px; text-align: left; }
+  @media (max-width: 860px){ .audience .cards { grid-template-columns: 1fr; } }
+  .aud-card { background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-xl); box-shadow: var(--shadow-card); padding: 44px 36px; transition: transform .3s ease, box-shadow .3s ease; }
+  .aud-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-hover); }
+  .aud-card .num { font-family: var(--font-heading); font-weight: 400; font-size: 34px; color: var(--color-premium); }
+  .aud-card h3 { font-family: var(--font-heading); font-weight: 500; font-size: 20px; color: var(--color-primary); margin-top: 26px; line-height: 1.25; letter-spacing: -0.01em; }
+  .aud-card .rule { width: 40px; height: 1px; background: var(--color-premium); opacity: .8; margin: 18px 0; }
+  .aud-card p { font-size: 14.5px; color: var(--color-text-muted); line-height: 1.6; }
+
+  /* ===== Quiénes somos ===== */
+  .about { border-top: 1px solid var(--color-border); scroll-margin-top: 90px; }
+  .about-head { max-width: 880px; margin: 0 auto; text-align: center; }
+  .about .lead { font-family: var(--font-heading); font-weight: 400; font-size: clamp(21px, 2.3vw, 29px); line-height: 1.45; color: var(--color-primary); letter-spacing: -0.01em; margin-top: 16px; }
+  .about .mv { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; margin-top: 52px; }
+  @media (max-width: 860px){ .about .mv { grid-template-columns: 1fr; } }
+  .mv-card { background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-lg); box-shadow: var(--shadow-card); padding: 40px; }
+  .mv-card .tag { font-size: 12px; font-weight: 500; letter-spacing: .2em; text-transform: uppercase; color: var(--color-premium); }
+  .mv-card p { font-size: 15.5px; color: var(--color-text-muted); line-height: 1.7; margin-top: 16px; }
+
+  /* ===== Qué no somos ===== */
+  .notus { margin-top: 92px; }
+  .notus h2 { font-weight: 400; font-size: clamp(28px, 3.4vw, 44px); line-height: 1.14; letter-spacing: -0.02em; color: var(--color-primary); margin-top: 14px; }
+  .notus .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 44px; }
+  @media (max-width: 860px){ .notus .grid2 { grid-template-columns: 1fr; } }
+  .not-card { background: #F4EEE3; border-left: 3px solid var(--color-premium); border-radius: 0 var(--radius-md) var(--radius-md) 0; padding: 26px 28px; display: grid; grid-template-columns: 20px 1fr; gap: 14px; align-items: start; }
+  .not-card .x { color: #C0655A; font-size: 15px; margin-top: 2px; }
+  .not-card p { font-size: 16px; color: var(--color-text); line-height: 1.5; }
+
+  /* ===== Admisión privada ===== */
+  .admission { background: var(--color-primary); color: #C6D6C9; text-align: center; scroll-margin-top: 90px; }
+  .admission .ey { display: inline-block; color: #B8C9BC; font-size: 12px; font-weight: 500; letter-spacing: .28em; text-transform: uppercase; }
+  .admission h2 { color: #fff; font-weight: 400; font-size: clamp(30px, 4vw, 52px); line-height: 1.12; letter-spacing: -0.02em; margin-top: 18px; }
+  .admission p { color: #B7C8BB; font-size: 17px; max-width: 620px; margin: 22px auto 0; line-height: 1.6; }
+  .admission .btn-outline { display: inline-flex; align-items: center; gap: 10px; margin-top: 34px; border: 1px solid rgba(255,255,255,0.5); color: #fff; border-radius: var(--radius-pill); padding: 14px 30px; text-decoration: none; font-size: 15px; font-weight: 500; transition: background .2s; }
+  .admission .btn-outline:hover { background: rgba(255,255,255,0.08); }
+
+  /* ===== Footer ===== */
+  footer.site { background: var(--color-primary); color: #A9BCAE; padding: 56px 0; text-align: center; }
+  footer.site .name { font-family: var(--font-heading); font-weight: 500; font-size: 22px; letter-spacing: 0.34em; color: #fff; }
+  footer.site p { font-size: 13px; max-width: 480px; margin: 14px auto 0; }
+  .claim { text-align: center; margin-top: 8px; font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: #B4B0A6; }
+  /* ===== Hero landing (foto de familia de fondo) ===== */
+  .hero-lp { position: relative; min-height: 88vh; display: flex; align-items: center; background-image: url('images/hero-familia.jpg'); background-size: cover; background-position: 70% center; }
+  .hero-lp::before { content: ''; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(243,245,242,0.94) 0%, rgba(243,245,242,0.76) 30%, rgba(243,245,242,0.18) 56%, rgba(243,245,242,0) 72%); }
+  .hero-lp .container { position: relative; z-index: 1; }
+  .hero-lp .hero-text { max-width: 660px; }
+  .hero-lp .kicker { color: var(--color-premium); }
+  .hero-lp h1 { font-family: var(--font-heading); font-weight: 300; font-size: clamp(28px, 3.9vw, 52px); line-height: 1.24; letter-spacing: -0.02em; color: var(--color-primary); margin-top: 20px; }
+  .hero-lp h1 em { font-style: normal; color: var(--color-premium); }
+  @media (max-width: 720px){
+    .hero-lp { min-height: 80vh; background-position: 64% center; align-items: flex-end; padding-bottom: 54px; }
+    .hero-lp::before { background: linear-gradient(180deg, rgba(243,245,242,0.45) 0%, rgba(243,245,242,0.08) 28%, rgba(243,245,242,0.7) 74%, rgba(243,245,242,0.97) 100%); }
+    .hero-lp h1 { font-size: clamp(25px, 6.6vw, 38px); }
+  }
+</style>
+<link rel="stylesheet" href="privia-language.css">
+<script defer src="privia-icons.js"></script>
+<script src="privia-language.js"></script>
+</head>
+<body>
+
+  <header class="site">
+    <div class="container">
+      <a class="brand" href="index.html">
+        <img class="brand-mark" src="images/logo.svg" alt="Privia Health" />
+        <span class="brand-txt">
+          <span class="name">PRIVIA</span>
+          <span class="sub">HEALTH</span>
+        </span>
+      </a>
+      <button class="nav-toggle" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
+      <nav class="site-nav">
+        <a href="#como-funciona">How it works</a>
+        <a href="#modelo">Model</a>
+        <a href="#quienes">About us</a>
+        <a href="blog.html">Blog</a>
+        <a href="https://medrag-prodgl3vc4-web.blackstone-b235e782.eastus2.azurecontainerapps.io" target="_blank" rel="noopener">Research area</a>
+        <a href="https://privia-demo-6camog4fqjoxo.swedencentral.cloudapp.azure.com/admin" target="_blank" rel="noopener">Admin</a>
+        <a href="https://privia-demo-6camog4fqjoxo.swedencentral.cloudapp.azure.com/professionals" target="_blank" rel="noopener">Professional access</a>
+        <a class="button-primary" href="https://privia-demo-6camog4fqjoxo.swedencentral.cloudapp.azure.com/" target="_blank" rel="noopener">User area</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero landing -->
+  <section class="hero-lp">
+    <div class="container">
+      <div class="hero-text">
+        <span class="kicker">Privia Health</span>
+        <h1>A personalised medical service combining <em>prevention</em>, <em>support</em> and <em>excellence</em> for your family.</h1>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="como-funciona" style="scroll-margin-top: 84px;">
+    <div class="container">
+      <div class="band">
+
+        <!-- Intro -->
+        <div class="intro">
+          <span class="kicker">Three pillars</span>
+          <h1>One goal:<br /><span class="gold">your health and<br />your family's.</span></h1>
+          <p>Private, preventive and precision medicine. With the best technology and AI serving your health and your family's.</p>
+          <div class="cta"><a class="button-primary" href="https://privia-demo-6camog4fqjoxo.swedencentral.cloudapp.azure.com/" target="_blank" rel="noopener">User area</a></div>
+        </div>
+
+        <!-- Pilar 01 -->
+        <article class="pillar pillar--health">
+          <div class="body">
+            <div class="num">01</div>
+            <div class="ic">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1F3D34" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="10" cy="8" r="3.4"/>
+                <path d="M4 19c0-3.4 2.7-5 6-5 .8 0 1.5.1 2.2.3"/>
+                <path d="M16.5 14.2c1.6 0 2.8 1.2 2.8 2.7 0 1.7-2.8 3.6-2.8 3.6s-2.8-1.9-2.8-3.6c0-1.5 1.2-2.7 2.8-2.7Z"/>
+              </svg>
+            </div>
+            <h3>Assessment, diagnosis<br />and health map</h3>
+            <div class="desc">Understand your starting point to prevent, anticipate and optimise your health.</div>
+          </div>
+          <div class="photo">
+            <div class="fallback fb-health">
+              <div class="mini-tablet">
+                <div class="mini-ring">
+                  <svg width="82" height="82" viewBox="0 0 82 82">
+                    <circle cx="41" cy="41" r="34" fill="none" stroke="#EAEFEA" stroke-width="6"/>
+                    <circle cx="41" cy="41" r="34" fill="none" stroke="url(#mg)" stroke-width="6" stroke-linecap="round" stroke-dasharray="214" stroke-dashoffset="33"/>
+                    <defs><linearGradient id="mg" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#A7BCA4"/><stop offset="100%" stop-color="#1F3D34"/></linearGradient></defs>
+                  </svg>
+                  <div class="v"><b>87</b><span>Very good</span></div>
+                </div>
+                <div class="mini-lines"><i></i><i></i><i></i><i></i></div>
+              </div>
+            </div>
+            <img src="images/pilar-01-tablet.jpg" alt="Tablet displaying the health map" onerror="this.remove()" />
+          </div>
+        </article>
+
+        <!-- Pilar 02 -->
+        <article class="pillar pillar--medical">
+          <div class="body">
+            <div class="num">02</div>
+            <div class="ic">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#B58C4F" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="8" cy="8.5" r="2.6"/><circle cx="16" cy="8.5" r="2.6"/>
+                <path d="M3 18c0-2.6 2.2-3.8 5-3.8M21 18c0-2.6-2.2-3.8-5-3.8"/>
+                <path d="M12 3.5v3M10.5 5h3"/>
+              </svg>
+            </div>
+            <h3>Medical excellence<br />within reach and<br />without delay</h3>
+            <div class="desc">Access the best experts when you need them.</div>
+          </div>
+          <div class="photo">
+            <div class="fallback fb-medical">
+              <span class="fb-note">Leading specialists</span>
+            </div>
+            <img src="images/pilar-02-medico.jpg" alt="Medical specialist with patient" onerror="this.remove()" />
+          </div>
+        </article>
+
+        <!-- Pilar 03 -->
+        <article class="pillar pillar--tech">
+          <div class="body">
+            <div class="num">03</div>
+            <div class="ic">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#3D5E8A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 4a4.5 4.5 0 0 0-4.5 4.5c0 1.8.9 2.7.9 4.5v1.4a3.6 3.6 0 0 0 7.2 0V13c0-1.8.9-2.7.9-4.5A4.5 4.5 0 0 0 12 4Z"/>
+                <path d="M9.5 20h5M10 8.5h4M12 8.5v5"/>
+              </svg>
+            </div>
+            <h3>Personalised follow-up<br />and operational efficiency<br />with technology and AI</h3>
+            <div class="desc">Consultations, services, tests and continuous follow-up for a smoother, smarter experience.</div>
+          </div>
+          <div class="photo">
+            <div class="fallback fb-tech">
+              <div class="mini-phone">
+                <div class="ph-hd">Good afternoon, Carlos</div>
+                <div class="ph-row"><div class="ph-dot"></div><div class="ph-bar"></div></div>
+                <div class="ph-row"><div class="ph-dot"></div><div class="ph-bar" style="width:70%"></div></div>
+                <div class="ph-chart">
+                  <svg viewBox="0 0 104 38" preserveAspectRatio="none">
+                    <polyline points="2,30 18,22 34,26 50,13 66,18 82,7 102,11" fill="none" stroke="#3D5E8A" stroke-width="1.8"/>
+                  </svg>
+                </div>
+              </div>
+            </div>
+            <img src="images/pilar-03-app.jpg" alt="Smartphone with the follow-up app" onerror="this.remove()" />
+          </div>
+        </article>
+
+      </div>
+      <div class="claim">Excellence · Speed · Prevention · Compassionate care · AI and Data</div>
+    </div>
+  </section>
+
+  <!-- Modelo / Qué somos -->
+  <section class="section modelo" id="modelo">
+    <div class="container">
+      <div class="grid">
+        <div>
+          <span class="kicker">What we are</span>
+          <h2>It is not insurance, it is not a hospital; it is a different way of understanding health and life.</h2>
+          <div class="rule"></div>
+          <p class="lead">Privia Health brings quality and operational efficiency to a fragmented healthcare market. We work alongside your insurer, hospital and specialists — coordinating every decision under the guidance of your Privia Health family doctor.</p>
+        </div>
+        <ul>
+          <li><span class="dash"></span><span>Longer consultations, active listening and a holistic view of the patient</span></li>
+          <li><span class="dash"></span><span>Biomarkers and tests only when they affect a clinical decision</span></li>
+          <li><span class="dash"></span><span>Multidisciplinary coordination with leading specialists</span></li>
+          <li><span class="dash"></span><span>Long-term continuity: ongoing support, not isolated check-ups</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Admisión privada -->
+  <section class="section admission" id="admision">
+    <div class="container">
+      <span class="ey">Private admission</span>
+      <h2>A standard of medical care to match your life</h2>
+      <p>Admission to Privia Health is private and by invitation. Request a conversation with our team and we will design a plan for you and your family.</p>
+      <a class="btn-outline" href="#"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6.5 3.5 4 6c0 8 6 14 14 14l2.5-2.5-3.5-2.5-2 1.5c-2.5-1-4.5-3-5.5-5.5l1.5-2L6.5 3.5Z"/></svg> Speak to an advisor</a>
+    </div>
+  </section>
+
+  <!-- Beneficios -->
+  <section class="section benefits">
+    <div class="container">
+      <span class="kicker" style="color:var(--color-premium)">Why Privia Health</span>
+      <div style="height:36px"></div>
+      <div class="grid">
+        <div class="benefit">
+          <img class="bphoto" src="images/pilar-01-tablet.jpg" alt="Active prevention" />
+          <div class="bbody">
+            <div class="bic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#A7BCA4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v5c0 5-3 8-7 10-4-2-7-5-7-10V6l7-3Z"/><path d="M9 12l2 2 4-4"/></svg></div>
+            <h4>Active prevention</h4>
+            <p>We anticipate risks to prevent illness and improve your quality of life.</p>
+          </div>
+        </div>
+        <div class="benefit">
+          <img class="bphoto" src="images/familia2.jpg" alt="Family care coordination" />
+          <div class="bbody">
+            <div class="bic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#C9A97A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="9" r="3"/><circle cx="16" cy="10" r="2.5"/><path d="M3 19c0-3 3-4 6-4s6 1 6 4"/></svg></div>
+            <h4>Family care coordination</h4>
+            <p>Comprehensive care for you and your loved ones, all in one place.</p>
+          </div>
+        </div>
+        <div class="benefit">
+          <img class="bphoto" src="images/pilar-03-app.jpg" alt="Technology and AI" />
+          <div class="bbody">
+            <div class="bic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#3D5E8A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4a4 4 0 0 0-4 4c0 1.6.8 2.4.8 4v1.2a3.2 3.2 0 0 0 6.4 0V12c0-1.6.8-2.4.8-4a4 4 0 0 0-4-4Z"/></svg></div>
+            <h4>Technology and AI</h4>
+            <p>Intelligence and data supporting more precise decisions.</p>
+          </div>
+        </div>
+        <div class="benefit">
+          <img class="bphoto" src="images/pilar-02-medico.jpg" alt="Continuous access" />
+          <div class="bbody">
+            <div class="bic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1F3D34" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12a7 7 0 0 1 14 0"/><rect x="3" y="12" width="4" height="6" rx="2"/><rect x="17" y="12" width="4" height="6" rx="2"/></svg></div>
+            <h4>Continuous access</h4>
+            <p>Ongoing support, wherever and whenever you need it.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Quiénes somos -->
+  <section class="section about" id="quienes">
+    <div class="container">
+      <div class="about-head">
+        <span class="kicker">About us</span>
+        <p class="lead">Privia Health is a premium layer of medical care for discerning families: it combines a trusted doctor, outstanding specialists, scheduled preventive care and an advanced digital product to resolve, anticipate and coordinate healthcare with far greater quality, speed and efficiency.</p>
+      </div>
+      <div class="mv">
+        <div class="mv-card">
+          <span class="tag">Mission</span>
+          <p>To simplify, anticipate and elevate the healthcare experience for discerning individuals and families by combining a trusted doctor who knows their complete history, swift access to outstanding specialists, personalised preventive care and intelligent technology connected to their medical records, enabling better decisions, saving time and providing peace of mind.</p>
+        </div>
+        <div class="mv-card">
+          <span class="tag">Vision</span>
+          <p>To be the leading premium layer of medical care for time-poor families and professionals: a high-touch, local and human model, supported by first-class technology and AI, capable of transforming a fragmented healthcare system into a continuous, preventive and personalised experience that can be extended to other markets.</p>
+        </div>
+      </div>
+
+      <div class="notus">
+        <span class="kicker">What we are not</span>
+        <h2>Our boundaries are part of our proposition</h2>
+        <div class="grid2">
+          <div class="not-card"><span class="x">✕</span><p>A factory producing supplements that serve no purpose</p></div>
+          <div class="not-card"><span class="x">✕</span><p>Longevity without quality or clinical evidence</p></div>
+          <div class="not-card"><span class="x">✕</span><p>Medical devices that only collect data</p></div>
+          <div class="not-card"><span class="x">✕</span><p>Technology that replaces the doctor rather than supporting them</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="site">
+    <div class="container">
+      <div class="name">PRIVIA HEALTH</div>
+      <p>Private, preventive and precision medicine. With the best technology and AI serving your health and your family's.</p>
+    </div>
+  </footer>
+
+  <script>
+    document.querySelectorAll('.nav-toggle').forEach(function (btn) {
+      var nav = btn.parentElement.querySelector('.site-nav');
+      btn.addEventListener('click', function () {
+        var open = nav.classList.toggle('open');
+        btn.classList.toggle('open', open);
+        btn.setAttribute('aria-expanded', String(open));
+      });
+      nav.querySelectorAll('a').forEach(function (a) {
+        a.addEventListener('click', function () {
+          nav.classList.remove('open');
+          btn.classList.remove('open');
+          btn.setAttribute('aria-expanded', 'false');
+        });
+      });
+    });
+  </script>
+</body>
+</html>

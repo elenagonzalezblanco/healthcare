@@ -24,6 +24,9 @@ MESES = {"ene": 1, "feb": 2, "mar": 3, "abr": 4, "may": 5, "jun": 6,
          "jul": 7, "ago": 8, "sep": 9, "set": 9, "oct": 10, "nov": 11, "dic": 12}
 MESES_NOMBRE = ["enero", "febrero", "marzo", "abril", "mayo", "junio",
                 "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"]
+MESES.update({"jan": 1, "apr": 4, "aug": 8, "dec": 12})
+MONTH_NAMES = ["January", "February", "March", "April", "May", "June",
+               "July", "August", "September", "October", "November", "December"]
 
 
 def strip_tags(s):
@@ -47,15 +50,19 @@ def parse_date(s):
     return (d, s)
 
 
-def display_date(dt, original):
+def display_date(dt, original, language="es"):
     if dt == datetime.min:
         return original
+    if language == "en":
+        return f"{dt.day} {MONTH_NAMES[dt.month - 1]} {dt.year}"
     return f"{dt.day} de {MESES_NOMBRE[dt.month - 1]} de {dt.year}"
 
 
-def parse_briefs():
+def parse_briefs(language="es"):
     items = []
     for path in sorted(glob.glob(BRIEF_GLOB)):
+        if path.endswith(".en.html") != (language == "en"):
+            continue
         raw = open(path, encoding="utf-8").read()
         parts = re.split(r"<h2[^>]*>(.*?)</h2>", raw, flags=re.S)
         for i in range(1, len(parts), 2):
@@ -76,23 +83,25 @@ def parse_briefs():
                 dt, _ = parse_date(date_txt)
                 items.append({
                     "link": link, "title": title, "source": source,
-                    "date_txt": date_txt, "date_disp": display_date(dt, date_txt),
+                    "date_txt": date_txt, "date_disp": display_date(dt, date_txt, language),
                     "category": category, "_dt": dt,
                 })
     return items
 
 
-def card_html(n):
+def card_html(n, language="es"):
+    read_source = "Read the source" if language == "en" else "Leer la fuente"
     return f'''        <a class="news-card" href="{html.escape(n['link'])}" target="_blank" rel="noopener">
           <span class="tag">{html.escape(n['category'])}</span>
           <h3>{html.escape(n['title'])}</h3>
           <div class="src">{html.escape(n['source'])} · {html.escape(n['date_disp'])}</div>
-          <span class="readsrc">Leer la fuente &#8599;</span>
+          <span class="readsrc">{read_source} &#8599;</span>
         </a>'''
 
 
-def main():
-    items = parse_briefs()
+def main(language="es"):
+    blog = "blog.en.html" if language == "en" else BLOG
+    items = parse_briefs(language)
     # dedup por enlace
     seen, uniq = set(), []
     for n in items:
@@ -104,7 +113,7 @@ def main():
         print("No se han encontrado noticias en los briefs de news/. blog.html sin cambios.")
         return
     uniq.sort(key=lambda n: n["_dt"], reverse=True)
-    cards = "\n".join(card_html(n) for n in uniq)
+    cards = "\n".join(card_html(n, language) for n in uniq)
     region = (
         "  <!-- Noticias del sector -->\n"
         "  <section class=\"posts\">\n"
@@ -113,17 +122,19 @@ def main():
         + cards
         + "\n\n      </div>\n    </div>\n  </section>"
     )
-    with open(BLOG, encoding="utf-8") as f:
+    with open(blog, encoding="utf-8") as f:
         page = f.read()
     new = re.sub(
         r"<!-- NEWS:START -->.*?<!-- NEWS:END -->",
         "<!-- NEWS:START -->\n" + region + "\n  <!-- NEWS:END -->",
         page, flags=re.S,
     )
-    with open(BLOG, "w", encoding="utf-8") as f:
+    with open(blog, "w", encoding="utf-8") as f:
         f.write(new)
-    print(f"blog.html actualizado con {len(uniq)} noticias reales del brief.")
+    print(f"{blog} actualizado con {len(uniq)} noticias reales del brief.")
 
 
 if __name__ == "__main__":
     main()
+    if os.path.exists("blog.en.html"):
+        main("en")
