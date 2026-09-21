@@ -1,0 +1,38 @@
+:root {
+  --elevalos-green: #0b3829;
+  --elevalos-gold: #c9a97a;
+  --elevalos-cream: #fefefb;
+}
+.elevalos-wordmark {
+  display: block;
+  width: 176px;
+  max-width: 100%;
+  height: auto;
+  object-fit: contain;
+  background: var(--elevalos-cream);
+  border-radius: 5px;
+}
+.brand .elevalos-wordmark, .ops-brand .elevalos-wordmark {
+  width: 176px;
+  height: auto;
+  max-height: none;
+}
+.elevalos-brand-link {
+  display: inline-flex;
+  align-items: center;
+  flex: 0 0 auto;
+  text-decoration: none;
+}
+.elevalos-brand-link:focus-visible {
+  outline: 3px solid var(--elevalos-gold);
+  outline-offset: 5px;
+}
+.elevalos-page-brand { margin: 12px 0 20px; }
+.privia-home img { object-fit: contain; }
+header.site .brand { flex-shrink: 0; }
+@media (max-width: 480px) {
+  .brand .elevalos-wordmark, .elevalos-wordmark { width: 150px; }
+}
+@media print {
+  .elevalos-wordmark { print-color-adjust: exact; }
+}

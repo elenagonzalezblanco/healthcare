@@ -7,7 +7,7 @@ Flujo previsto:
   2. Ejecutas:  python3 build_blog.py
   3. El script extrae CADA noticia real del brief — su TÍTULO, FUENTE, FECHA y
      ENLACE original — y reescribe la zona de noticias de blog.html (entre
-     <!-- NEWS:START --> y <!-- NEWS:END -->) con tarjetas en el formato Privia Health.
+     <!-- NEWS:START --> y <!-- NEWS:END -->) con tarjetas en el formato ELEVALOS.
 
 NO se inventa contenido: solo se usan las noticias enlazadas del brief.
 Se omiten los bloques de análisis interno (Tendencias / Implicaciones), que no
@@ -16,6 +16,9 @@ Las noticias se ordenan por fecha (más recientes primero).
 """
 import os, re, glob, html
 from datetime import datetime
+from pathlib import Path
+
+from brand_html import brand_brief
 
 BRIEF_GLOB = "news/*.html"
 BLOG = "blog.html"
@@ -135,6 +138,8 @@ def main(language="es"):
 
 
 if __name__ == "__main__":
+    for brief in sorted(Path("news").glob("*.html")):
+        brand_brief(brief)
     main()
     if os.path.exists("blog.en.html"):
         main("en")
