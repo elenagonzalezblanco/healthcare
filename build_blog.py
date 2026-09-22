@@ -18,7 +18,7 @@ import os, re, glob, html
 from datetime import datetime
 from pathlib import Path
 
-from brand_html import brand_brief
+from brand_html import brand_brief, configure_domain
 
 BRIEF_GLOB = "news/*.html"
 BLOG = "blog.html"
@@ -143,3 +143,6 @@ if __name__ == "__main__":
     main()
     if os.path.exists("blog.en.html"):
         main("en")
+    for page in sorted(Path(".").glob("*.html")) + sorted(Path("news").glob("*.html")):
+        configure_domain(page)
+    Path("CNAME").write_text("elevalos.com\n", encoding="utf-8")

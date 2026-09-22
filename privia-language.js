@@ -55,7 +55,7 @@
       const link = event.target.closest("a[href]");
       if (!link || link.hasAttribute("download")) return;
       const destination = new URL(link.href, root.location.href);
-      const hosts = [root.location.host, "elenagonzalezblanco.github.io", "privia-demo-6camog4fqjoxo.swedencentral.cloudapp.azure.com", "medrag-prodgl3vc4-web.blackstone-b235e782.eastus2.azurecontainerapps.io", "patient-care.blackstone-b235e782.eastus2.azurecontainerapps.io"];
+      const hosts = [root.location.host, "elevalos.com", "www.elevalos.com", "portal.elevalos.com", "research.elevalos.com", "elenagonzalezblanco.github.io", "privia-demo-6camog4fqjoxo.swedencentral.cloudapp.azure.com", "medrag-prodgl3vc4-web.blackstone-b235e782.eastus2.azurecontainerapps.io", "patient-care.blackstone-b235e782.eastus2.azurecontainerapps.io"];
       if (!hosts.includes(destination.host) || !/^https?:$/.test(destination.protocol) || destination.pathname.startsWith("/api/")) return;
       if (destination.origin === root.location.origin && destination.pathname === root.location.pathname && link.getAttribute("href").startsWith("#")) return;
       destination.searchParams.set("lang", language); link.href = destination.href;

@@ -5,6 +5,32 @@ from pathlib import Path
 import re
 
 BRAND = re.compile(r"\b(?:PRIVIA|Privia)(?:[ ]+(?:HEALTH|Health))?\b")
+PUBLIC_ORIGIN = "https://elevalos.com"
+SITE_ORIGINS = {
+    "https://elenagonzalezblanco.github.io/healthcare": PUBLIC_ORIGIN,
+    "https://privia-demo-6camog4fqjoxo.swedencentral.cloudapp.azure.com": "https://portal.elevalos.com",
+    "https://medrag-prodgl3vc4-web.blackstone-b235e782.eastus2.azurecontainerapps.io": "https://research.elevalos.com",
+}
+
+
+def configure_domain(path: Path) -> None:
+    raw = path.read_text(encoding="utf-8")
+    def update_attribute(match):
+        value = match[3]
+        for previous, current in SITE_ORIGINS.items():
+            if value == previous or value.startswith(previous + "/") or value.startswith(previous + "?"):
+                value = current + value[len(previous):]
+                break
+        return match[1] + match[2] + value + match[2]
+    page = re.sub(r'(\b(?:href|src|content)=)(["\'])(.*?)\2', update_attribute, raw)
+    relative = path.resolve().relative_to(Path(__file__).resolve().parent).as_posix()
+    canonical = PUBLIC_ORIGIN + "/" + ("" if relative == "index.html" else relative)
+    page = re.sub(r'<link\b[^>]*rel=["\']canonical["\'][^>]*>\s*', "", page)
+    page = re.sub(r'<meta\b[^>]*property=["\']og:url["\'][^>]*>\s*', "", page)
+    page = page.replace("</head>", f'<link rel="canonical" href="{canonical}">\n'
+                        f'<meta property="og:url" content="{canonical}">\n</head>')
+    if page != raw:
+        path.write_text(page, encoding="utf-8")
 
 
 class EditorialBrand(HTMLParser):
@@ -69,10 +95,10 @@ def brand_brief(path: Path) -> None:
 <meta name="theme-color" content="#0b3829">
 <meta property="og:site_name" content="ELEVALOS">
 <meta property="og:title" content="{title}">
-<meta property="og:image" content="https://elenagonzalezblanco.github.io/healthcare/images/brand/elevalos-social.png">
+<meta property="og:image" content="https://elevalos.com/images/brand/elevalos-social.png">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="{title}">
-<meta name="twitter:image" content="https://elenagonzalezblanco.github.io/healthcare/images/brand/elevalos-social.png">
+<meta name="twitter:image" content="https://elevalos.com/images/brand/elevalos-social.png">
 """
         page = re.sub(r'<link[^>]+rel=["\'](?:icon|apple-touch-icon)["\'][^>]*>\n?', "", page)
         page = page.replace("</head>", head + "</head>")
